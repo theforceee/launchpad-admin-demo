@@ -1,4 +1,7 @@
 export const URLS = {
-  HOME: "/",
-  POOL: "/pools",
+  HOME: "/dashboard",
+  POOLS: "/pools",
+  TBA_POOLS: "/tba-pools",
+  STAKING_POOLS: "/staking-pools",
+  USERS: "/users",
 };
