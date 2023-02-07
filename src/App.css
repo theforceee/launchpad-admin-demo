@@ -2,3 +2,21 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
+
+@layer components {
+  .formControl {
+    @apply relative mt-7;
+  }
+  .formInputText {
+    @apply rounded-md w-full p-3 mt-2 bg-white border duration-100 ease-in outline-none focus:border-[#ffcc00];
+  }
+  .formInputLabel {
+    @apply rounded-md text-[#363636] tracking-wider;
+  }
+  .formErrorMessage {
+    @apply mt-2 text-red-600 text-14/18;
+  }
+  .formSection {
+    @apply bg-white rounded-xl px-6 py-5 drop-shadow-md;
+  }
+}
