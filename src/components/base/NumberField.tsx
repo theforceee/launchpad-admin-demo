@@ -1,10 +1,23 @@
+import { ChangeEvent } from "react";
 import { Controller } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
-import { InputFieldProps } from "../../constants/poolDetail";
+import { InputFieldProps, RegisterInputs } from "../../constants/poolDetail";
 import { renderError } from "../../utils/validate";
 
+const SEPARATOR = ",";
+
 const NumberField = (props: InputFieldProps) => {
-  const { label, name, control, errors, required, placeholder } = props;
+  const { label, name, control, errors, required, placeholder, setValue } =
+    props;
+
+  const handleChangeNumber = (
+    event: ChangeEvent<HTMLInputElement> | undefined,
+    name: keyof RegisterInputs,
+  ) => {
+    const inputValue = event?.target.value || "";
+    const newValue = inputValue.split(SEPARATOR).join("");
+    setValue && setValue(name, newValue);
+  };
 
   return (
     <div className="formControl">
@@ -15,11 +28,12 @@ const NumberField = (props: InputFieldProps) => {
         rules={{
           required: required,
         }}
-        render={({ field: { onChange, name, value } }) => (
+        render={({ field: { name } }) => (
           <NumericFormat
             name={name}
-            value={value}
-            onChange={onChange}
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              handleChangeNumber(event, name)
+            }
             thousandSeparator={true}
             className="formInputText"
             placeholder={placeholder}

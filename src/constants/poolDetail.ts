@@ -1,4 +1,9 @@
-import { Control, FieldErrors, UseFormRegister } from "react-hook-form";
+import {
+  Control,
+  FieldErrors,
+  UseFormRegister,
+  UseFormSetValue,
+} from "react-hook-form";
 
 // all pool properties
 export type RegisterInputs = {
@@ -8,12 +13,20 @@ export type RegisterInputs = {
   tokenSymbol: string;
   tokenIcon: string;
   totalSoldCoin: string;
+  buyType: string;
+  acceptCurrency: string;
+  airdropNetwork: string;
+  is_private: string;
+  networkAvailable: string;
+  claimNetwork: string;
+  startTime: string;
 };
 
 export type PoolFieldProps = {
   control: Control<RegisterInputs, any>;
   register: UseFormRegister<RegisterInputs>;
   errors: FieldErrors<RegisterInputs>;
+  setValue?: UseFormSetValue<RegisterInputs>;
 };
 
 export type InputFieldProps = {
@@ -22,6 +35,13 @@ export type InputFieldProps = {
   control: Control<RegisterInputs, any>;
   register: UseFormRegister<RegisterInputs>;
   errors: FieldErrors<RegisterInputs>;
+  setValue?: UseFormSetValue<RegisterInputs>;
   required?: boolean;
   placeholder?: string | undefined;
+  radioOptions?: Array<any>;
+};
+
+export type RadioOptionTypes = {
+  label: string;
+  value: string;
 };

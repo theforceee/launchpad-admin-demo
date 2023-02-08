@@ -1,8 +1,16 @@
+import { Button } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { DefaultLayout } from "../../components/layout";
 import { RegisterInputs } from "../../constants/poolDetail";
+import AcceptCurrency from "./AcceptCurrency";
+import AirdropNetwork from "./AirdropNetwork";
+import BuyType from "./BuyType";
+import ClaimNetwork from "./ClaimNetwork";
+import NetworkAvailable from "./NetworkAvailable";
 import PoolBanner from "./PoolBanner";
 import PoolName from "./PoolName";
+import PrivatePoolSetting from "./PrivatePoolSetting";
+import StartBuyTime from "./StartBuyTime";
 import TokenIcon from "./TokenIcon";
 import TokenSymbol from "./TokenSymbol";
 import TotalSoldCoin from "./TotalSoldCoin";
@@ -16,6 +24,13 @@ const PoolDetailPage = () => {
     tokenIcon: "",
     tokenSymbol: "",
     totalSoldCoin: "",
+    buyType: "",
+    acceptCurrency: "",
+    airdropNetwork: "",
+    claimNetwork: "",
+    is_private: "",
+    networkAvailable: "",
+    startTime: "",
   };
 
   const {
@@ -26,6 +41,7 @@ const PoolDetailPage = () => {
     handleSubmit,
     control,
     watch,
+    reset,
     formState: { errors },
   } = useForm<RegisterInputs>({
     mode: "onChange",
@@ -64,12 +80,102 @@ const PoolDetailPage = () => {
                 control={control}
                 errors={errors}
                 register={register}
+                setValue={setValue}
+              />
+            </div>
+
+            <div className="formSection">
+              <div className="grid grid-cols-2 gap-x-5">
+                <StartBuyTime
+                  control={control}
+                  errors={errors}
+                  register={register}
+                  setValue={setValue}
+                />
+                <StartBuyTime
+                  control={control}
+                  errors={errors}
+                  register={register}
+                  setValue={setValue}
+                />
+                <StartBuyTime
+                  control={control}
+                  errors={errors}
+                  register={register}
+                  setValue={setValue}
+                />
+                <StartBuyTime
+                  control={control}
+                  errors={errors}
+                  register={register}
+                  setValue={setValue}
+                />
+                <StartBuyTime
+                  control={control}
+                  errors={errors}
+                  register={register}
+                  setValue={setValue}
+                />
+              </div>
+            </div>
+
+            <div className="formSection">
+              <BuyType
+                control={control}
+                errors={errors}
+                register={register}
+                setValue={setValue}
+              />
+              <PrivatePoolSetting
+                control={control}
+                errors={errors}
+                register={register}
+                setValue={setValue}
+              />
+              <NetworkAvailable
+                control={control}
+                errors={errors}
+                register={register}
+                setValue={setValue}
+              />
+              <ClaimNetwork
+                control={control}
+                errors={errors}
+                register={register}
+                setValue={setValue}
+              />
+              <AcceptCurrency
+                control={control}
+                errors={errors}
+                register={register}
+                setValue={setValue}
+              />
+              <AirdropNetwork
+                control={control}
+                errors={errors}
+                register={register}
+                setValue={setValue}
               />
             </div>
 
             <div className="formSection"></div>
 
-            <input type={"submit"} title="Enter" />
+            <Button
+              onClick={() => reset()}
+              variant={"contained"}
+              size="large"
+              color="secondary"
+            >
+              Reset
+            </Button>
+            <Button
+              onClick={handleSubmit(onSubmit)}
+              variant="contained"
+              size="large"
+              color="warning"
+            >
+              Submit
+            </Button>
           </div>
         </form>
       </div>

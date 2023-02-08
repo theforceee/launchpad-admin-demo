@@ -1,21 +1,20 @@
-import NumberField from "../../components/base/NumberField";
+import DateTimePicker from "../../components/base/DateTimePicker";
 import { PoolFieldProps } from "../../constants/poolDetail";
 
-const TotalSoldCoin = (props: PoolFieldProps) => {
+const StartBuyTime = (props: PoolFieldProps) => {
   const { control, errors, register, setValue } = props;
   return (
     <>
-      <NumberField
-        label="Total Sold Coin"
+      <DateTimePicker
+        label="Start Time"
         control={control}
         errors={errors}
-        name="totalSoldCoin"
+        name="startTime"
         register={register}
         setValue={setValue}
-        placeholder="Please enter a number"
       />
     </>
   );
 };
 
-export default TotalSoldCoin;
+export default StartBuyTime;

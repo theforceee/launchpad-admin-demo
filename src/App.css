@@ -6,7 +6,7 @@
 
 @layer components {
   .formControl {
-    @apply relative mt-7;
+    @apply relative mt-6;
   }
   .formInputText {
     @apply rounded-md w-full p-3 mt-2 bg-white border duration-100 ease-in outline-none focus:border-[#ffcc00];
@@ -18,7 +18,7 @@
     @apply mt-2 text-red-600 text-14/18;
   }
   .formSection {
-    @apply bg-white rounded-xl px-6 py-5 drop-shadow-md;
+    @apply flex flex-col bg-white rounded-xl px-6 py-5 drop-shadow-md;
   }
 }
 
