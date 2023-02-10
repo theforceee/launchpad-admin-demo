@@ -6,6 +6,7 @@ import AcceptCurrency from "./AcceptCurrency";
 import AirdropNetwork from "./AirdropNetwork";
 import BuyType from "./BuyType";
 import ClaimNetwork from "./ClaimNetwork";
+import ExampleSelect from "./ExampleSelect";
 import NetworkAvailable from "./NetworkAvailable";
 import PoolBanner from "./PoolBanner";
 import PoolName from "./PoolName";
@@ -31,16 +32,14 @@ const PoolDetailPage = () => {
     is_private: "",
     networkAvailable: "",
     startTime: "",
+    exampleSelect: "",
   };
 
   const {
     register,
     setValue,
-    getValues,
-    clearErrors,
     handleSubmit,
     control,
-    watch,
     reset,
     formState: { errors },
   } = useForm<RegisterInputs>({
@@ -85,38 +84,11 @@ const PoolDetailPage = () => {
             </div>
 
             <div className="formSection">
-              <div className="grid grid-cols-2 gap-x-5">
-                <StartBuyTime
-                  control={control}
-                  errors={errors}
-                  register={register}
-                  setValue={setValue}
-                />
-                <StartBuyTime
-                  control={control}
-                  errors={errors}
-                  register={register}
-                  setValue={setValue}
-                />
-                <StartBuyTime
-                  control={control}
-                  errors={errors}
-                  register={register}
-                  setValue={setValue}
-                />
-                <StartBuyTime
-                  control={control}
-                  errors={errors}
-                  register={register}
-                  setValue={setValue}
-                />
-                <StartBuyTime
-                  control={control}
-                  errors={errors}
-                  register={register}
-                  setValue={setValue}
-                />
-              </div>
+              <ExampleSelect
+                control={control}
+                errors={errors}
+                register={register}
+              />
             </div>
 
             <div className="formSection">
@@ -158,7 +130,40 @@ const PoolDetailPage = () => {
               />
             </div>
 
-            <div className="formSection"></div>
+            <div className="formSection">
+              <div className="grid grid-cols-2 gap-x-5">
+                <StartBuyTime
+                  control={control}
+                  errors={errors}
+                  register={register}
+                  setValue={setValue}
+                />
+                <StartBuyTime
+                  control={control}
+                  errors={errors}
+                  register={register}
+                  setValue={setValue}
+                />
+                <StartBuyTime
+                  control={control}
+                  errors={errors}
+                  register={register}
+                  setValue={setValue}
+                />
+                <StartBuyTime
+                  control={control}
+                  errors={errors}
+                  register={register}
+                  setValue={setValue}
+                />
+                <StartBuyTime
+                  control={control}
+                  errors={errors}
+                  register={register}
+                  setValue={setValue}
+                />
+              </div>
+            </div>
 
             <Button
               onClick={() => reset()}

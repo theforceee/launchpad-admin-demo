@@ -1,6 +1,6 @@
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { Controller } from "react-hook-form";
-import { InputFieldProps, RadioOptionTypes } from "../../constants/poolDetail";
+import { InputFieldProps, OptionTypes } from "../../constants/poolDetail";
 import { renderError } from "../../utils/validate";
 
 const RadioGroupField = (props: InputFieldProps) => {
@@ -22,7 +22,7 @@ const RadioGroupField = (props: InputFieldProps) => {
             row
             sx={{ columnGap: 1 }}
           >
-            {radioOptions?.map((singleOption: RadioOptionTypes) => (
+            {radioOptions?.map((singleOption: OptionTypes) => (
               <FormControlLabel
                 key={singleOption.value}
                 value={singleOption.value}

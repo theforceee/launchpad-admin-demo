@@ -20,6 +20,7 @@ export type RegisterInputs = {
   networkAvailable: string;
   claimNetwork: string;
   startTime: string;
+  exampleSelect?: string;
 };
 
 export type PoolFieldProps = {
@@ -38,10 +39,11 @@ export type InputFieldProps = {
   setValue?: UseFormSetValue<RegisterInputs>;
   required?: boolean;
   placeholder?: string | undefined;
-  radioOptions?: Array<any>;
+  radioOptions?: Array<OptionTypes>;
+  selectOptions?: Array<OptionTypes>;
 };
 
-export type RadioOptionTypes = {
+export type OptionTypes = {
   label: string;
   value: string;
 };

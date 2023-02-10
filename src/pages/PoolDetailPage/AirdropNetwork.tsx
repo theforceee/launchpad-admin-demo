@@ -1,7 +1,7 @@
 import RadioGroupField from "../../components/base/RadioGroupField";
-import { PoolFieldProps, RadioOptionTypes } from "../../constants/poolDetail";
+import { PoolFieldProps, OptionTypes } from "../../constants/poolDetail";
 
-const options: Array<RadioOptionTypes> = [
+const options: Array<OptionTypes> = [
   {
     label: "NONE",
     value: "1",

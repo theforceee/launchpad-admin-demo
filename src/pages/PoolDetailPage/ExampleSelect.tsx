@@ -1,5 +1,5 @@
-import RadioGroupField from "../../components/base/RadioGroupField";
-import { PoolFieldProps, OptionTypes } from "../../constants/poolDetail";
+import SelectField from "../../components/base/SelectField";
+import { OptionTypes, PoolFieldProps } from "../../constants/poolDetail";
 
 const options: Array<OptionTypes> = [
   {
@@ -32,20 +32,20 @@ const options: Array<OptionTypes> = [
   },
 ];
 
-const NetworkAvailable = (props: PoolFieldProps) => {
+const ExampleSelect = (props: PoolFieldProps) => {
   const { control, errors, register } = props;
   return (
     <>
-      <RadioGroupField
-        label="NetworkAvailable"
+      <SelectField
+        label="Example Select"
         control={control}
         errors={errors}
-        name="networkAvailable"
+        name="exampleSelect"
         register={register}
-        radioOptions={options}
+        selectOptions={options}
       />
     </>
   );
 };
 
-export default NetworkAvailable;
+export default ExampleSelect;
