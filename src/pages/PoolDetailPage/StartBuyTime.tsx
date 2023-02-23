@@ -9,7 +9,7 @@ const StartBuyTime = (props: PoolFieldProps) => {
         label="Start Time"
         control={control}
         errors={errors}
-        name="startTime"
+        name="start_buy_time"
         register={register}
         setValue={setValue}
       />

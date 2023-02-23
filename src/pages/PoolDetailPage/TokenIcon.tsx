@@ -9,7 +9,7 @@ const TokenIcon = (props: PoolFieldProps) => {
         label="Token Icon"
         control={control}
         errors={errors}
-        name="tokenIcon"
+        name="token_logo"
         register={register}
       />
     </>

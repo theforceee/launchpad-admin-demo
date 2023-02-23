@@ -40,7 +40,7 @@ const ClaimNetwork = (props: PoolFieldProps) => {
         label="Claim Network"
         control={control}
         errors={errors}
-        name="claimNetwork"
+        name="token_network"
         register={register}
         radioOptions={options}
       />

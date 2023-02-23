@@ -32,7 +32,7 @@ const PrivatePoolSetting = (props: PoolFieldProps) => {
         label="Private Pool Setting"
         control={control}
         errors={errors}
-        name="is_private"
+        name="type"
         register={register}
         radioOptions={options}
       />

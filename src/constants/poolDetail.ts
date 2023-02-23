@@ -7,19 +7,29 @@ import {
 
 // all pool properties
 export type RegisterInputs = {
+  type: string;
   title: string;
+  description: string;
   banner: string;
   website: string;
-  tokenSymbol: string;
-  tokenIcon: string;
+  network: string;
+  token_network: string;
+  token_symbol: string;
+  token_logo: string;
   totalSoldCoin: string;
   buyType: string;
-  acceptCurrency: string;
+  accepted_currency: string;
   airdropNetwork: string;
-  is_private: string;
-  networkAvailable: string;
-  claimNetwork: string;
-  startTime: string;
+
+  start_join_time: string;
+  end_join_time: string;
+  start_buy_time: string;
+  end_buy_time: string;
+  start_free_buy_time: string;
+  free_buy_time_bonus: string;
+
+  release_type?: string;
+  release_policy?: string;
   exampleSelect?: string;
 };
 

@@ -40,7 +40,7 @@ const NetworkAvailable = (props: PoolFieldProps) => {
         label="NetworkAvailable"
         control={control}
         errors={errors}
-        name="networkAvailable"
+        name="network"
         register={register}
         radioOptions={options}
       />

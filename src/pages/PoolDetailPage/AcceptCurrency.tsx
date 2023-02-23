@@ -24,7 +24,7 @@ const AcceptCurrency = (props: PoolFieldProps) => {
         label="Accept Currency"
         control={control}
         errors={errors}
-        name="acceptCurrency"
+        name="accepted_currency"
         register={register}
         radioOptions={options}
       />
