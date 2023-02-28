@@ -6,3 +6,10 @@ export const URLS = {
   USERS: "/users",
   LOGIN: "/login",
 };
+
+export const KEY_CACHE = "cache";
+export type SessionContextTypes = {
+  data: any;
+  login: React.Dispatch<any>;
+  logout: () => Promise<void>;
+};

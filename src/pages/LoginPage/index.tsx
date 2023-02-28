@@ -1,7 +1,8 @@
 import { FormControl, Input, InputLabel } from "@mui/material";
 import Button from "@mui/material/Button/Button";
 import { verifyMessage } from "ethers/lib/utils";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useRef } from "react";
+import { useOutletContext } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { SiweMessage } from "siwe";
@@ -13,19 +14,20 @@ import {
   useSignMessage,
 } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
-import { URLS } from "../../constants";
+import { KEY_CACHE, SessionContextTypes, URLS } from "../../constants";
 import { AppContext } from "../../contexts/AppContext";
 import { get, post } from "../../requests";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+  const { setUserLogin } = useContext(AppContext);
+  const session: SessionContextTypes = useOutletContext();
   const { address, isConnected, isConnecting, connector } = useAccount();
   const { data: ensName } = useEnsName({ address });
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   });
   const recoveredAddress = useRef<string>();
-  const { userLogin, setUserLogin } = useContext(AppContext);
-  const navigate = useNavigate();
 
   const { disconnect } = useDisconnect();
   const { signMessageAsync, isLoading: loadingSignIn } = useSignMessage({
@@ -38,11 +40,6 @@ const LoginPage = () => {
       toast.error("Fail to sign in: " + error.message);
     },
   });
-
-  useEffect(() => {
-    console.log("userLogin", userLogin);
-    if (userLogin) navigate(URLS.HOME);
-  }, [userLogin]);
 
   const handleSignIn = async () => {
     const resp = await get("/jobs");
@@ -67,7 +64,8 @@ const LoginPage = () => {
       message: message.prepareMessage(),
     });
     setUserLogin && setUserLogin({ address, token: signature });
-    localStorage.setItem(`sig_${address}`, signature);
+    localStorage.setItem(KEY_CACHE, signature);
+    session?.login(signature);
     navigate(URLS.HOME);
 
     const loginRes = await post("/admin/login", {

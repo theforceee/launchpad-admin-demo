@@ -7,8 +7,9 @@ import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import { SvgIconProps } from "@mui/material/SvgIcon";
 import clsx from "clsx";
 import React, { ComponentType } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { URLS } from "../../../constants";
+import { useOutletContext } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { SessionContextTypes, URLS } from "../../../constants";
 
 type NavItemTypes = {
   title: string;
@@ -48,6 +49,8 @@ const NavLeft = (props: any) => {
   const { openSidebar } = props;
   const [navLeft] = React.useState(nav);
   const location = useLocation();
+  const session: SessionContextTypes = useOutletContext();
+  const navigate = useNavigate();
 
   const logoutUser = () => {
     // eslint-disable-next-line no-restricted-globals
@@ -56,9 +59,8 @@ const NavLeft = (props: any) => {
     }
 
     // logout
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("user");
-    window.location.reload();
+    session?.logout();
+    navigate(URLS.LOGIN);
   };
 
   return (

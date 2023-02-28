@@ -1,54 +1,93 @@
-import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import {
+  createRoutesFromElements,
+  Outlet,
+  RouterProvider,
+  useOutletContext,
+} from "react-router";
+import { createBrowserRouter, Navigate, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ProtectedRoute } from "./components/base/ProtectedRoute";
-import { URLS } from "./constants";
+import { ProtectedRoute } from "./components/routes/ProtectedRoute";
+import { PublicRoute } from "./components/routes/PublicRoute";
+import { KEY_CACHE, URLS } from "./constants";
+import { AppContext } from "./contexts/AppContext";
+import ErrorPage from "./pages/ErrorPage";
 import Dashboard from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import PoolDetailPage from "./pages/PoolDetailPage";
+import PoolsPage from "./pages/PoolsPage";
 import StakingPoolsPage from "./pages/StakingPoolsPage";
 import TBAPoolsPage from "./pages/TBAPoolsPage";
 import UsersPage from "./pages/UsersPage";
 
-const routing = function createRouting() {
-  return (
-    <>
-      <Routes>
-        <Route path={URLS.LOGIN} element={<LoginPage />} />
-        <Route
-          path={URLS.HOME}
-          element={<ProtectedRoute element={Dashboard} />}
-        />
+const SessionProvider = () => {
+  const cache = localStorage.getItem(KEY_CACHE);
+  const [data, setData] = useState<any>(cache);
+  const { setUserLogin } = useContext(AppContext);
+
+  useEffect(() => {
+    const newCache = localStorage.getItem(KEY_CACHE);
+    setData(newCache);
+  }, []);
+
+  const logout = async () => {
+    setData(null);
+    setUserLogin && setUserLogin(null);
+    localStorage.removeItem(KEY_CACHE);
+    // localStorage.clear();
+  };
+
+  return <Outlet context={{ data, login: setData, logout }} />;
+};
+export const MainLayout = () => {
+  const session = useOutletContext();
+  return <Outlet context={session} />;
+};
+
+const router = createBrowserRouter(
+  createRoutesFromElements([
+    <Route element={<SessionProvider />} errorElement={<ErrorPage />}>
+      <Route element={<MainLayout />}>
         <Route path="/" element={<Navigate to={URLS.HOME} />} />
         <Route
-          path={URLS.POOLS}
-          element={<ProtectedRoute element={PoolDetailPage} />}
+          path={URLS.LOGIN}
+          element={<PublicRoute element={<LoginPage />} />}
+        />
+        <Route
+          path={URLS.HOME}
+          element={<ProtectedRoute element={<Dashboard />} />}
         />
         <Route
           path={URLS.STAKING_POOLS}
-          element={<ProtectedRoute element={StakingPoolsPage} />}
+          element={<ProtectedRoute element={<StakingPoolsPage />} />}
         />
         <Route
           path={URLS.TBA_POOLS}
-          element={<ProtectedRoute element={TBAPoolsPage} />}
+          element={<ProtectedRoute element={<TBAPoolsPage />} />}
         />
         <Route
           path={URLS.USERS}
-          element={<ProtectedRoute element={UsersPage} />}
+          element={<ProtectedRoute element={<UsersPage />} />}
         />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+        <Route path={URLS.POOLS} element={<ProtectedRoute />}>
+          <Route index element={<PoolsPage />} />
+          <Route path=":uuid" element={<PoolDetailPage />} />
+        </Route>
+      </Route>
+      <Route path="*" element={<NotFoundPage />} />
+    </Route>,
+  ]),
+);
+
+const routing = function () {
+  return (
+    <>
+      <RouterProvider router={router} />
       <ToastContainer />
     </>
   );
 };
-/**
- * Wrap the app routes into router
- *
- * PROPS
- * =============================================================================
- * @returns {React.Node}
- */
+
 export default routing;

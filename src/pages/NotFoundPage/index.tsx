@@ -5,22 +5,17 @@ const NotFoundPage = () => {
   return (
     <>
       <div
-        className={clsx(
-          styles.bg,
-          "relative w-screen h-screen text-white text-center",
-        )}
+        className={clsx(styles.bg, "relative w-screen h-screen text-center")}
       >
         <div className="w-full absolute top-0 max-w-screen-main left-1/2 -translate-x-1/2 h-20 flex items-center z-20 px-20">
-          <a href="/">
-            <img src="/images/logo-text.svg" alt="" />
-          </a>
+          <a href="/">{/* <img src="/images/logo-text.svg" alt="" /> */}</a>
         </div>
 
         <div className="flex w-full h-full justify-center items-center">
           <div className="flex flex-col">
             <span
               className={clsx(
-                "font-oswald font-semibold text-[120px] leading-[140px] ",
+                "font-semibold text-[120px] leading-[140px] ",
                 "xs:text-[160px] xs:leading-[160px] ",
               )}
             >
