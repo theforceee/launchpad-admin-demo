@@ -1,14 +1,27 @@
 import { DatePicker } from "antd";
 import moment from "moment";
+import React, { useEffect } from "react";
 import { Controller } from "react-hook-form";
 import { InputFieldProps, RegisterInputs } from "../../constants/poolDetail";
 import { renderError } from "../../utils/validate";
 
-const DateTimePicker = (props: InputFieldProps) => {
-  const { label, name, control, errors, required, setValue } = props;
+const DateTimePicker = React.memo((props: InputFieldProps) => {
+  const {
+    label,
+    name,
+    control,
+    errors,
+    required,
+    setValue,
+    validate,
+    disabledDate,
+  } = props;
+
+  useEffect(() => {
+    setValue && setValue(name, moment().format());
+  }, [name, setValue]);
 
   const handleChangeDateTime = (event: any, name: keyof RegisterInputs) => {
-    console.log("event", moment(event).format());
     setValue && setValue(name, moment(event).format());
   };
 
@@ -20,6 +33,7 @@ const DateTimePicker = (props: InputFieldProps) => {
         control={control}
         rules={{
           required: required,
+          validate,
         }}
         render={() => (
           <DatePicker
@@ -29,6 +43,7 @@ const DateTimePicker = (props: InputFieldProps) => {
               format: "HH:mm",
             }}
             onChange={(value) => handleChangeDateTime(value, name)}
+            disabledDate={disabledDate}
             showSecond={false}
             minuteStep={15}
             className="formInputText"
@@ -38,6 +53,6 @@ const DateTimePicker = (props: InputFieldProps) => {
       <p className="formErrorMessage">{renderError(errors, name)}</p>
     </div>
   );
-};
+});
 
 export default DateTimePicker;

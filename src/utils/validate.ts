@@ -5,34 +5,26 @@ export const renderError = (
   errors: FieldErrors<RegisterInputs>,
   prop: keyof RegisterInputs,
 ) => {
-  if (errors[prop]) {
-    const errorName = prop.split("_").join(" ");
-    const errorType = errors[prop]?.type;
+  const error = errors[prop];
+  if (!error) return "";
 
-    switch (errorType) {
-      case "required": {
-        return "This field is required";
-      }
-      case "greaterOrEqualToday": {
-        return `The ${errorName} must be after current date.`;
-      }
-      case "greateOrEqualStartTime": {
-        return "This finish time must be after the start time";
-      }
-      case "greaterOrEqualFinishTime": {
-        return "This relase time must be after the finish time";
-      }
-      case "validAddress": {
-        return "Address receive is invalid.";
-      }
-      case "invalidToken": {
-        return errors[prop]?.message;
-      }
-      case "tokenAlreadyUsed": {
-        return "Token address is already in use.";
-      }
-    }
+  const errorName = prop.split("_").join(" ");
+  const errorType = error.type;
+
+  switch (errorType) {
+    case "required":
+      return "This field is required";
+    case "greaterOrEqualToday":
+      return `The ${errorName} must be after current date.`;
+    case "lessOrEqualEndTime":
+      return "This start time must be before the end time";
+    case "greaterOrEqualStartTime":
+      return "This end time must be after the start time";
+    case "validAddress":
+      return "Address receive is invalid.";
+    case "invalidToken":
+      return error.message;
+    default:
+      return "";
   }
-
-  return;
 };

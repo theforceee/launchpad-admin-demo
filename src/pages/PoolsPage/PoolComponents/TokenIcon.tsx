@@ -1,5 +1,5 @@
-import TextField from "../../components/base/TextField";
-import { PoolFieldProps } from "../../constants/poolDetail";
+import TextField from "../../../components/base/TextField";
+import { PoolFieldProps } from "../../../constants/poolDetail";
 
 const TokenIcon = (props: PoolFieldProps) => {
   const { control, errors, register } = props;

@@ -1,8 +1,11 @@
+import { RangePickerProps } from "antd/lib/date-picker";
 import {
   Control,
   FieldErrors,
   UseFormRegister,
   UseFormSetValue,
+  UseFormWatch,
+  Validate,
 } from "react-hook-form";
 
 // all pool properties
@@ -21,12 +24,14 @@ export type RegisterInputs = {
   accepted_currency: string;
   airdropNetwork: string;
 
-  start_join_time: string;
-  end_join_time: string;
-  start_buy_time: string;
-  end_buy_time: string;
-  start_free_buy_time: string;
-  free_buy_time_bonus: string;
+  start_whitelist_time: string | undefined;
+  end_whitelist_time: string | undefined;
+  start_join_time: string | undefined;
+  end_join_time: string | undefined;
+  start_buy_time: string | undefined;
+  end_buy_time: string | undefined;
+  start_free_buy_time: string | undefined;
+  free_buy_time_bonus: string | undefined;
 
   release_type?: string;
   release_policy?: string;
@@ -38,6 +43,7 @@ export type PoolFieldProps = {
   register: UseFormRegister<RegisterInputs>;
   errors: FieldErrors<RegisterInputs>;
   setValue?: UseFormSetValue<RegisterInputs>;
+  watch?: UseFormWatch<RegisterInputs>;
 };
 
 export type InputFieldProps = {
@@ -51,6 +57,11 @@ export type InputFieldProps = {
   placeholder?: string | undefined;
   radioOptions?: Array<OptionTypes>;
   selectOptions?: Array<OptionTypes>;
+  validate?:
+    | Validate<string | undefined, RegisterInputs>
+    | Record<string, Validate<string | undefined, RegisterInputs>>
+    | undefined;
+  disabledDate?: RangePickerProps["disabledDate"] | undefined;
 };
 
 export type OptionTypes = {

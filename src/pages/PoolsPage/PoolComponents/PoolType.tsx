@@ -1,5 +1,5 @@
-import RadioGroupField from "../../components/base/RadioGroupField";
-import { PoolFieldProps, OptionTypes } from "../../constants/poolDetail";
+import RadioGroupField from "../../../components/base/RadioGroupField";
+import { PoolFieldProps, OptionTypes } from "../../../constants/poolDetail";
 
 const options: Array<OptionTypes> = [
   {
@@ -29,7 +29,7 @@ const PrivatePoolSetting = (props: PoolFieldProps) => {
   return (
     <>
       <RadioGroupField
-        label="Private Pool Setting"
+        label="Pool Type"
         control={control}
         errors={errors}
         name="type"

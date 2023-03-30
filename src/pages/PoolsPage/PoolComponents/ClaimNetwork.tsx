@@ -1,5 +1,5 @@
-import RadioGroupField from "../../components/base/RadioGroupField";
-import { PoolFieldProps, OptionTypes } from "../../constants/poolDetail";
+import RadioGroupField from "../../../components/base/RadioGroupField";
+import { PoolFieldProps, OptionTypes } from "../../../constants/poolDetail";
 
 const options: Array<OptionTypes> = [
   {
@@ -10,26 +10,6 @@ const options: Array<OptionTypes> = [
     label: "BSC",
     value: "bsc",
   },
-  {
-    label: "Polygon",
-    value: "matic",
-  },
-  {
-    label: "Solana",
-    value: "sol",
-  },
-  {
-    label: "Terra",
-    value: "luna",
-  },
-  {
-    label: "Fantom",
-    value: "ftm",
-  },
-  {
-    label: "Avalanche",
-    value: "avax",
-  },
 ];
 
 const ClaimNetwork = (props: PoolFieldProps) => {
@@ -37,7 +17,7 @@ const ClaimNetwork = (props: PoolFieldProps) => {
   return (
     <>
       <RadioGroupField
-        label="Claim Network"
+        label="Token Network"
         control={control}
         errors={errors}
         name="token_network"

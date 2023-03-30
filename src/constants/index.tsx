@@ -1,6 +1,8 @@
 export const URLS = {
   HOME: "/dashboard",
   POOLS: "/pools",
+  POOL_DETAIL: "/pools/:uuid",
+  CREATE_POOL: "/pools/add",
   TBA_POOLS: "/tba-pools",
   STAKING_POOLS: "/staking-pools",
   USERS: "/users",

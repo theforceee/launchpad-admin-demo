@@ -1,5 +1,5 @@
-import TextField from "../../components/base/TextField";
-import { PoolFieldProps } from "../../constants/poolDetail";
+import TextField from "../../../components/base/TextField";
+import { PoolFieldProps } from "../../../constants/poolDetail";
 
 const PoolName = (props: PoolFieldProps) => {
   const { control, errors, register } = props;
@@ -10,6 +10,7 @@ const PoolName = (props: PoolFieldProps) => {
         control={control}
         errors={errors}
         name="title"
+        required
         register={register}
       />
     </>

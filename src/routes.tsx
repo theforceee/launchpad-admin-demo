@@ -16,6 +16,7 @@ import ErrorPage from "./pages/ErrorPage";
 import Dashboard from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import PoolCreatePage from "./pages/PoolCreatePage";
 import PoolDetailPage from "./pages/PoolDetailPage";
 import PoolsPage from "./pages/PoolsPage";
 import StakingPoolsPage from "./pages/StakingPoolsPage";
@@ -71,10 +72,18 @@ const router = createBrowserRouter(
           path={URLS.USERS}
           element={<ProtectedRoute element={<UsersPage />} />}
         />
+        <Route
+          path={URLS.USERS}
+          element={<ProtectedRoute element={<UsersPage />} />}
+        />
         <Route path={URLS.POOLS} element={<ProtectedRoute />}>
           <Route index element={<PoolsPage />} />
           <Route path=":uuid" element={<PoolDetailPage />} />
         </Route>
+        <Route
+          path={URLS.CREATE_POOL}
+          element={<ProtectedRoute element={<PoolCreatePage />} />}
+        />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Route>,

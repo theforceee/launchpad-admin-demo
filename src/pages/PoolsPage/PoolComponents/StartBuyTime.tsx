@@ -1,5 +1,5 @@
-import DateTimePicker from "../../components/base/DateTimePicker";
-import { PoolFieldProps } from "../../constants/poolDetail";
+import DateTimePicker from "../../../components/base/DateTimePicker";
+import { PoolFieldProps } from "../../../constants/poolDetail";
 
 const StartBuyTime = (props: PoolFieldProps) => {
   const { control, errors, register, setValue } = props;

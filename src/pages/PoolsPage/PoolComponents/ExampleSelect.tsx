@@ -1,5 +1,5 @@
-import SelectField from "../../components/base/SelectField";
-import { OptionTypes, PoolFieldProps } from "../../constants/poolDetail";
+import SelectField from "../../../components/base/SelectField";
+import { OptionTypes, PoolFieldProps } from "../../../constants/poolDetail";
 
 const options: Array<OptionTypes> = [
   {
