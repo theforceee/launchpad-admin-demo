@@ -9,6 +9,7 @@ import EndWhitelistTime from "../PoolComponents/EndWhitelistTime";
 import ExampleSelect from "../PoolComponents/ExampleSelect";
 import NetworkAvailable from "../PoolComponents/NetworkAvailable";
 import PoolBanner from "../PoolComponents/PoolBanner";
+import PoolDescription from "../PoolComponents/PoolDescription";
 import PoolName from "../PoolComponents/PoolName";
 import PrivatePoolSetting from "../PoolComponents/PoolType";
 import StartBuyTime from "../PoolComponents/StartBuyTime";
@@ -178,7 +179,19 @@ const PoolForm = (props: PoolFormTypes) => {
               />
             </div>
           </div>
+        </div>
 
+        <div className="formSection mt-5 min-h-[200px]">
+          <PoolDescription
+            control={control}
+            errors={errors}
+            register={register}
+            setValue={setValue}
+            watch={watch}
+          />
+        </div>
+
+        <div className="grid w-full grid-cols-2 gap-5 mt-10">
           <Button
             onClick={() => reset()}
             variant={"contained"}
