@@ -181,7 +181,7 @@ const TableWithPagination = (props: TableWithPaginationProps) => {
             colSpan={3}
             count={dataTable?.length}
             rowsPerPage={pagination?.rowsPerPage || 10}
-            page={pagination?.currentPage || 1}
+            page={pagination?.currentPage || 0}
             sx={{ borderBottom: 0 }}
             SelectProps={{
               inputProps: {

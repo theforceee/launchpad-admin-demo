@@ -23,6 +23,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(() => ({
+  "&:hover": {
+    cursor: "pointer",
+    backgroundColor: "#ffe664 !important",
+    transition: "0.2s all",
+  },
   backgroundColor: "#f5f5f5",
   "&:nth-of-type(odd)": {
     backgroundColor: "#d9d9d9",
@@ -44,16 +49,17 @@ const PoolRecord: React.FC<PoolRecordProps> = (props: PoolRecordProps) => {
   const getPoolStatusColor = (status: string) => {
     switch (status) {
       case "Active":
-        return "bg-green";
+        return "bg-green-400";
       case "Queued":
-        return "bg-orange";
+        return "bg-orange-400";
       case "Ended":
-        return "bg-red";
+        return "bg-red-500";
       default:
-        return "bg-green";
+        return "bg-green-400";
     }
   };
 
+  console.log("dataTable", getPoolStatusColor(pool?.status || ""));
   if (!pool) return <></>;
 
   return (
@@ -68,10 +74,10 @@ const PoolRecord: React.FC<PoolRecordProps> = (props: PoolRecordProps) => {
       <StyledTableCell align="left">{pool.network}</StyledTableCell>
 
       <StyledTableCell align="left">
-        <p className="flex items-center justify-center m-0">
+        <p className="flex items-center  m-0">
           <span
             className={clsx(
-              "rounded-full w-3 h-3 ",
+              "rounded-full w-3 h-3",
               getPoolStatusColor(pool.status),
             )}
           ></span>

@@ -24,7 +24,7 @@ for (let i = 0; i < 10; i++) {
       start_join_time: "1680707600",
       end_join_time: "1680907600",
       network: "ETH",
-      status: ["Active", "Queued", "Ended"][Math.random() * 3],
+      status: ["Active", "Queued", "Ended"][Math.round(Math.random() * 2)],
     },
   ];
 }
@@ -61,7 +61,7 @@ const PoolsPage = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchInput] = useState<string>("");
   const [pagination, setPagination] = useState<PagingationTypes>({
-    currentPage: 1,
+    currentPage: 0,
     rowsPerPage: 0,
     total: 0,
   });
