@@ -2,7 +2,6 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import FactCheckIcon from "@mui/icons-material/FactCheck";
 import FeaturedPlayListIcon from "@mui/icons-material/FeaturedPlayList";
 import LogoutIcon from "@mui/icons-material/Logout";
-import SummarizeIcon from "@mui/icons-material/Summarize";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import { SvgIconProps } from "@mui/material/SvgIcon";
 import clsx from "clsx";
@@ -27,11 +26,6 @@ const nav: Array<NavItemTypes> = [
     title: "List Pools",
     part: URLS.POOLS,
     icon: FeaturedPlayListIcon,
-  },
-  {
-    title: "List TBA Pools",
-    part: URLS.TBA_POOLS,
-    icon: SummarizeIcon,
   },
   {
     title: "List Staking Pools",

@@ -1,6 +1,9 @@
 import { Button } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { RegisterInputs } from "../../../constants/poolDetail";
+import {
+  RegisterInputs,
+  defaultEmptyPool,
+} from "../../../constants/poolDetail";
 import AcceptCurrency from "../PoolComponents/AcceptCurrency";
 import AirdropNetwork from "../PoolComponents/AirdropNetwork";
 import BuyType from "../PoolComponents/BuyType";
@@ -18,33 +21,6 @@ import TokenIcon from "../PoolComponents/TokenIcon";
 import TokenSymbol from "../PoolComponents/TokenSymbol";
 import TotalSoldCoin from "../PoolComponents/TotalSoldCoin";
 import Website from "../PoolComponents/Website";
-
-const defaultEmptyPool: RegisterInputs = {
-  title: "",
-  website: "",
-  banner: "",
-  token_logo: "",
-  token_symbol: "",
-  description: "",
-  start_whitelist_time: "",
-  end_whitelist_time: "",
-  end_buy_time: "",
-  end_join_time: "",
-  free_buy_time_bonus: "",
-  start_buy_time: "",
-  start_free_buy_time: "",
-  release_policy: "",
-  release_type: "",
-  totalSoldCoin: "",
-  buyType: "",
-  accepted_currency: "",
-  airdropNetwork: "",
-  token_network: "",
-  type: "",
-  network: "",
-  start_join_time: "",
-  exampleSelect: "",
-};
 
 export type PoolFormTypes = {
   poolData?: RegisterInputs | undefined;

@@ -2,28 +2,43 @@ import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
-import SearchIcon from "@mui/icons-material/Search";
 import {
   Box,
   IconButton,
-  InputAdornment,
+  Paper,
+  Table,
+  TableBody,
+  TableContainer,
+  TableHead,
   TablePagination,
-  TextField,
+  TableRow,
   useTheme,
 } from "@mui/material";
-import { ChangeEvent, useState } from "react";
-import { DefaultLayout } from "../../components/layout";
-import UserTable from "./UserTable";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import { styled } from "@mui/material/styles";
+import React from "react";
+import {
+  TableHeaderTypes,
+  TablePaginationActionsProps,
+  TableWithPaginationProps,
+} from "./constants";
+import styles from "./table.module.scss";
 
-interface TablePaginationActionsProps {
-  count: number;
-  page: number;
-  rowsPerPage: number;
-  onPageChange: (
-    event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number,
-  ) => void;
-}
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: "gray",
+    color: theme.palette.common.white,
+    fontSize: 16,
+    borderRight: "2px solid white",
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+    color: "#3a38bb",
+    fontWeight: 600,
+    borderRight: "2px solid white",
+    // display: "flex",
+  },
+}));
 
 function TablePaginationActions(props: TablePaginationActionsProps) {
   const theme = useTheme();
@@ -95,76 +110,78 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   );
 }
 
-export type UserTypes = {
-  wallet_address: string;
-  token_staked: string;
-  sheriff_staked: string;
-  pioneer_staked: string;
-  points: string;
-};
-const allUsers: Array<UserTypes> = new Array(10).fill({
-  wallet_address: "0xF1b4b671FBCB9d6A73168197a46D24357DFbe765",
-  token_staked: "1231243.3344",
-  sheriff_staked: "3",
-  pioneer_staked: "2",
-  points: "1000",
-});
+const TableWithPagination = (props: TableWithPaginationProps) => {
+  const { dataTable, tableHeaders, pagination, setPagination, TableRecord } =
+    props;
 
-const UsersPage = () => {
-  const [page, setPage] = useState<number>(0);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(5);
-  const [searchTerm, setSearchInput] = useState<string>("");
+  const handleSort = (headerValue: number) => {
+    console.log("sort", headerValue);
+  };
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number,
   ) => {
-    setPage(newPage);
+    setPagination((currentState) => ({
+      ...currentState,
+      currentPage: newPage,
+    }));
   };
 
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  const handleSearch = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const value = e.target.value;
-    setSearchInput(value);
+    setPagination((currentState) => ({
+      ...currentState,
+      currentPage: 0,
+      rowsPerPage: parseInt(event.target.value, 10),
+    }));
   };
 
   return (
-    <DefaultLayout>
-      <div className="bg-white px-6 py-5 w-full rounded-xl shadow-lg flex flex-col">
-        <div className="mb-10 flex">
-          <TextField
-            label="Search"
-            variant="outlined"
-            size="small"
-            placeholder="Name, wallet address"
-            className="w-full"
-            // value={searchTerm}
-            onChange={handleSearch}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </div>
-        <UserTable dataTable={allUsers} />
+    <>
+      <div className="w-full flex flex-col">
+        <TableContainer component={Paper} className="!shadow-none !rounded-lg">
+          <Table className="text-14/20">
+            <TableHead>
+              <TableRow>
+                {tableHeaders.map((tableHeader: TableHeaderTypes) => (
+                  <StyledTableCell
+                    key={tableHeader.value}
+                    className="pb-6 pr-7"
+                  >
+                    <p className="flex justify-between m-0">
+                      <span>{tableHeader.label}</span>
+                      {tableHeader.sortable && (
+                        <img
+                          src="/images/icon-sort.svg"
+                          alt=""
+                          onClick={() => handleSort(tableHeader.value)}
+                          className="w-4 h-5 ml-1 cursor-pointer"
+                        />
+                      )}
+                    </p>
+                  </StyledTableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody className={styles.tableBody}>
+              {dataTable &&
+                dataTable.length > 0 &&
+                dataTable.map((dataRecord: any, index: number) => (
+                  <TableRecord pool={dataRecord} key={index} />
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
         <div className="ml-auto">
           <TablePagination
             rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
             colSpan={3}
-            count={allUsers.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
+            count={dataTable?.length}
+            rowsPerPage={pagination?.rowsPerPage || 10}
+            page={pagination?.currentPage || 1}
             sx={{ borderBottom: 0 }}
             SelectProps={{
               inputProps: {
@@ -178,8 +195,8 @@ const UsersPage = () => {
           />
         </div>
       </div>
-    </DefaultLayout>
+    </>
   );
 };
 
-export default UsersPage;
+export default TableWithPagination;

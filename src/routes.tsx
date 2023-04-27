@@ -20,7 +20,6 @@ import PoolCreatePage from "./pages/PoolCreatePage";
 import PoolDetailPage from "./pages/PoolDetailPage";
 import PoolsPage from "./pages/PoolsPage";
 import StakingPoolsPage from "./pages/StakingPoolsPage";
-import TBAPoolsPage from "./pages/TBAPoolsPage";
 import UsersPage from "./pages/UsersPage";
 
 const SessionProvider = () => {
@@ -63,14 +62,6 @@ const router = createBrowserRouter(
         <Route
           path={URLS.STAKING_POOLS}
           element={<ProtectedRoute element={<StakingPoolsPage />} />}
-        />
-        <Route
-          path={URLS.TBA_POOLS}
-          element={<ProtectedRoute element={<TBAPoolsPage />} />}
-        />
-        <Route
-          path={URLS.USERS}
-          element={<ProtectedRoute element={<UsersPage />} />}
         />
         <Route
           path={URLS.USERS}

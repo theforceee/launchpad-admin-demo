@@ -12,6 +12,7 @@ import {
 export type RegisterInputs = {
   type: string;
   title: string;
+  slug: string;
   description: string;
   banner: string;
   website: string;
@@ -23,6 +24,7 @@ export type RegisterInputs = {
   buyType: string;
   accepted_currency: string;
   airdropNetwork: string;
+  status: string;
 
   start_whitelist_time: string | undefined;
   end_whitelist_time: string | undefined;
@@ -36,6 +38,35 @@ export type RegisterInputs = {
   release_type?: string;
   release_policy?: string;
   exampleSelect?: string;
+};
+
+export const defaultEmptyPool: RegisterInputs = {
+  title: "",
+  slug: "",
+  website: "",
+  banner: "",
+  token_logo: "",
+  token_symbol: "",
+  description: "",
+  start_whitelist_time: "",
+  end_whitelist_time: "",
+  end_buy_time: "",
+  end_join_time: "",
+  free_buy_time_bonus: "",
+  start_buy_time: "",
+  start_free_buy_time: "",
+  release_policy: "",
+  release_type: "",
+  totalSoldCoin: "",
+  buyType: "",
+  accepted_currency: "",
+  airdropNetwork: "",
+  token_network: "",
+  type: "",
+  network: "",
+  status: "",
+  start_join_time: "",
+  exampleSelect: "",
 };
 
 export type PoolFieldProps = {

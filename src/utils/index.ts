@@ -1,4 +1,5 @@
 import { ethers } from "ethers";
+import moment from "moment";
 
 export const formatCurrency = (n: any, maxLengthOfDecimal = 2) => {
   if (Number.isNaN(n)) return "0";
@@ -33,4 +34,8 @@ export const displayWalletAddress = (
     address.length - 3,
     address.length,
   )}`;
+};
+
+export const displayDateTime = (unix: string | undefined) => {
+  return unix ? moment.unix(+unix).format("YYYY-MM-DD HH:mm:ss") : "TBA";
 };
