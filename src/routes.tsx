@@ -19,7 +19,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import PoolCreatePage from "./pages/PoolCreatePage";
 import PoolDetailPage from "./pages/PoolDetailPage";
 import PoolsPage from "./pages/PoolsPage";
-import StakingPoolsPage from "./pages/StakingPoolsPage";
+import ContentsPage from "./pages/ContentsPage";
 import UsersPage from "./pages/UsersPage";
 
 const SessionProvider = () => {
@@ -60,8 +60,8 @@ const router = createBrowserRouter(
           element={<ProtectedRoute element={<Dashboard />} />}
         />
         <Route
-          path={URLS.STAKING_POOLS}
-          element={<ProtectedRoute element={<StakingPoolsPage />} />}
+          path={URLS.CONTENTS}
+          element={<ProtectedRoute element={<ContentsPage />} />}
         />
         <Route
           path={URLS.USERS}

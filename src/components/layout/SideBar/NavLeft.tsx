@@ -28,8 +28,8 @@ const nav: Array<NavItemTypes> = [
     icon: FeaturedPlayListIcon,
   },
   {
-    title: "List Staking Pools",
-    part: URLS.STAKING_POOLS,
+    title: "Contents",
+    part: URLS.CONTENTS,
     icon: FactCheckIcon,
   },
   {

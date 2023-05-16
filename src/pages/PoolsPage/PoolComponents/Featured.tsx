@@ -1,35 +1,33 @@
 import RadioGroupField from "../../../components/base/RadioGroupField";
-import { PoolFieldProps, OptionTypes } from "../../../constants/poolDetail";
+import { OptionTypes, PoolFieldProps } from "../../../constants/poolDetail";
 
 const options: Array<OptionTypes> = [
   {
-    label: "NONE",
+    label: "Yes",
     value: "1",
   },
   {
-    label: "SOLANA",
+    label: "No",
     value: "2",
-  },
-  {
-    label: "TERRA",
-    value: "3",
   },
 ];
 
-const AirdropNetwork = (props: PoolFieldProps) => {
+const Featured = (props: PoolFieldProps) => {
   const { control, errors, register } = props;
   return (
-    <>
+    <div className="flex flex-1">
+      <label className="formInputLabelShort">Featured?</label>
+
       <RadioGroupField
-        label="Airdrop Network"
+        label="Buy Type"
         control={control}
         errors={errors}
-        name="airdropNetwork"
+        name="buyType"
         register={register}
         radioOptions={options}
       />
-    </>
+    </div>
   );
 };
 
-export default AirdropNetwork;
+export default Featured;

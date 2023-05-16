@@ -3,7 +3,7 @@ export const URLS = {
   POOLS: "/pools",
   POOL_DETAIL: "/pools/:uuid",
   CREATE_POOL: "/pools/add",
-  STAKING_POOLS: "/staking-pools",
+  CONTENTS: "/contents",
   USERS: "/users",
   LOGIN: "/login",
 };

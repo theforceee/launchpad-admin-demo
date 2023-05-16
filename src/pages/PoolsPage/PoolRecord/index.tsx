@@ -1,49 +1,18 @@
-import { TableRow } from "@mui/material";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import { styled } from "@mui/material/styles";
 import clsx from "clsx";
 import React, { useRef } from "react";
+import {
+  StyledTableCell,
+  StyledTableRow,
+} from "../../../components/base/TableWithPagination";
 import { RegisterInputs } from "../../../constants/poolDetail";
 import { displayDateTime } from "../../../utils";
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "gray",
-    color: theme.palette.common.white,
-    fontSize: 16,
-    borderRight: "2px solid white",
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-    color: "#3a38bb",
-    fontWeight: 600,
-    borderRight: "2px solid white",
-    // display: "flex",
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(() => ({
-  "&:hover": {
-    cursor: "pointer",
-    backgroundColor: "#ffe664 !important",
-    transition: "0.2s all",
-  },
-  backgroundColor: "#f5f5f5",
-  "&:nth-of-type(odd)": {
-    backgroundColor: "#d9d9d9",
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    borderBottom: 0,
-  },
-}));
-
 type PoolRecordProps = {
-  pool?: RegisterInputs;
+  dataRecord?: RegisterInputs;
 };
 
 const PoolRecord: React.FC<PoolRecordProps> = (props: PoolRecordProps) => {
-  const { pool } = props;
+  const { dataRecord: pool } = props;
   const ref = useRef<any>();
 
   const getPoolStatusColor = (status: string) => {
@@ -59,7 +28,6 @@ const PoolRecord: React.FC<PoolRecordProps> = (props: PoolRecordProps) => {
     }
   };
 
-  console.log("dataTable", getPoolStatusColor(pool?.status || ""));
   if (!pool) return <></>;
 
   return (

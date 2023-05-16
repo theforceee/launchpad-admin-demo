@@ -4,11 +4,10 @@ import { InputFieldProps, OptionTypes } from "../../constants/poolDetail";
 import { renderError } from "../../utils/validate";
 
 const RadioGroupField = (props: InputFieldProps) => {
-  const { label, name, control, errors, required, radioOptions } = props;
+  const { name, control, errors, required, radioOptions } = props;
 
   return (
-    <div className="formControl">
-      <label className="formInputLabel">{label}</label>
+    <div className="flex flex-col">
       <Controller
         name={name}
         control={control}
@@ -20,7 +19,7 @@ const RadioGroupField = (props: InputFieldProps) => {
             value={value}
             onChange={onChange}
             row
-            sx={{ columnGap: 1 }}
+            sx={{ columnGap: 1, flexWrap: "nowrap" }}
           >
             {radioOptions?.map((singleOption: OptionTypes) => (
               <FormControlLabel

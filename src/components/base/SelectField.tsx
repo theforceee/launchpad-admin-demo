@@ -4,12 +4,10 @@ import { InputFieldProps, OptionTypes } from "../../constants/poolDetail";
 import { renderError } from "../../utils/validate";
 
 const SelectField = (props: InputFieldProps) => {
-  const { label, name, control, errors, required, placeholder, selectOptions } =
-    props;
+  const { name, control, errors, required, placeholder, selectOptions } = props;
 
   return (
-    <div className="formControl">
-      <label className="formInputLabel">{label}</label>
+    <div className="flex flex-col w-full">
       <Controller
         name={name}
         control={control}

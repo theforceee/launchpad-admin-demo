@@ -5,11 +5,10 @@ import { InputFieldProps } from "../../constants/poolDetail";
 import { renderError } from "../../utils/validate";
 
 const EditorField = React.memo((props: InputFieldProps) => {
-  const { label, name, control, errors, required } = props;
+  const { name, control, errors, required } = props;
 
   return (
-    <div className="formControl">
-      <label className="formInputLabel">{label}</label>
+    <div className="flex flex-col w-full">
       <Controller
         name={name}
         control={control}

@@ -1,30 +1,54 @@
 import { Button } from "@mui/material";
+import clsx from "clsx";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import {
+  PoolFieldProps,
   RegisterInputs,
   defaultEmptyPool,
 } from "../../../constants/poolDetail";
-import AcceptCurrency from "../PoolComponents/AcceptCurrency";
-import AirdropNetwork from "../PoolComponents/AirdropNetwork";
-import BuyType from "../PoolComponents/BuyType";
-import ClaimNetwork from "../PoolComponents/ClaimNetwork";
+import TabInfo from "./TabInfo";
+import TabMedia from "./TabMedia";
+import TabPool from "./TabPool";
+import TabToken from "./TabToken";
 import EndWhitelistTime from "../PoolComponents/EndWhitelistTime";
-import ExampleSelect from "../PoolComponents/ExampleSelect";
-import NetworkAvailable from "../PoolComponents/NetworkAvailable";
-import PoolBanner from "../PoolComponents/PoolBanner";
-import PoolDescription from "../PoolComponents/PoolDescription";
-import PoolName from "../PoolComponents/PoolName";
-import PrivatePoolSetting from "../PoolComponents/PoolType";
-import StartBuyTime from "../PoolComponents/StartBuyTime";
 import StartWhitelistTime from "../PoolComponents/StartWhitelistTime";
-import TokenIcon from "../PoolComponents/TokenIcon";
-import TokenSymbol from "../PoolComponents/TokenSymbol";
-import TotalSoldCoin from "../PoolComponents/TotalSoldCoin";
-import Website from "../PoolComponents/Website";
+import TabUserList from "./TabUserList";
+
+export interface PoolTabProps extends PoolFieldProps {
+  show: boolean;
+}
 
 export type PoolFormTypes = {
   poolData?: RegisterInputs | undefined;
 };
+
+type PoolNavTypes = {
+  label: string;
+  value: number;
+};
+const poolNav: Array<PoolNavTypes> = [
+  {
+    label: "INFO",
+    value: 1,
+  },
+  {
+    label: "TOKEN",
+    value: 2,
+  },
+  {
+    label: "POOL",
+    value: 3,
+  },
+  {
+    label: "MEDIA",
+    value: 4,
+  },
+  {
+    label: "USER LIST",
+    value: 5,
+  },
+];
 
 const PoolForm = (props: PoolFormTypes) => {
   const { poolData } = props;
@@ -42,81 +66,84 @@ const PoolForm = (props: PoolFormTypes) => {
     reValidateMode: "onChange",
   });
 
+  const [selectedNav, setSelectedNav] = useState<number>(1);
+
+  const handleChangeNav = (navValue: number) => {
+    setSelectedNav(navValue);
+  };
+
   console.log("errors", errors);
   const onSubmit: SubmitHandler<RegisterInputs> = (data: RegisterInputs) => {
     console.log(data, errors);
   };
 
   return (
-    <>
+    <div className="flex-col flex">
+      <div className="flex justify-center my-5">
+        {poolNav.map((item: PoolNavTypes) => (
+          <div
+            key={item.value}
+            className={clsx(
+              "flex-1 flex items-center justify-center cursor-pointer text-20/28 font-medium",
+              selectedNav === item.value ? "text-[#606060]" : "text-[#D9D9D9]",
+            )}
+            onClick={() => handleChangeNav(item.value)}
+          >
+            <span
+              className={
+                selectedNav === item.value ? "border-b-8 border-[#606060]" : ""
+              }
+            >
+              {item.label}
+            </span>
+          </div>
+        ))}
+      </div>
+
       <form onSubmit={handleSubmit(onSubmit)} className="flex-1">
-        <div className="grid w-full grid-cols-2 gap-5">
-          <div className="formSection">
-            <PoolName control={control} errors={errors} register={register} />
-            <PoolBanner control={control} errors={errors} register={register} />
-            <TokenSymbol
-              control={control}
-              errors={errors}
-              register={register}
-            />
-            <TokenIcon control={control} errors={errors} register={register} />
-            <Website control={control} errors={errors} register={register} />
-            <TotalSoldCoin
-              control={control}
-              errors={errors}
-              register={register}
-              setValue={setValue}
-            />
-          </div>
+        <div className="w-full">
+          <TabInfo
+            show={selectedNav === 1}
+            control={control}
+            errors={errors}
+            register={register}
+            setValue={setValue}
+            watch={watch}
+          />
+          <TabToken
+            show={selectedNav === 2}
+            control={control}
+            errors={errors}
+            register={register}
+            setValue={setValue}
+            watch={watch}
+          />
+          <TabPool
+            show={selectedNav === 3}
+            control={control}
+            errors={errors}
+            register={register}
+            setValue={setValue}
+            watch={watch}
+          />
+          <TabMedia
+            show={selectedNav === 4}
+            control={control}
+            errors={errors}
+            register={register}
+            setValue={setValue}
+            watch={watch}
+          />
+          <TabUserList
+            show={selectedNav === 5}
+            control={control}
+            errors={errors}
+            register={register}
+            setValue={setValue}
+            watch={watch}
+          />
 
-          <div className="formSection">
-            <ExampleSelect
-              control={control}
-              errors={errors}
-              register={register}
-            />
-          </div>
-
-          <div className="formSection">
-            <BuyType
-              control={control}
-              errors={errors}
-              register={register}
-              setValue={setValue}
-            />
-            <PrivatePoolSetting
-              control={control}
-              errors={errors}
-              register={register}
-              setValue={setValue}
-            />
-            <NetworkAvailable
-              control={control}
-              errors={errors}
-              register={register}
-              setValue={setValue}
-            />
-            <ClaimNetwork
-              control={control}
-              errors={errors}
-              register={register}
-              setValue={setValue}
-            />
-            <AcceptCurrency
-              control={control}
-              errors={errors}
-              register={register}
-              setValue={setValue}
-            />
-            <AirdropNetwork
-              control={control}
-              errors={errors}
-              register={register}
-              setValue={setValue}
-            />
-          </div>
-
-          <div className="formSection">
+          {/* <div className="formSection">
             <div className="grid grid-cols-2 gap-x-5">
               <StartWhitelistTime
                 control={control}
@@ -132,39 +159,8 @@ const PoolForm = (props: PoolFormTypes) => {
                 register={register}
                 setValue={setValue}
               />
-              <StartBuyTime
-                control={control}
-                errors={errors}
-                watch={watch}
-                register={register}
-                setValue={setValue}
-              />
-              <StartBuyTime
-                control={control}
-                errors={errors}
-                watch={watch}
-                register={register}
-                setValue={setValue}
-              />
-              <StartBuyTime
-                control={control}
-                errors={errors}
-                watch={watch}
-                register={register}
-                setValue={setValue}
-              />
             </div>
-          </div>
-        </div>
-
-        <div className="formSection mt-5 min-h-[200px]">
-          <PoolDescription
-            control={control}
-            errors={errors}
-            register={register}
-            setValue={setValue}
-            watch={watch}
-          />
+          </div> */}
         </div>
 
         <div className="grid w-full grid-cols-2 gap-5 mt-10">
@@ -187,7 +183,7 @@ const PoolForm = (props: PoolFormTypes) => {
           </Button>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 

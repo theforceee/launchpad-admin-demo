@@ -10,7 +10,7 @@ const TokenSymbol = (props: PoolFieldProps) => {
       <TextField
         control={control}
         errors={errors}
-        name="token_symbol"
+        name="token_id"
         register={register}
       />
     </div>

@@ -1,5 +1,5 @@
-import RadioGroupField from "../../../components/base/RadioGroupField";
-import { PoolFieldProps, OptionTypes } from "../../../constants/poolDetail";
+import SelectField from "../../../components/base/SelectField";
+import { OptionTypes, PoolFieldProps } from "../../../constants/poolDetail";
 
 const options: Array<OptionTypes> = [
   {
@@ -19,16 +19,16 @@ const options: Array<OptionTypes> = [
 const AcceptCurrency = (props: PoolFieldProps) => {
   const { control, errors, register } = props;
   return (
-    <>
-      <RadioGroupField
-        label="Accept Currency"
+    <div className="flex">
+      <label className="formInputLabelShort w-[170px]">Accepted Tokens</label>
+      <SelectField
         control={control}
         errors={errors}
         name="accepted_currency"
         register={register}
-        radioOptions={options}
+        selectOptions={options}
       />
-    </>
+    </div>
   );
 };
 

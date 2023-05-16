@@ -1,19 +1,21 @@
 import TextField from "../../../components/base/TextField";
 import { PoolFieldProps } from "../../../constants/poolDetail";
 
-const Website = (props: PoolFieldProps) => {
+const TokenName = (props: PoolFieldProps) => {
   const { control, errors, register } = props;
   return (
-    <>
+    <div className="flex">
+      <label className="formInputLabelShort">Token Name</label>
+
       <TextField
-        label="Website"
         control={control}
         errors={errors}
-        name="website"
+        name="token_name"
+        // required
         register={register}
       />
-    </>
+    </div>
   );
 };
 
-export default Website;
+export default TokenName;

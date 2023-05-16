@@ -1,20 +1,21 @@
 import DateTimePicker from "../../../components/base/DateTimePicker";
 import { PoolFieldProps } from "../../../constants/poolDetail";
 
-const StartBuyTime = (props: PoolFieldProps) => {
+const EndRefundTime = (props: PoolFieldProps) => {
   const { control, errors, register, setValue } = props;
+
   return (
-    <>
+    <div className="flex flex-1">
+      <label className="formInputLabelShort">Refund End Time</label>
       <DateTimePicker
-        label="Start Time"
         control={control}
         errors={errors}
-        name="start_buy_time"
+        name="end_refund_time"
         register={register}
         setValue={setValue}
       />
-    </>
+    </div>
   );
 };
 
-export default StartBuyTime;
+export default EndRefundTime;

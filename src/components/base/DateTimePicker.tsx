@@ -6,16 +6,8 @@ import { InputFieldProps, RegisterInputs } from "../../constants/poolDetail";
 import { renderError } from "../../utils/validate";
 
 const DateTimePicker = React.memo((props: InputFieldProps) => {
-  const {
-    label,
-    name,
-    control,
-    errors,
-    required,
-    setValue,
-    validate,
-    disabledDate,
-  } = props;
+  const { name, control, errors, required, setValue, validate, disabledDate } =
+    props;
 
   useEffect(() => {
     setValue && setValue(name, moment().format());
@@ -26,8 +18,7 @@ const DateTimePicker = React.memo((props: InputFieldProps) => {
   };
 
   return (
-    <div className="formControl">
-      <label className="formInputLabel">{label}</label>
+    <div className="flex flex-col w-full">
       <Controller
         name={name}
         control={control}

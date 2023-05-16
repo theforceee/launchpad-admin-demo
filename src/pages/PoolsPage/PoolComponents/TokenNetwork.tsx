@@ -32,20 +32,20 @@ const options: Array<OptionTypes> = [
   },
 ];
 
-const ExampleSelect = (props: PoolFieldProps) => {
+const TokenNetwork = (props: PoolFieldProps) => {
   const { control, errors, register } = props;
   return (
-    <>
+    <div className="flex">
+      <label className="formInputLabelShort w-[170px]">Chain</label>
       <SelectField
-        label="Example Select"
         control={control}
         errors={errors}
-        name="exampleSelect"
+        name="token_network"
         register={register}
         selectOptions={options}
       />
-    </>
+    </div>
   );
 };
 
-export default ExampleSelect;
+export default TokenNetwork;

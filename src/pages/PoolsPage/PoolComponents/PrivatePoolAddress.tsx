@@ -1,19 +1,20 @@
 import TextField from "../../../components/base/TextField";
 import { PoolFieldProps } from "../../../constants/poolDetail";
 
-const PoolBanner = (props: PoolFieldProps) => {
+const PrivatePoolAddress = (props: PoolFieldProps) => {
   const { control, errors, register } = props;
   return (
-    <>
+    <div className="flex flex-1">
+      <label className="formInputLabelShort">Private Pool Address</label>
+
       <TextField
-        label="Pool Banner"
         control={control}
         errors={errors}
-        name="banner"
+        name="pool_private_address"
         register={register}
       />
-    </>
+    </div>
   );
 };
 
-export default PoolBanner;
+export default PrivatePoolAddress;

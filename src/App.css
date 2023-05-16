@@ -6,19 +6,25 @@
 
 @layer components {
   .formControl {
-    @apply relative mt-6;
+    @apply relative mt-6 flex items-center;
   }
   .formInputText {
-    @apply rounded-md w-full p-3 mt-2 bg-white border duration-100 ease-in outline-none focus:border-[#ffcc00];
+    @apply rounded-md w-full p-2 bg-white border duration-100 ease-in outline-none focus:border-[#ffcc00];
   }
   .formInputLabel {
-    @apply rounded-md text-[#363636] tracking-wider;
+    @apply rounded-md flex items-center text-[#363636] text-16/20 font-semibold tracking-wider w-full max-w-[170px] h-10;
+  }
+  .formInputLabelShort {
+    @apply rounded-md flex items-center text-[#363636] text-16/20 font-semibold tracking-wider h-10 mr-10 whitespace-nowrap;
   }
   .formErrorMessage {
     @apply mt-2 text-red-600 text-14/18;
   }
   .formSection {
     @apply flex flex-col bg-white rounded-xl px-6 py-5 drop-shadow-lg;
+  }
+  .formRow {
+    @apply flex space-x-10 mb-4;
   }
 }
 

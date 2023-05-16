@@ -7,8 +7,7 @@ import { renderError } from "../../utils/validate";
 const SEPARATOR = ",";
 
 const NumberField = (props: InputFieldProps) => {
-  const { label, name, control, errors, required, placeholder, setValue } =
-    props;
+  const { name, control, errors, required, placeholder, setValue } = props;
 
   const handleChangeNumber = (
     event: ChangeEvent<HTMLInputElement> | undefined,
@@ -20,8 +19,7 @@ const NumberField = (props: InputFieldProps) => {
   };
 
   return (
-    <div className="formControl">
-      <label className="formInputLabel">{label}</label>
+    <div className="flex flex-col w-full">
       <Controller
         name={name}
         control={control}

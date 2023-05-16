@@ -6,11 +6,13 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import { styled } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { UserTypes } from "..";
+import {
+  StyledTableCell,
+  StyledTableRow,
+} from "../../../components/base/TableWithPagination";
 import styles from "./table.module.scss";
 
 const tableHeaders = [
@@ -21,32 +23,6 @@ const tableHeaders = [
   "Pioneer NFTs Staked",
   "Leaderboard Points",
 ];
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "gray",
-    color: theme.palette.common.white,
-    fontSize: 16,
-    borderRight: "2px solid white",
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-    color: "#3a38bb",
-    fontWeight: 600,
-    borderRight: "2px solid white",
-    // display: "flex",
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(() => ({
-  backgroundColor: "#f5f5f5",
-  "&:nth-of-type(odd)": {
-    backgroundColor: "#d9d9d9",
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    borderBottom: 0,
-  },
-}));
 
 const UserTable = (props: any) => {
   const { currentPage, search, dataTable } = props;

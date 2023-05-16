@@ -3,12 +3,10 @@ import { InputFieldProps } from "../../constants/poolDetail";
 import { renderError } from "../../utils/validate";
 
 const TextField = (props: InputFieldProps) => {
-  const { label, name, control, register, errors, required, placeholder } =
-    props;
+  const { name, control, register, errors, required, placeholder } = props;
 
   return (
-    <div className="formControl">
-      <label className="formInputLabel">{label}</label>
+    <div className="flex flex-col w-full">
       <Controller
         name={name}
         control={control}

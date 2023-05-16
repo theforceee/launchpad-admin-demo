@@ -1,31 +1,32 @@
 import RadioGroupField from "../../../components/base/RadioGroupField";
-import { PoolFieldProps, OptionTypes } from "../../../constants/poolDetail";
+import { OptionTypes, PoolFieldProps } from "../../../constants/poolDetail";
 
 const options: Array<OptionTypes> = [
   {
-    label: "Whitelist Lottery",
+    label: "Yes",
     value: "1",
   },
   {
-    label: "FCFS",
+    label: "No",
     value: "2",
   },
 ];
 
-const BuyType = (props: PoolFieldProps) => {
+const KycRequire = (props: PoolFieldProps) => {
   const { control, errors, register } = props;
   return (
-    <>
+    <div className="flex">
+      <label className="formInputLabelShort">Requires KYC</label>
+
       <RadioGroupField
-        label="Buy Type"
         control={control}
         errors={errors}
-        name="buyType"
+        name="is_require_kyc"
         register={register}
         radioOptions={options}
       />
-    </>
+    </div>
   );
 };
 
-export default BuyType;
+export default KycRequire;

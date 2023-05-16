@@ -2,10 +2,10 @@ import moment from "moment";
 import DateTimePicker from "../../../components/base/DateTimePicker";
 import { PoolFieldProps } from "../../../constants/poolDetail";
 
-const StartWhitelistTime = (props: PoolFieldProps) => {
+const StartSaleTime = (props: PoolFieldProps) => {
   const { control, errors, register, setValue, watch } = props;
 
-  const endDate = watch && watch("end_whitelist_time");
+  const endDate = watch && watch("end_buy_time");
 
   // const disabledDate: RangePickerProps["disabledDate"] = useCallback(
   //   (currentDate: moment.Moment) => {
@@ -18,11 +18,11 @@ const StartWhitelistTime = (props: PoolFieldProps) => {
 
   return (
     <div className="flex flex-1">
-      <label className="formInputLabelShort">Whitelist Start Time</label>
+      <label className="formInputLabelShort">Sale Start Time</label>
       <DateTimePicker
         control={control}
         errors={errors}
-        name="start_whitelist_time"
+        name="start_buy_time"
         register={register}
         setValue={setValue}
         validate={{
@@ -36,4 +36,4 @@ const StartWhitelistTime = (props: PoolFieldProps) => {
   );
 };
 
-export default StartWhitelistTime;
+export default StartSaleTime;

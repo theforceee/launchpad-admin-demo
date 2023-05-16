@@ -1,19 +1,20 @@
 import TextField from "../../../components/base/TextField";
 import { PoolFieldProps } from "../../../constants/poolDetail";
 
-const TokenIcon = (props: PoolFieldProps) => {
+const TokenDecimal = (props: PoolFieldProps) => {
   const { control, errors, register } = props;
   return (
-    <>
+    <div className="flex">
+      <label className="formInputLabelShort">Token Decimal</label>
+
       <TextField
-        label="Token Icon"
         control={control}
         errors={errors}
-        name="token_logo"
+        name="token_decimal"
         register={register}
       />
-    </>
+    </div>
   );
 };
 
-export default TokenIcon;
+export default TokenDecimal;

@@ -24,7 +24,7 @@ import {
 } from "./constants";
 import styles from "./table.module.scss";
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "gray",
     color: theme.palette.common.white,
@@ -37,6 +37,22 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontWeight: 600,
     borderRight: "2px solid white",
     // display: "flex",
+  },
+}));
+
+export const StyledTableRow = styled(TableRow)(() => ({
+  "&:hover": {
+    cursor: "pointer",
+    backgroundColor: "#ffe664 !important",
+    transition: "0.2s all",
+  },
+  backgroundColor: "#f5f5f5",
+  "&:nth-of-type(odd)": {
+    backgroundColor: "#d9d9d9",
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    borderBottom: 0,
   },
 }));
 
@@ -169,7 +185,7 @@ const TableWithPagination = (props: TableWithPaginationProps) => {
               {dataTable &&
                 dataTable.length > 0 &&
                 dataTable.map((dataRecord: any, index: number) => (
-                  <TableRecord pool={dataRecord} key={index} />
+                  <TableRecord dataRecord={dataRecord} key={index} />
                 ))}
             </TableBody>
           </Table>

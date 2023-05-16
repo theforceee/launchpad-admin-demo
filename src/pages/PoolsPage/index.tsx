@@ -20,7 +20,7 @@ for (let i = 0; i < 10; i++) {
     {
       ...defaultEmptyPool,
       slug: "" + i,
-      title: "This is an example about very long project's name",
+      title: "This is an example of a very long long project's name",
       start_join_time: "1680707600",
       end_join_time: "1680907600",
       network: "ETH",
