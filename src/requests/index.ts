@@ -2,6 +2,8 @@ interface RequestOptions {
   body?: Record<string, unknown>;
 }
 
+export const BASE_API_URL = process.env.REACT_APP_BASE_API_URL || "";
+
 async function request(url: string, method: string, options?: RequestOptions) {
   const token = localStorage.getItem("authToken");
   const headers = new Headers({
@@ -21,7 +23,8 @@ async function request(url: string, method: string, options?: RequestOptions) {
   });
 
   if (!response.ok) {
-    throw new Error(`HTTP ${response.status} - ${response.statusText}`);
+    // throw new Error(`HTTP ${response.status} - ${response.statusText}`);
+    console.log(`HTTP ${response.status} - ${response.statusText}`);
   }
 
   return response.json();

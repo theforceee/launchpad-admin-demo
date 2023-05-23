@@ -42,12 +42,9 @@ const LoginPage = () => {
   });
 
   const handleSignIn = async () => {
-    const resp = await get("/jobs");
-    console.log(resp);
     const chainId = await connector?.getChainId();
-    // const nonceRes = await get("/admin/nonce");
-    const nonceRes: any = {};
-    const nonce = nonceRes?.body?.data?.nonce;
+    const nonceRes = await get("/nonce");
+    const nonce = nonceRes?.data?.nonce;
 
     const message = new SiweMessage({
       domain: window.location.host,
@@ -57,32 +54,39 @@ const LoginPage = () => {
       version: "1",
       chainId,
       nonce,
-      issuedAt: new Date().toLocaleString(),
+      issuedAt: new Date().toISOString(),
     });
 
     const signature = await signMessageAsync({
       message: message.prepareMessage(),
     });
-    setUserLogin && setUserLogin({ address, token: signature });
-    localStorage.setItem(KEY_CACHE, signature);
-    session?.login(signature);
-    navigate(URLS.HOME);
 
-    const loginRes = await post("/admin/login", {
+    const loginRes = await post("/login", {
       body: {
         message,
         signature,
       },
     });
-    console.log("loginRes", loginRes);
+
+    if (!loginRes || loginRes.status !== 200) {
+      toast.error("Fail to login: " + loginRes.message);
+      return;
+    }
+
+    const userToken = loginRes.data?.token?.token;
+    setUserLogin && setUserLogin({ address, token: userToken });
+    localStorage.setItem(KEY_CACHE, userToken);
+    session?.login(userToken);
+    navigate(URLS.HOME);
   };
+
   return (
-    <div className="w-screen h-screen flex justify-center pt-40">
-      <div className="flex flex-col max-w-[500px] w-full">
-        <div className="text-40/52 text-center">
+    <div className="flex h-screen w-screen justify-center pt-40">
+      <div className="flex w-full max-w-[500px] flex-col">
+        <div className="text-center text-40/52">
           {isConnected ? "Wallet Connected" : "Connect Your Wallet"}
         </div>
-        <div className="text-center mt-10 text-18/24">
+        <div className="mt-10 text-center text-18/24">
           {isConnected ? (
             <div className="flex flex-col">
               <FormControl disabled variant="standard">
@@ -101,7 +105,7 @@ const LoginPage = () => {
         </div>
         <div className="mt-10 flex w-full">
           {isConnected ? (
-            <div className="grid grid-cols-2 gap-5 w-full">
+            <div className="grid w-full grid-cols-2 gap-5">
               <Button
                 onClick={() => disconnect()}
                 variant="contained"
