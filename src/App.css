@@ -12,7 +12,7 @@
     @apply rounded-md w-full p-2 bg-white border duration-100 ease-in outline-none focus:border-[#ffcc00];
   }
   .formInputLabel {
-    @apply rounded-md flex items-center text-[#363636] text-16/20 font-semibold tracking-wider w-full max-w-[170px] h-10;
+    @apply rounded-md flex items-center text-[#363636] text-16/20 font-semibold tracking-wider w-full max-w-[200px] shrink-0 h-10;
   }
   .formInputLabelShort {
     @apply rounded-md flex items-center text-[#363636] text-16/20 font-semibold tracking-wider h-10 mr-10 whitespace-nowrap;

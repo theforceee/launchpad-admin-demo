@@ -6,7 +6,7 @@ const EndRefundTime = (props: PoolFieldProps) => {
 
   return (
     <div className="flex flex-1">
-      <label className="formInputLabelShort">Refund End Time</label>
+      <label className="formInputLabel">Refund End Time</label>
       <DateTimePicker
         control={control}
         errors={errors}

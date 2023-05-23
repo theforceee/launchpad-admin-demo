@@ -21,7 +21,7 @@ const KycRequire = (props: PoolFieldProps) => {
       <RadioGroupField
         control={control}
         errors={errors}
-        name="is_require_kyc"
+        name="require_kyc"
         register={register}
         radioOptions={options}
       />

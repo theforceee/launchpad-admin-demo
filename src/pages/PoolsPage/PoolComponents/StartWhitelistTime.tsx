@@ -18,7 +18,7 @@ const StartWhitelistTime = (props: PoolFieldProps) => {
 
   return (
     <div className="flex flex-1">
-      <label className="formInputLabelShort">Whitelist Start Time</label>
+      <label className="formInputLabel">Whitelist Start Time</label>
       <DateTimePicker
         control={control}
         errors={errors}

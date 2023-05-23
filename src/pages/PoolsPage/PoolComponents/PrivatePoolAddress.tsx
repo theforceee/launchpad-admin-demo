@@ -5,7 +5,7 @@ const PrivatePoolAddress = (props: PoolFieldProps) => {
   const { control, errors, register } = props;
   return (
     <div className="flex flex-1">
-      <label className="formInputLabelShort">Private Pool Address</label>
+      <label className="formInputLabel">Private Pool Address</label>
 
       <TextField
         control={control}

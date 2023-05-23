@@ -5,7 +5,7 @@ const MinInvestment = (props: PoolFieldProps) => {
   const { control, errors, register, setValue } = props;
   return (
     <div className="flex flex-1">
-      <label className="formInputLabelShort">Minimum Investment</label>
+      <label className="formInputLabel">Minimum Investment</label>
       <NumberField
         control={control}
         errors={errors}

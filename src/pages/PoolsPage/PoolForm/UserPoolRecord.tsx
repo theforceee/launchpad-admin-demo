@@ -9,7 +9,6 @@ type UserRecordProps = {
 };
 const UserPoolRecord: React.FC<UserRecordProps> = (props: UserRecordProps) => {
   const { dataRecord: user } = props;
-  console.log("user", user);
   const ref = useRef<any>();
 
   if (!user) return <></>;

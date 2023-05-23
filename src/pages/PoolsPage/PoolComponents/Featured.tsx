@@ -4,11 +4,11 @@ import { OptionTypes, PoolFieldProps } from "../../../constants/poolDetail";
 const options: Array<OptionTypes> = [
   {
     label: "Yes",
-    value: "1",
+    value: "true",
   },
   {
     label: "No",
-    value: "2",
+    value: "false",
   },
 ];
 
@@ -19,10 +19,9 @@ const Featured = (props: PoolFieldProps) => {
       <label className="formInputLabelShort">Featured?</label>
 
       <RadioGroupField
-        label="Buy Type"
         control={control}
         errors={errors}
-        name="buyType"
+        name="is_featured"
         register={register}
         radioOptions={options}
       />

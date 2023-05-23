@@ -10,7 +10,7 @@ const TokenContract = (props: PoolFieldProps) => {
       <TextField
         control={control}
         errors={errors}
-        name="token_contract"
+        name="token_address"
         register={register}
       />
     </div>

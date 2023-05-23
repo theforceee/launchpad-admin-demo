@@ -4,8 +4,8 @@ import { PoolFieldProps } from "../../../constants/poolDetail";
 const TokenName = (props: PoolFieldProps) => {
   const { control, errors, register } = props;
   return (
-    <div className="flex">
-      <label className="formInputLabelShort">Token Name</label>
+    <div className="flex w-[364px]">
+      <label className="formInputLabel">Token Name</label>
 
       <TextField
         control={control}

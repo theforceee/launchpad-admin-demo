@@ -4,7 +4,7 @@ import { PoolFieldProps } from "../../../constants/poolDetail";
 const TokenAllocated = (props: PoolFieldProps) => {
   const { control, errors, register, setValue } = props;
   return (
-    <div className="flex">
+    <div className="flex w-[400px]">
       <label className="formInputLabel">Tokens Allocated</label>
       <NumberField
         control={control}

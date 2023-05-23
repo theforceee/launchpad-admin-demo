@@ -10,7 +10,7 @@ const TokenApi = (props: PoolFieldProps) => {
       <TextField
         control={control}
         errors={errors}
-        name="token_api"
+        name="token_data_api"
         register={register}
       />
     </div>

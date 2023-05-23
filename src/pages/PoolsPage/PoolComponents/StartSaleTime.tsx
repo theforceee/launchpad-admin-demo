@@ -18,7 +18,7 @@ const StartSaleTime = (props: PoolFieldProps) => {
 
   return (
     <div className="flex flex-1">
-      <label className="formInputLabelShort">Sale Start Time</label>
+      <label className="formInputLabel">Sale Start Time</label>
       <DateTimePicker
         control={control}
         errors={errors}

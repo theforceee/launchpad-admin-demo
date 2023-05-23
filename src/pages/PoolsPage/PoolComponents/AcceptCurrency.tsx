@@ -19,8 +19,8 @@ const options: Array<OptionTypes> = [
 const AcceptCurrency = (props: PoolFieldProps) => {
   const { control, errors, register } = props;
   return (
-    <div className="flex">
-      <label className="formInputLabelShort w-[170px]">Accepted Tokens</label>
+    <div className="flex w-[320px]">
+      <label className="formInputLabel">Accepted Tokens</label>
       <SelectField
         control={control}
         errors={errors}

@@ -35,8 +35,8 @@ const options: Array<OptionTypes> = [
 const TokenNetwork = (props: PoolFieldProps) => {
   const { control, errors, register } = props;
   return (
-    <div className="flex">
-      <label className="formInputLabelShort w-[170px]">Chain</label>
+    <div className="flex w-[320px]">
+      <label className="formInputLabel">Chain</label>
       <SelectField
         control={control}
         errors={errors}

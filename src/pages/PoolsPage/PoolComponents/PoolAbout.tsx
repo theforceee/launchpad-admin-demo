@@ -4,12 +4,12 @@ import { PoolFieldProps } from "../../../constants/poolDetail";
 const PoolAbout = (props: PoolFieldProps) => {
   const { control, errors, register, setValue } = props;
   return (
-    <div className="flex flex-col w-full">
-      <label className="formInputLabel">PoolAbout</label>
+    <div className="flex w-full flex-col">
+      <label className="formInputLabel">About</label>
       <EditorField
         control={control}
         errors={errors}
-        name="description"
+        name="about"
         register={register}
         setValue={setValue}
       />
