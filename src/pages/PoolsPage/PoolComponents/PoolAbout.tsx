@@ -5,7 +5,6 @@ const PoolAbout = (props: PoolFieldProps) => {
   const { control, errors, register, setValue } = props;
   return (
     <div className="flex w-full flex-col">
-      <label className="formInputLabel">About</label>
       <EditorField
         control={control}
         errors={errors}

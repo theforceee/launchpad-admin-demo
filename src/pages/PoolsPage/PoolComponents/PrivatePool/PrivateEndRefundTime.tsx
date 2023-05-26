@@ -1,7 +1,7 @@
-import DateTimePicker from "../../../components/base/DateTimePicker";
-import { PoolFieldProps } from "../../../constants/poolDetail";
+import DateTimePicker from "../../../../components/base/DateTimePicker";
+import { PoolFieldProps } from "../../../../constants/poolDetail";
 
-const EndRefundTime = (props: PoolFieldProps) => {
+const PrivateEndRefundTime = (props: PoolFieldProps) => {
   const { control, errors, register, setValue } = props;
 
   return (
@@ -10,7 +10,7 @@ const EndRefundTime = (props: PoolFieldProps) => {
       <DateTimePicker
         control={control}
         errors={errors}
-        name="end_refund_time"
+        name="pri_end_refund_time"
         register={register}
         setValue={setValue}
       />
@@ -18,4 +18,4 @@ const EndRefundTime = (props: PoolFieldProps) => {
   );
 };
 
-export default EndRefundTime;
+export default PrivateEndRefundTime;

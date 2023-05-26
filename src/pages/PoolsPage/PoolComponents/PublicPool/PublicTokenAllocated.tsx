@@ -1,7 +1,7 @@
-import NumberField from "../../../components/base/NumberField";
-import { PoolFieldProps } from "../../../constants/poolDetail";
+import NumberField from "../../../../components/base/NumberField";
+import { PoolFieldProps } from "../../../../constants/poolDetail";
 
-const TokenAllocated = (props: PoolFieldProps) => {
+const PublicTokenAllocated = (props: PoolFieldProps) => {
   const { control, errors, register, setValue } = props;
   return (
     <div className="flex w-[400px]">
@@ -9,7 +9,7 @@ const TokenAllocated = (props: PoolFieldProps) => {
       <NumberField
         control={control}
         errors={errors}
-        name="token_allocated"
+        name="pub_token_allocated"
         register={register}
         setValue={setValue}
         placeholder="Please enter a number"
@@ -18,4 +18,4 @@ const TokenAllocated = (props: PoolFieldProps) => {
   );
 };
 
-export default TokenAllocated;
+export default PublicTokenAllocated;

@@ -9,22 +9,25 @@
     @apply relative mt-6 flex items-center;
   }
   .formInputText {
-    @apply rounded-md w-full p-2 bg-white border duration-100 ease-in outline-none focus:border-[#ffcc00];
+    @apply w-full rounded-md border bg-white p-2 outline-none duration-100 ease-in focus:border-[#ffcc00];
   }
   .formInputLabel {
-    @apply rounded-md flex items-center text-[#363636] text-16/20 font-semibold tracking-wider w-full max-w-[200px] shrink-0 h-10;
+    @apply flex h-10 w-full max-w-[220px] shrink-0 items-center rounded-md text-16/20 font-semibold tracking-wider text-[#363636];
   }
   .formInputLabelShort {
-    @apply rounded-md flex items-center text-[#363636] text-16/20 font-semibold tracking-wider h-10 mr-10 whitespace-nowrap;
+    @apply mr-10 flex h-10 items-center whitespace-nowrap rounded-md text-16/20 font-semibold tracking-wider text-[#363636];
   }
   .formErrorMessage {
-    @apply mt-2 text-red-600 text-14/18;
+    @apply mt-2 text-14/18 text-red-600;
   }
   .formSection {
-    @apply flex flex-col bg-white rounded-xl px-6 py-5 drop-shadow-lg;
+    @apply flex flex-col rounded-xl bg-white px-6 py-5 drop-shadow-lg;
   }
   .formRow {
-    @apply flex space-x-10 mb-4;
+    @apply mb-4 flex space-x-10;
+  }
+  .formButton {
+    @apply w-fit cursor-pointer rounded-lg py-2 font-semibold disabled:cursor-not-allowed;
   }
 }
 

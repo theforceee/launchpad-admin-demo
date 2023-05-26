@@ -4,7 +4,7 @@ import { NumericFormat } from "react-number-format";
 import { InputFieldProps, RegisterInputs } from "../../constants/poolDetail";
 import { renderError } from "../../utils/validate";
 
-const SEPARATOR = ",";
+export const SEPARATOR = ",";
 
 const NumberField = (props: InputFieldProps) => {
   const { name, control, errors, required, placeholder, setValue } = props;
@@ -19,7 +19,7 @@ const NumberField = (props: InputFieldProps) => {
   };
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex w-full flex-col">
       <Controller
         name={name}
         control={control}
@@ -35,6 +35,7 @@ const NumberField = (props: InputFieldProps) => {
             thousandSeparator={true}
             className="formInputText"
             placeholder={placeholder}
+            // defaultValue={"10"}
           />
         )}
       />

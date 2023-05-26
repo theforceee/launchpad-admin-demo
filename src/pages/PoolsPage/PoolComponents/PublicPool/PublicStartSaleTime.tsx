@@ -1,11 +1,11 @@
 import moment from "moment";
-import DateTimePicker from "../../../components/base/DateTimePicker";
-import { PoolFieldProps } from "../../../constants/poolDetail";
+import DateTimePicker from "../../../../components/base/DateTimePicker";
+import { PoolFieldProps } from "../../../../constants/poolDetail";
 
-const StartSaleTime = (props: PoolFieldProps) => {
+const PublicStartSaleTime = (props: PoolFieldProps) => {
   const { control, errors, register, setValue, watch } = props;
 
-  const endDate = watch && watch("end_buy_time");
+  const endDate = watch && watch("pub_end_buy_time");
 
   // const disabledDate: RangePickerProps["disabledDate"] = useCallback(
   //   (currentDate: moment.Moment) => {
@@ -22,7 +22,7 @@ const StartSaleTime = (props: PoolFieldProps) => {
       <DateTimePicker
         control={control}
         errors={errors}
-        name="start_buy_time"
+        name="pub_start_buy_time"
         register={register}
         setValue={setValue}
         validate={{
@@ -36,4 +36,4 @@ const StartSaleTime = (props: PoolFieldProps) => {
   );
 };
 
-export default StartSaleTime;
+export default PublicStartSaleTime;

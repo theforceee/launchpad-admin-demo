@@ -10,102 +10,137 @@ import {
 
 // all pool properties
 export type RegisterInputs = {
-  type: string;
-  title: string;
+  name: string;
   slug: string;
-  about: string;
-  litepaper: string;
-  banner: string;
-  is_featured: string;
-
   website: string;
   twitter: string;
   telegram: string;
   discord: string;
+  about: string;
+  litepaper: string;
+  is_featured: string;
+  tags: string;
 
-  network: string;
-  token_address: string;
-  token_network: string;
-  token_symbol: string;
-  token_decimal: string;
   token_name: string;
   token_id: string;
+  token_address: string;
+  network: string;
+  token_decimal: string;
   token_data_api: string;
-  token_logo: string;
-  token_price: string;
-  totalSoldCoin: string;
-  buyType: string;
-  accepted_currency: string;
-  status: string;
+  total_supply: string;
+  token_release: string | undefined;
 
-  pool_private_address: string;
-  require_kyc: string;
-  token_allocated: string;
-  min_investment: string;
-  max_investment: string;
-
-  start_join_time: string | undefined;
-  end_join_time: string | undefined;
   start_whitelist_time: string | undefined;
   end_whitelist_time: string | undefined;
-  start_buy_time: string | undefined;
-  end_buy_time: string | undefined;
-  end_refund_time: string | undefined;
-  start_fcfs_time: string | undefined;
-  free_buy_time_bonus: string | undefined;
+  allocation_venture_capital: string;
+  allocation_private: string;
+  allocation_public: string;
 
-  release_type?: string;
-  release_policy?: string;
-  exampleSelect?: string;
+  pri_address: string | undefined;
+  pri_require_kyc: string | undefined;
+  pri_token_allocated: string | undefined;
+  pri_accepted_currency: string | undefined;
+  pri_conversion_rate: string | undefined;
+  pri_receiver_address: string | undefined;
+  pri_start_buy_time: string | undefined;
+  pri_end_buy_time: string | undefined;
+  pri_start_fcfs_time: string | undefined;
+  pri_end_refund_time: string | undefined;
+  pri_min_investment: string | undefined;
+  pri_fcfs_amount: string | undefined;
+
+  pub_address: string | undefined;
+  pub_require_kyc: string | undefined;
+  pub_token_allocated: string | undefined;
+  pub_accepted_currency: string | undefined;
+  pub_conversion_rate: string | undefined;
+  pub_receiver_address: string | undefined;
+  pub_start_buy_time: string | undefined;
+  pub_end_buy_time: string | undefined;
+  pub_start_fcfs_time: string | undefined;
+  pub_end_refund_time: string | undefined;
+  pub_min_investment: string | undefined;
+  pub_fcfs_amount: string | undefined;
+
+  tokenominc_development: string | undefined;
+  tokenominc_marketing: string | undefined;
+  tokenominc_operations: string | undefined;
+  tokenominc_dex_pool: string | undefined;
+  tokenominc_token_sale: string | undefined;
+  tokenominc_team: string | undefined;
+  tokenominc_advisory: string | undefined;
+  tokenominc_partnerships: string | undefined;
+  tokenominc_community: string | undefined;
+  tokenominc_legal: string | undefined;
+
+  status: string;
 };
 
 export const defaultEmptyPool: RegisterInputs = {
-  title: "",
+  name: "",
   slug: "",
-  is_featured: "",
-
   website: "",
   twitter: "",
   telegram: "",
   discord: "",
-
   about: "",
   litepaper: "",
-  banner: "",
-  token_logo: "",
-  token_symbol: "",
-  token_address: "",
-  token_decimal: "",
+  is_featured: "",
+  tags: "",
+
   token_name: "",
   token_id: "",
+  token_address: "",
+  network: "",
+  token_decimal: "",
   token_data_api: "",
-  token_price: "",
-
-  pool_private_address: "",
-  require_kyc: "",
-  token_allocated: "",
-  min_investment: "",
-  max_investment: "",
+  total_supply: "",
+  token_release: undefined,
 
   start_whitelist_time: "",
   end_whitelist_time: "",
-  end_buy_time: "",
-  end_refund_time: "",
-  end_join_time: "",
-  free_buy_time_bonus: "",
-  start_buy_time: "",
-  start_fcfs_time: "",
-  release_policy: "",
-  release_type: "",
-  totalSoldCoin: "",
-  buyType: "",
-  accepted_currency: "",
-  token_network: "",
-  type: "",
-  network: "",
+  allocation_private: "",
+  allocation_public: "",
+  allocation_venture_capital: "",
+
+  pri_address: "",
+  pri_require_kyc: "",
+  pri_token_allocated: "",
+  pri_accepted_currency: "",
+  pri_conversion_rate: "",
+  pri_receiver_address: "",
+  pri_start_buy_time: "",
+  pri_end_buy_time: "",
+  pri_start_fcfs_time: "",
+  pri_end_refund_time: "",
+  pri_min_investment: "",
+  pri_fcfs_amount: "",
+
+  pub_address: "",
+  pub_require_kyc: "",
+  pub_token_allocated: "",
+  pub_accepted_currency: "",
+  pub_conversion_rate: "",
+  pub_receiver_address: "",
+  pub_start_buy_time: "",
+  pub_end_buy_time: "",
+  pub_start_fcfs_time: "",
+  pub_end_refund_time: "",
+  pub_min_investment: "",
+  pub_fcfs_amount: "",
+
+  tokenominc_development: "",
+  tokenominc_marketing: "",
+  tokenominc_operations: "",
+  tokenominc_dex_pool: "",
+  tokenominc_token_sale: "",
+  tokenominc_team: "",
+  tokenominc_advisory: "",
+  tokenominc_partnerships: "",
+  tokenominc_community: "",
+  tokenominc_legal: "",
+
   status: "",
-  start_join_time: "",
-  exampleSelect: "",
 };
 
 export interface PoolFieldProps {
@@ -114,6 +149,7 @@ export interface PoolFieldProps {
   errors: FieldErrors<RegisterInputs>;
   setValue?: UseFormSetValue<RegisterInputs>;
   watch?: UseFormWatch<RegisterInputs>;
+  poolData?: RegisterInputs;
 }
 
 export type InputFieldProps = {

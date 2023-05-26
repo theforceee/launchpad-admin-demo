@@ -1,33 +1,18 @@
-import { DefaultLayout } from "../../components/layout";
-import { Button, InputAdornment, TextField } from "@mui/material";
-import { useNavigate } from "react-router";
 import SearchIcon from "@mui/icons-material/Search";
-import { ChangeEvent, useState } from "react";
-import { URLS } from "../../constants";
+import { Button, InputAdornment, TextField } from "@mui/material";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
+import TableWithPagination from "../../components/base/TableWithPagination";
 import {
   PagingationTypes,
   TableHeaderTypes,
 } from "../../components/base/TableWithPagination/constants";
-import TableWithPagination from "../../components/base/TableWithPagination";
+import { DefaultLayout } from "../../components/layout";
+import { URLS } from "../../constants";
+import { RegisterInputs } from "../../constants/poolDetail";
+import { get } from "../../requests";
 import PoolRecord from "./PoolRecord";
-import { RegisterInputs, defaultEmptyPool } from "../../constants/poolDetail";
-
-let dataTable: Array<RegisterInputs> = [];
-
-for (let i = 0; i < 10; i++) {
-  dataTable = [
-    ...dataTable,
-    {
-      ...defaultEmptyPool,
-      slug: "" + i,
-      title: "This is an example of a very long long project's name",
-      start_join_time: "1680707600",
-      end_join_time: "1680907600",
-      network: "ETH",
-      status: ["Active", "Queued", "Ended"][Math.round(Math.random() * 2)],
-    },
-  ];
-}
 
 const tableHeaders: Array<TableHeaderTypes> = [
   {
@@ -61,10 +46,28 @@ const PoolsPage = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchInput] = useState<string>("");
   const [pagination, setPagination] = useState<PagingationTypes>({
-    currentPage: 0,
-    rowsPerPage: 0,
+    currentPage: 1,
+    rowsPerPage: 10,
     total: 0,
   });
+  const [pools, setPools] = useState<Array<RegisterInputs>>([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await get(`/pool?page=${pagination.currentPage}`);
+      if (res.status !== 200) {
+        toast.error("ERROR: Fail to get list pool");
+        return;
+      }
+      const resData = res.data;
+      setPools(resData?.data || []);
+      setPagination((prevState) => ({
+        ...prevState,
+        total: resData?.meta?.total,
+      }));
+    };
+    getData();
+  }, [pagination.currentPage]);
 
   const handleSearch = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -75,7 +78,7 @@ const PoolsPage = () => {
 
   return (
     <DefaultLayout>
-      <div className="flex flex-col w-full">
+      <div className="flex w-full flex-col">
         <div className="mb-10 flex">
           <TextField
             label="Search"
@@ -97,7 +100,7 @@ const PoolsPage = () => {
           <Button
             size="large"
             variant="contained"
-            className="h-fit !ml-auto"
+            className="!ml-auto h-fit"
             onClick={() => navigate(URLS.CREATE_POOL)}
           >
             Create Pool
@@ -106,7 +109,7 @@ const PoolsPage = () => {
 
         <div className="w-full">
           <TableWithPagination
-            dataTable={dataTable}
+            dataTable={pools}
             pagination={pagination}
             setPagination={setPagination}
             tableHeaders={tableHeaders}

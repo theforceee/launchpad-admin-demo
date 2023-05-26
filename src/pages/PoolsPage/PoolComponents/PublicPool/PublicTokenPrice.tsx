@@ -1,7 +1,7 @@
-import NumberField from "../../../components/base/NumberField";
-import { PoolFieldProps } from "../../../constants/poolDetail";
+import NumberField from "../../../../components/base/NumberField";
+import { PoolFieldProps } from "../../../../constants/poolDetail";
 
-const TokenPrice = (props: PoolFieldProps) => {
+const PublicTokenPrice = (props: PoolFieldProps) => {
   const { control, errors, register, setValue } = props;
   return (
     <div className="flex">
@@ -9,7 +9,7 @@ const TokenPrice = (props: PoolFieldProps) => {
       <NumberField
         control={control}
         errors={errors}
-        name="token_price"
+        name="pub_conversion_rate"
         register={register}
         setValue={setValue}
         placeholder="Please enter a number"
@@ -18,4 +18,4 @@ const TokenPrice = (props: PoolFieldProps) => {
   );
 };
 
-export default TokenPrice;
+export default PublicTokenPrice;

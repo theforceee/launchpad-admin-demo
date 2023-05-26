@@ -1,7 +1,7 @@
 import TextField from "../../../components/base/TextField";
 import { PoolFieldProps } from "../../../constants/poolDetail";
 
-const TokenSymbol = (props: PoolFieldProps) => {
+const TokenID = (props: PoolFieldProps) => {
   const { control, errors, register } = props;
   return (
     <div className="flex">
@@ -17,4 +17,4 @@ const TokenSymbol = (props: PoolFieldProps) => {
   );
 };
 
-export default TokenSymbol;
+export default TokenID;

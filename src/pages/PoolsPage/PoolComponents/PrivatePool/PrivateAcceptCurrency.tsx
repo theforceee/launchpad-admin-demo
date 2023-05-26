@@ -1,5 +1,5 @@
-import SelectField from "../../../components/base/SelectField";
-import { OptionTypes, PoolFieldProps } from "../../../constants/poolDetail";
+import SelectField from "../../../../components/base/SelectField";
+import { OptionTypes, PoolFieldProps } from "../../../../constants/poolDetail";
 
 const options: Array<OptionTypes> = [
   {
@@ -16,7 +16,7 @@ const options: Array<OptionTypes> = [
   },
 ];
 
-const AcceptCurrency = (props: PoolFieldProps) => {
+const PrivateAcceptCurrency = (props: PoolFieldProps) => {
   const { control, errors, register } = props;
   return (
     <div className="flex w-[320px]">
@@ -24,7 +24,7 @@ const AcceptCurrency = (props: PoolFieldProps) => {
       <SelectField
         control={control}
         errors={errors}
-        name="accepted_currency"
+        name="pri_accepted_currency"
         register={register}
         selectOptions={options}
       />
@@ -32,4 +32,4 @@ const AcceptCurrency = (props: PoolFieldProps) => {
   );
 };
 
-export default AcceptCurrency;
+export default PrivateAcceptCurrency;

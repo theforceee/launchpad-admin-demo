@@ -6,6 +6,7 @@ import PoolAbout from "../PoolComponents/PoolAbout";
 import PoolLinks from "../PoolComponents/PoolLinks";
 import PoolName from "../PoolComponents/PoolName";
 import PoolSlug from "../PoolComponents/PoolSlug";
+import PoolTags from "../PoolComponents/PoolTags";
 
 const TabInfo = (props: PoolTabProps) => {
   const { show = false, control, errors, register, setValue, watch } = props;
@@ -21,13 +22,26 @@ const TabInfo = (props: PoolTabProps) => {
 
         <PoolLinks control={control} errors={errors} register={register} />
 
-        <PoolAbout
-          control={control}
-          errors={errors}
-          register={register}
-          setValue={setValue}
-          watch={watch}
-        />
+        <div className="flex w-full flex-col">
+          <div className="mb-2 flex items-center justify-between">
+            <label className="formInputLabel">About</label>
+
+            <PoolTags
+              control={control}
+              errors={errors}
+              register={register}
+              setValue={setValue}
+              watch={watch}
+            />
+          </div>
+          <PoolAbout
+            control={control}
+            errors={errors}
+            register={register}
+            setValue={setValue}
+            watch={watch}
+          />
+        </div>
 
         <Litepaper
           control={control}

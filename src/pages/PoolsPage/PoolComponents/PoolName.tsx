@@ -10,8 +10,8 @@ const PoolName = (props: PoolFieldProps) => {
       <TextField
         control={control}
         errors={errors}
-        name="title"
-        // required
+        name="name"
+        required
         register={register}
       />
     </div>

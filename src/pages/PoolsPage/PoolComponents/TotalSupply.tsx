@@ -1,7 +1,7 @@
 import NumberField from "../../../components/base/NumberField";
 import { PoolFieldProps } from "../../../constants/poolDetail";
 
-const TotalSoldCoin = (props: PoolFieldProps) => {
+const TotalSupply = (props: PoolFieldProps) => {
   const { control, errors, register, setValue } = props;
   return (
     <div className="flex w-[400px]">
@@ -9,7 +9,7 @@ const TotalSoldCoin = (props: PoolFieldProps) => {
       <NumberField
         control={control}
         errors={errors}
-        name="totalSoldCoin"
+        name="total_supply"
         register={register}
         setValue={setValue}
         placeholder="Please enter a number"
@@ -18,4 +18,4 @@ const TotalSoldCoin = (props: PoolFieldProps) => {
   );
 };
 
-export default TotalSoldCoin;
+export default TotalSupply;

@@ -1,19 +1,19 @@
 import moment from "moment";
-import DateTimePicker from "../../../components/base/DateTimePicker";
-import { PoolFieldProps } from "../../../constants/poolDetail";
+import DateTimePicker from "../../../../components/base/DateTimePicker";
+import { PoolFieldProps } from "../../../../constants/poolDetail";
 
-const EndSaleTime = (props: PoolFieldProps) => {
+const PublicEndSaleTime = (props: PoolFieldProps) => {
   const { control, errors, register, setValue, watch } = props;
 
-  const startDate = watch && watch("start_buy_time");
+  const startDate = watch && watch("pub_start_buy_time");
 
   return (
     <div className="flex flex-1">
-      <label className="formInputLabelShort">Sale End Time</label>
+      <label className="formInputLabel">Sale End Time</label>
       <DateTimePicker
         control={control}
         errors={errors}
-        name="end_buy_time"
+        name="pub_end_buy_time"
         register={register}
         setValue={setValue}
         validate={{
@@ -26,4 +26,4 @@ const EndSaleTime = (props: PoolFieldProps) => {
   );
 };
 
-export default EndSaleTime;
+export default PublicEndSaleTime;

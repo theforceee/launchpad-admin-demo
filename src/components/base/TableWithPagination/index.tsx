@@ -149,15 +149,15 @@ const TableWithPagination = (props: TableWithPaginationProps) => {
   ) => {
     setPagination((currentState) => ({
       ...currentState,
-      currentPage: 0,
+      currentPage: 1,
       rowsPerPage: parseInt(event.target.value, 10),
     }));
   };
 
   return (
     <>
-      <div className="w-full flex flex-col">
-        <TableContainer component={Paper} className="!shadow-none !rounded-lg">
+      <div className="flex w-full flex-col">
+        <TableContainer component={Paper} className="!rounded-lg !shadow-none">
           <Table className="text-14/20">
             <TableHead>
               <TableRow>
@@ -166,14 +166,14 @@ const TableWithPagination = (props: TableWithPaginationProps) => {
                     key={tableHeader.value}
                     className="pb-6 pr-7"
                   >
-                    <p className="flex justify-between m-0">
+                    <p className="m-0 flex justify-between">
                       <span>{tableHeader.label}</span>
                       {tableHeader.sortable && (
                         <img
                           src="/images/icon-sort.svg"
                           alt=""
                           onClick={() => handleSort(tableHeader.value)}
-                          className="w-4 h-5 ml-1 cursor-pointer"
+                          className="ml-1 h-5 w-4 cursor-pointer"
                         />
                       )}
                     </p>
@@ -195,9 +195,9 @@ const TableWithPagination = (props: TableWithPaginationProps) => {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
             colSpan={3}
-            count={dataTable?.length}
+            count={pagination.total}
             rowsPerPage={pagination?.rowsPerPage || 10}
-            page={pagination?.currentPage || 0}
+            page={pagination?.currentPage - 1 || 0}
             sx={{ borderBottom: 0 }}
             SelectProps={{
               inputProps: {

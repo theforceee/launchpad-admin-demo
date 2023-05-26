@@ -8,7 +8,7 @@ const EditorField = React.memo((props: InputFieldProps) => {
   const { name, control, errors, required } = props;
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex w-full flex-col">
       <Controller
         name={name}
         control={control}
@@ -25,7 +25,7 @@ const EditorField = React.memo((props: InputFieldProps) => {
               onChange(data);
             }}
             onInstanceReady={({ editor }: any) => {
-              editor.setData("<p>Lorem ipsum dolor sit amet</p>");
+              editor.setData("");
             }}
             config={{
               language: "en",

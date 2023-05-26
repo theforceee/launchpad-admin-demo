@@ -1,3 +1,5 @@
+import { KEY_CACHE } from "../constants";
+
 interface RequestOptions {
   body?: Record<string, unknown>;
 }
@@ -5,7 +7,7 @@ interface RequestOptions {
 export const BASE_API_URL = process.env.REACT_APP_BASE_API_URL || "";
 
 async function request(url: string, method: string, options?: RequestOptions) {
-  const token = localStorage.getItem("authToken");
+  const token = localStorage.getItem(KEY_CACHE);
   const headers = new Headers({
     Accept: "application/json",
     "Content-Type": "application/json",

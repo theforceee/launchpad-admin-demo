@@ -6,7 +6,7 @@ const TextField = (props: InputFieldProps) => {
   const { name, control, register, errors, required, placeholder } = props;
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex w-full flex-col">
       <Controller
         name={name}
         control={control}

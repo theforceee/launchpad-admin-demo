@@ -11,7 +11,7 @@ const PoolSlug = (props: PoolFieldProps) => {
         control={control}
         errors={errors}
         name="slug"
-        // required
+        required
         register={register}
       />
     </div>

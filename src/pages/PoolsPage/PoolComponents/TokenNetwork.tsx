@@ -4,31 +4,15 @@ import { OptionTypes, PoolFieldProps } from "../../../constants/poolDetail";
 const options: Array<OptionTypes> = [
   {
     label: "Ether",
-    value: "eth",
+    value: "ETHEREUM",
   },
   {
     label: "BSC",
-    value: "bsc",
+    value: "BSC",
   },
   {
     label: "Polygon",
-    value: "matic",
-  },
-  {
-    label: "Solana",
-    value: "sol",
-  },
-  {
-    label: "Terra",
-    value: "luna",
-  },
-  {
-    label: "Fantom",
-    value: "ftm",
-  },
-  {
-    label: "Avalanche",
-    value: "avax",
+    value: "POLYGON",
   },
 ];
 
@@ -40,7 +24,7 @@ const TokenNetwork = (props: PoolFieldProps) => {
       <SelectField
         control={control}
         errors={errors}
-        name="token_network"
+        name="network"
         register={register}
         selectOptions={options}
       />

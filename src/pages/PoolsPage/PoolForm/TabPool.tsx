@@ -1,100 +1,70 @@
 import clsx from "clsx";
+import { useState } from "react";
 import { PoolTabProps } from ".";
-import AcceptCurrency from "../PoolComponents/AcceptCurrency";
-import EndWhitelistTime from "../PoolComponents/EndWhitelistTime";
-import KycRequire from "../PoolComponents/KycRequire";
-import MaxFcfsAmount from "../PoolComponents/MaxFcfsAmount";
-import MinInvestment from "../PoolComponents/MinInvestment";
-import PoolStatus from "../PoolComponents/PoolStatus";
-import PrivatePoolAddress from "../PoolComponents/PrivatePoolAddress";
-import ReceivingWalletAddress from "../PoolComponents/ReceivingWalletAddress";
-import StartWhitelistTime from "../PoolComponents/StartWhitelistTime";
-import TokenAllocated from "../PoolComponents/TokenAllocated";
-import TokenPrice from "../PoolComponents/TokenPrice";
-import StartSaleTime from "../PoolComponents/StartSaleTime";
-import EndSaleTime from "../PoolComponents/EndSaleTime";
-import EndRefundTime from "../PoolComponents/EndRefundTime";
-import TokenAmount from "../PoolComponents/TokenAmount";
+import TabPoolPrivate from "./TabPoolPrivate";
+import TabPoolPublic from "./TabPoolPublic";
+
+const poolNav = [
+  {
+    value: "private",
+    label: "Private",
+  },
+  {
+    value: "public",
+    label: "Public",
+  },
+];
 
 const TabPool = (props: PoolTabProps) => {
-  const { show = false, control, errors, register, setValue, watch } = props;
+  const {
+    show = false,
+    control,
+    errors,
+    register,
+    setValue,
+    watch,
+    deployPool,
+  } = props;
+
+  const [activedNav, setActivedNav] = useState<"private" | "public">("private");
 
   return (
     <div className={clsx(show ? "block" : "hidden")}>
       <div className="formSection">
-        <div className="formRow">
-          <PrivatePoolAddress
-            control={control}
-            errors={errors}
-            register={register}
-          />
-          <KycRequire control={control} errors={errors} register={register} />
+        <div className="items-center, flex justify-center space-x-20 text-18/32">
+          {poolNav.map((item: any) => (
+            <div
+              key={item.value}
+              className={clsx(
+                "flex cursor-pointer rounded-full border-4 px-10 font-bold uppercase",
+                activedNav === item.value
+                  ? "border-gray-600 text-gray-600"
+                  : "border-white text-gray-400",
+              )}
+              onClick={() => setActivedNav(item.value)}
+            >
+              {item.label}
+            </div>
+          ))}
         </div>
 
-        <div className="formRow">
-          <TokenAllocated
-            control={control}
-            errors={errors}
-            register={register}
-          />
+        <TabPoolPrivate
+          show={activedNav === "private"}
+          control={control}
+          errors={errors}
+          register={register}
+          setValue={setValue}
+          watch={watch}
+        />
 
-          <PoolStatus />
-        </div>
-
-        <div className="formRow">
-          <AcceptCurrency
-            control={control}
-            errors={errors}
-            register={register}
-          />
-          <TokenPrice control={control} errors={errors} register={register} />
-        </div>
-
-        <div className="formRow">
-          <MinInvestment
-            control={control}
-            errors={errors}
-            register={register}
-          />
-          <MaxFcfsAmount
-            control={control}
-            errors={errors}
-            register={register}
-          />
-        </div>
-
-        <div className="formRow">
-          <StartWhitelistTime
-            control={control}
-            errors={errors}
-            register={register}
-          />
-          <EndWhitelistTime
-            control={control}
-            errors={errors}
-            register={register}
-          />
-        </div>
-
-        <div className="formRow">
-          <StartSaleTime
-            control={control}
-            errors={errors}
-            register={register}
-          />
-          <EndSaleTime control={control} errors={errors} register={register} />
-        </div>
-
-        <div className="formRow">
-          <EndRefundTime
-            control={control}
-            errors={errors}
-            register={register}
-          />
-          <div className="flex-1"></div>
-        </div>
-
-        <TokenAmount />
+        <TabPoolPublic
+          show={activedNav === "public"}
+          control={control}
+          errors={errors}
+          register={register}
+          setValue={setValue}
+          watch={watch}
+        />
       </div>
     </div>
   );
