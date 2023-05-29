@@ -4,11 +4,11 @@ import { OptionTypes, PoolFieldProps } from "../../../../constants/poolDetail";
 const options: Array<OptionTypes> = [
   {
     label: "Yes",
-    value: "1",
+    value: "true",
   },
   {
     label: "No",
-    value: "2",
+    value: "false",
   },
 ];
 

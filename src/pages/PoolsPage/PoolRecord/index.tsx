@@ -45,10 +45,10 @@ const PoolRecord: React.FC<PoolRecordProps> = (props: PoolRecordProps) => {
     >
       <StyledTableCell align="left">{pool.name}</StyledTableCell>
       <StyledTableCell align="left">
-        {displayDateTime(pool.start_whitelist_time)}
+        {displayDateTime(pool.start_join_time)}
       </StyledTableCell>
       <StyledTableCell align="left">
-        {displayDateTime(pool.end_whitelist_time)}
+        {displayDateTime(pool.end_join_time)}
       </StyledTableCell>
       <StyledTableCell align="left">{pool?.token?.network}</StyledTableCell>
 

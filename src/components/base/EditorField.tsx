@@ -5,7 +5,7 @@ import { InputFieldProps } from "../../constants/poolDetail";
 import { renderError } from "../../utils/validate";
 
 const EditorField = React.memo((props: InputFieldProps) => {
-  const { name, control, errors, required } = props;
+  const { name, control, errors, required, defaultValue } = props;
 
   return (
     <div className="flex w-full flex-col">
@@ -25,7 +25,7 @@ const EditorField = React.memo((props: InputFieldProps) => {
               onChange(data);
             }}
             onInstanceReady={({ editor }: any) => {
-              editor.setData("");
+              editor.setData(defaultValue);
             }}
             config={{
               language: "en",

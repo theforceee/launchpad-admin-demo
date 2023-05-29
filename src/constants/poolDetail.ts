@@ -30,8 +30,8 @@ export type RegisterInputs = {
   total_supply: string;
   token_release: string | undefined;
 
-  start_whitelist_time: string | undefined;
-  end_whitelist_time: string | undefined;
+  start_join_time?: string | undefined;
+  end_join_time?: string | undefined;
   allocation_venture_capital: string;
   allocation_private: string;
   allocation_public: string;
@@ -42,12 +42,12 @@ export type RegisterInputs = {
   pri_accepted_currency: string | undefined;
   pri_conversion_rate: string | undefined;
   pri_receiver_address: string | undefined;
-  pri_start_buy_time: string | undefined;
-  pri_end_buy_time: string | undefined;
-  pri_start_fcfs_time: string | undefined;
-  pri_end_refund_time: string | undefined;
-  pri_min_investment: string | undefined;
-  pri_fcfs_amount: string | undefined;
+  pri_start_buy_time: string;
+  pri_end_buy_time: string;
+  pri_start_fcfs_time: string;
+  pri_end_refund_time: string;
+  pri_min_investment: string;
+  pri_fcfs_amount: string;
 
   pub_address: string | undefined;
   pub_require_kyc: string | undefined;
@@ -97,8 +97,8 @@ export const defaultEmptyPool: RegisterInputs = {
   total_supply: "",
   token_release: undefined,
 
-  start_whitelist_time: "",
-  end_whitelist_time: "",
+  start_join_time: undefined,
+  end_join_time: undefined,
   allocation_private: "",
   allocation_public: "",
   allocation_venture_capital: "",
@@ -150,6 +150,7 @@ export interface PoolFieldProps {
   setValue?: UseFormSetValue<RegisterInputs>;
   watch?: UseFormWatch<RegisterInputs>;
   poolData?: RegisterInputs;
+  isEditing?: boolean | undefined;
 }
 
 export type InputFieldProps = {
@@ -163,6 +164,7 @@ export type InputFieldProps = {
   placeholder?: string | undefined;
   radioOptions?: Array<OptionTypes>;
   selectOptions?: Array<OptionTypes>;
+  defaultValue?: any;
   validate?:
     | Validate<string | undefined, RegisterInputs>
     | Record<string, Validate<string | undefined, RegisterInputs>>

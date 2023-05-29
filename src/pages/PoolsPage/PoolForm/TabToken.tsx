@@ -12,7 +12,7 @@ import Tokennomics from "../PoolComponents/Tokennomics";
 import TotalSupply from "../PoolComponents/TotalSupply";
 
 const TabToken = (props: PoolTabProps) => {
-  const { show = false, control, errors, register, setValue, watch } = props;
+  const { show = false, control, errors, register, setValue, poolData } = props;
 
   return (
     <div className={clsx(show ? "block" : "hidden")}>
@@ -56,6 +56,7 @@ const TabToken = (props: PoolTabProps) => {
             control={control}
             errors={errors}
             register={register}
+            poolData={poolData}
           />
           <Allocations
             setValue={setValue}

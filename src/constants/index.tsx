@@ -1,3 +1,5 @@
+import { OptionTypes } from "./poolDetail";
+
 export const URLS = {
   HOME: "/dashboard",
   POOLS: "/pools",
@@ -14,3 +16,22 @@ export type SessionContextTypes = {
   login: React.Dispatch<any>;
   logout: () => Promise<void>;
 };
+
+export const acceptedCurrencies: Array<OptionTypes> = [
+  {
+    label: "NATIVE",
+    value: "NATIVE",
+  },
+  {
+    label: "BUSD",
+    value: "BUSD",
+  },
+  {
+    label: "USDC",
+    value: "USDC",
+  },
+  {
+    label: "USDT",
+    value: "USDT",
+  },
+];

@@ -23,7 +23,8 @@ const TabPool = (props: PoolTabProps) => {
     register,
     setValue,
     watch,
-    deployPool,
+    // deployPool,
+    // poolData,
   } = props;
 
   const [activedNav, setActivedNav] = useState<"private" | "public">("private");

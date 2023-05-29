@@ -1,4 +1,4 @@
-import { KEY_CACHE } from "../constants";
+import { KEY_CACHE, URLS } from "../constants";
 
 interface RequestOptions {
   body?: Record<string, unknown>;
@@ -27,6 +27,12 @@ async function request(url: string, method: string, options?: RequestOptions) {
   if (!response.ok) {
     // throw new Error(`HTTP ${response.status} - ${response.statusText}`);
     console.log(`HTTP ${response.status} - ${response.statusText}`);
+  }
+
+  // Unauthorized
+  if (response.status === 401) {
+    localStorage.removeItem(KEY_CACHE);
+    window.location.href = URLS.LOGIN;
   }
 
   return response.json();

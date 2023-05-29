@@ -39,9 +39,15 @@ const tags: Array<TagTypes> = [
 ];
 
 const PoolTags = (props: PoolFieldProps) => {
-  const { control, errors, register, setValue } = props;
+  const { setValue, poolData } = props;
 
   const [selectedTags, setSelectedTags] = useState<Array<string>>([]);
+
+  useEffect(() => {
+    if (!poolData?.tags) return;
+    const tags = poolData?.tags.split(",");
+    setSelectedTags(tags);
+  }, [poolData?.tags]);
 
   useEffect(() => {
     const str = selectedTags.join();

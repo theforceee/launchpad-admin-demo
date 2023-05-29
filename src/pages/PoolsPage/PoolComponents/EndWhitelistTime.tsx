@@ -5,7 +5,7 @@ import { PoolFieldProps } from "../../../constants/poolDetail";
 const EndWhitelistTime = (props: PoolFieldProps) => {
   const { control, errors, register, setValue, watch } = props;
 
-  const startDate = watch && watch("start_whitelist_time");
+  const startDate = watch && watch("start_join_time");
 
   return (
     <div className="flex flex-1">
@@ -13,7 +13,7 @@ const EndWhitelistTime = (props: PoolFieldProps) => {
       <DateTimePicker
         control={control}
         errors={errors}
-        name="end_whitelist_time"
+        name="end_join_time"
         register={register}
         setValue={setValue}
         validate={{

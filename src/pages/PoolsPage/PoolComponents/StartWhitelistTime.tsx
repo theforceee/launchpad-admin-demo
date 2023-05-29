@@ -5,7 +5,7 @@ import { PoolFieldProps } from "../../../constants/poolDetail";
 const StartWhitelistTime = (props: PoolFieldProps) => {
   const { control, errors, register, setValue, watch } = props;
 
-  const endDate = watch && watch("end_whitelist_time");
+  const endDate = watch && watch("end_join_time");
 
   // const disabledDate: RangePickerProps["disabledDate"] = useCallback(
   //   (currentDate: moment.Moment) => {
@@ -22,7 +22,7 @@ const StartWhitelistTime = (props: PoolFieldProps) => {
       <DateTimePicker
         control={control}
         errors={errors}
-        name="start_whitelist_time"
+        name="start_join_time"
         register={register}
         setValue={setValue}
         validate={{

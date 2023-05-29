@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { Controller } from "react-hook-form";
+import { useController } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
 import { InputFieldProps, RegisterInputs } from "../../constants/poolDetail";
 import { renderError } from "../../utils/validate";
@@ -8,6 +8,11 @@ export const SEPARATOR = ",";
 
 const NumberField = (props: InputFieldProps) => {
   const { name, control, errors, required, placeholder, setValue } = props;
+  const { field } = useController({
+    name,
+    rules: { required },
+    control,
+  });
 
   const handleChangeNumber = (
     event: ChangeEvent<HTMLInputElement> | undefined,
@@ -20,24 +25,14 @@ const NumberField = (props: InputFieldProps) => {
 
   return (
     <div className="flex w-full flex-col">
-      <Controller
-        name={name}
-        control={control}
-        rules={{
-          required: required,
-        }}
-        render={({ field: { name } }) => (
-          <NumericFormat
-            name={name}
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              handleChangeNumber(event, name)
-            }
-            thousandSeparator={true}
-            className="formInputText"
-            placeholder={placeholder}
-            // defaultValue={"10"}
-          />
-        )}
+      <NumericFormat
+        {...field}
+        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          handleChangeNumber(event, name)
+        }
+        thousandSeparator={true}
+        className="formInputText"
+        placeholder={placeholder}
       />
       <p className="formErrorMessage">{renderError(errors, name)}</p>
     </div>

@@ -35,12 +35,14 @@ const TabPoolPublic = (props: PoolTabProps) => {
           control={control}
           errors={errors}
           register={register}
+          setValue={setValue}
         />
         <div className="invisible">
           <PublicKycRequire
             control={control}
             errors={errors}
             register={register}
+            setValue={setValue}
           />
         </div>
       </div>
@@ -50,6 +52,7 @@ const TabPoolPublic = (props: PoolTabProps) => {
           control={control}
           errors={errors}
           register={register}
+          setValue={setValue}
         />
 
         <PoolStatus />
@@ -60,6 +63,7 @@ const TabPoolPublic = (props: PoolTabProps) => {
           control={control}
           errors={errors}
           register={register}
+          setValue={setValue}
         />
         <PublicTokenPrice
           control={control}
@@ -74,11 +78,13 @@ const TabPoolPublic = (props: PoolTabProps) => {
           control={control}
           errors={errors}
           register={register}
+          setValue={setValue}
         />
         <PublicMaxFcfsAmount
           control={control}
           errors={errors}
           register={register}
+          setValue={setValue}
         />
       </div>
 
@@ -87,6 +93,7 @@ const TabPoolPublic = (props: PoolTabProps) => {
           control={control}
           errors={errors}
           register={register}
+          setValue={setValue}
         />
       </div>
 
@@ -95,11 +102,13 @@ const TabPoolPublic = (props: PoolTabProps) => {
           control={control}
           errors={errors}
           register={register}
+          setValue={setValue}
         />
         <EndWhitelistTime
           control={control}
           errors={errors}
           register={register}
+          setValue={setValue}
         />
       </div>
 
@@ -108,11 +117,13 @@ const TabPoolPublic = (props: PoolTabProps) => {
           control={control}
           errors={errors}
           register={register}
+          setValue={setValue}
         />
         <PublicEndSaleTime
           control={control}
           errors={errors}
           register={register}
+          setValue={setValue}
         />
       </div>
 
@@ -121,6 +132,7 @@ const TabPoolPublic = (props: PoolTabProps) => {
           control={control}
           errors={errors}
           register={register}
+          setValue={setValue}
         />
         <div className="flex w-full flex-1">
           <input
@@ -138,6 +150,7 @@ const TabPoolPublic = (props: PoolTabProps) => {
           control={control}
           errors={errors}
           register={register}
+          setValue={setValue}
         />
       </div>
 

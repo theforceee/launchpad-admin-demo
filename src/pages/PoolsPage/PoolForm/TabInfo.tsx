@@ -9,7 +9,16 @@ import PoolSlug from "../PoolComponents/PoolSlug";
 import PoolTags from "../PoolComponents/PoolTags";
 
 const TabInfo = (props: PoolTabProps) => {
-  const { show = false, control, errors, register, setValue, watch } = props;
+  const {
+    show = false,
+    control,
+    errors,
+    register,
+    setValue,
+    watch,
+    poolData,
+    isEditing,
+  } = props;
 
   return (
     <div className={clsx(show ? "block" : "hidden")}>
@@ -32,6 +41,7 @@ const TabInfo = (props: PoolTabProps) => {
               register={register}
               setValue={setValue}
               watch={watch}
+              poolData={poolData}
             />
           </div>
           <PoolAbout
@@ -40,6 +50,8 @@ const TabInfo = (props: PoolTabProps) => {
             register={register}
             setValue={setValue}
             watch={watch}
+            poolData={poolData}
+            isEditing={isEditing}
           />
         </div>
 
@@ -49,6 +61,8 @@ const TabInfo = (props: PoolTabProps) => {
           register={register}
           setValue={setValue}
           watch={watch}
+          poolData={poolData}
+          isEditing={isEditing}
         />
       </div>
     </div>

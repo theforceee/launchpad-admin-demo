@@ -12,11 +12,21 @@ type EmissionTypes = {
 };
 
 const ClaimEmissions = (props: PoolFieldProps) => {
-  const { control, errors, register, setValue } = props;
+  const { control, errors, register, setValue, poolData } = props;
 
   const [claimEmissions, setClaimEmissions] = useState<EmissionTypes[]>([
     { release_time: undefined, release_percent: "" },
   ]);
+
+  useEffect(() => {
+    if (!poolData?.token_release) return;
+
+    const emissions = (poolData.token_release as any).map((item: any) => ({
+      release_percent: item?.release_percent + "",
+      release_time: item?.release_time,
+    }));
+    setClaimEmissions(emissions);
+  }, [poolData?.token_release]);
 
   useEffect(() => {
     setValue && setValue("token_release", JSON.stringify(claimEmissions));
@@ -72,41 +82,50 @@ const ClaimEmissions = (props: PoolFieldProps) => {
       <div className="mb-5 pr-10 text-right text-16/24 font-bold">
         Claim Emissions
       </div>
-      {claimEmissions.map((_, index: number) => (
-        <div className="mb-2 flex items-center pl-10 text-16/24" key={index}>
-          <input
-            type="button"
-            value="-"
-            onClick={() => handleRemove(index)}
-            className={clsx(
-              "ml-7 flex h-5 w-5 shrink-0 cursor-pointer items-center justify-center rounded-full border-2 border-gray-500 font-bold",
-              index === 0 && "invisible",
-            )}
-          ></input>
-          <span className="mx-3 text-gray-500">{displayNumOrder(index)}</span>
+      {claimEmissions.map((emission: EmissionTypes, index: number) => {
+        console.log("emission", index, emission);
+        return (
+          <div className="mb-2 flex items-center pl-10 text-16/24" key={index}>
+            <input
+              type="button"
+              value="-"
+              onClick={() => handleRemove(index)}
+              className={clsx(
+                "ml-7 flex h-5 w-5 shrink-0 cursor-pointer items-center justify-center rounded-full border-2 border-gray-500 font-bold",
+                index === 0 && "invisible",
+              )}
+            ></input>
+            <span className="mx-3 text-gray-500">{displayNumOrder(index)}</span>
 
-          <DatePicker
-            format="YYYY-MM-DD HH:mm:ss"
-            showTime={{
-              defaultValue: moment("00:00:00", "HH:mm:ss"),
-              format: "HH:mm",
-            }}
-            onChange={(value) => handleChangeDateTime(value, index)}
-            showSecond={false}
-            minuteStep={15}
-            className="formInputText"
-          />
+            <DatePicker
+              format="YYYY-MM-DD HH:mm:ss"
+              showTime={{
+                defaultValue: moment("00:00:00", "HH:mm:ss"),
+                format: "HH:mm",
+              }}
+              value={
+                emission.release_time
+                  ? moment(emission.release_time * 1000)
+                  : undefined
+              }
+              onChange={(value) => handleChangeDateTime(value, index)}
+              showSecond={false}
+              minuteStep={15}
+              className="formInputText"
+            />
 
-          <NumericFormat
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              handleChangeNumber(event, index)
-            }
-            thousandSeparator={true}
-            className="formInputText ml-2 w-20"
-          />
-          <span className="ml-3 font-bold">%</span>
-        </div>
-      ))}
+            <NumericFormat
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                handleChangeNumber(event, index)
+              }
+              value={emission.release_percent}
+              thousandSeparator={true}
+              className="formInputText ml-2 w-20"
+            />
+            <span className="ml-3 font-bold">%</span>
+          </div>
+        );
+      })}
 
       <div className="flex items-center pl-10 text-16/24">
         <input

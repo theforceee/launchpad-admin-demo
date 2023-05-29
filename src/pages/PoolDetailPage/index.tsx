@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { toast } from "react-toastify";
 import { DefaultLayout } from "../../components/layout";
-import { RegisterInputs, defaultEmptyPool } from "../../constants/poolDetail";
+import { RegisterInputs } from "../../constants/poolDetail";
 import { get } from "../../requests";
 import PoolForm from "../PoolsPage/PoolForm";
 
@@ -20,10 +20,7 @@ const PoolDetailPage = () => {
       }
 
       const rawData = poolDetailRes.data;
-      console.log("poolDetailRes rawData", rawData);
-
       const { token, pools } = rawData;
-
       const { token_sale_allocation, tokenomics, tokenReleases } = token;
 
       const formData: RegisterInputs = {
@@ -49,14 +46,14 @@ const PoolDetailPage = () => {
         total_supply: token?.total_supply,
         token_release: tokenReleases,
 
-        start_whitelist_time: rawData.start_join_time,
-        end_whitelist_time: rawData.end_join_time,
+        start_join_time: rawData.start_join_time,
+        end_join_time: rawData.end_join_time,
         allocation_private: token_sale_allocation?.private + "",
         allocation_public: token_sale_allocation?.public + "",
         allocation_venture_capital: token_sale_allocation?.venture_capital + "",
 
         pri_address: pools[0]?.address,
-        pri_require_kyc: pools[0]?.require_kyc,
+        pri_require_kyc: pools[0]?.require_kyc + "",
         pri_token_allocated: pools[0]?.token_allocated,
         pri_accepted_currency: pools[0]?.accepted_currency,
         pri_conversion_rate: pools[0]?.conversion_rate,
@@ -69,7 +66,7 @@ const PoolDetailPage = () => {
         pri_fcfs_amount: pools[0]?.fcfs_amount,
 
         pub_address: pools[1]?.address,
-        pub_require_kyc: pools[1]?.require_kyc,
+        pub_require_kyc: pools[1]?.require_kyc + "",
         pub_token_allocated: pools[1]?.token_allocated,
         pub_accepted_currency: pools[1]?.accepted_currency,
         pub_conversion_rate: pools[1]?.conversion_rate,
@@ -93,7 +90,6 @@ const PoolDetailPage = () => {
         tokenominc_legal: tokenomics?.legal,
       };
 
-      console.log("formData", formData);
       setPoolData(formData);
     };
     getData();
@@ -107,7 +103,7 @@ const PoolDetailPage = () => {
         </p>
 
         <div className="mx-auto w-full max-w-7xl">
-          <PoolForm poolData={poolData} />
+          <PoolForm poolData={poolData} isEditing={true} />
         </div>
       </div>
     </DefaultLayout>
