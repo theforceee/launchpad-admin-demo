@@ -29,6 +29,8 @@ export type RegisterInputs = {
   token_data_api: string;
   total_supply: string;
   token_release: string | undefined;
+  accepted_currency: string | undefined;
+  require_kyc: string | undefined;
 
   start_join_time?: string | undefined;
   end_join_time?: string | undefined;
@@ -37,29 +39,25 @@ export type RegisterInputs = {
   allocation_public: string;
 
   pri_address: string | undefined;
-  pri_require_kyc: string | undefined;
   pri_token_allocated: string | undefined;
-  pri_accepted_currency: string | undefined;
   pri_conversion_rate: string | undefined;
   pri_receiver_address: string | undefined;
   pri_start_buy_time: string;
   pri_end_buy_time: string;
   pri_start_fcfs_time: string;
   pri_end_refund_time: string;
-  pri_min_investment: string;
+  pri_min_amount: string;
   pri_fcfs_amount: string;
 
   pub_address: string | undefined;
-  pub_require_kyc: string | undefined;
   pub_token_allocated: string | undefined;
-  pub_accepted_currency: string | undefined;
   pub_conversion_rate: string | undefined;
   pub_receiver_address: string | undefined;
   pub_start_buy_time: string | undefined;
   pub_end_buy_time: string | undefined;
   pub_start_fcfs_time: string | undefined;
   pub_end_refund_time: string | undefined;
-  pub_min_investment: string | undefined;
+  pub_min_amount: string | undefined;
   pub_fcfs_amount: string | undefined;
 
   tokenominc_development: string | undefined;
@@ -96,6 +94,8 @@ export const defaultEmptyPool: RegisterInputs = {
   token_data_api: "",
   total_supply: "",
   token_release: undefined,
+  accepted_currency: "",
+  require_kyc: "",
 
   start_join_time: undefined,
   end_join_time: undefined,
@@ -104,29 +104,25 @@ export const defaultEmptyPool: RegisterInputs = {
   allocation_venture_capital: "",
 
   pri_address: "",
-  pri_require_kyc: "",
   pri_token_allocated: "",
-  pri_accepted_currency: "",
   pri_conversion_rate: "",
   pri_receiver_address: "",
   pri_start_buy_time: "",
   pri_end_buy_time: "",
   pri_start_fcfs_time: "",
   pri_end_refund_time: "",
-  pri_min_investment: "",
+  pri_min_amount: "",
   pri_fcfs_amount: "",
 
   pub_address: "",
-  pub_require_kyc: "",
   pub_token_allocated: "",
-  pub_accepted_currency: "",
   pub_conversion_rate: "",
   pub_receiver_address: "",
   pub_start_buy_time: "",
   pub_end_buy_time: "",
   pub_start_fcfs_time: "",
   pub_end_refund_time: "",
-  pub_min_investment: "",
+  pub_min_amount: "",
   pub_fcfs_amount: "",
 
   tokenominc_development: "",

@@ -75,7 +75,6 @@ const PoolForm = (props: PoolFormTypes) => {
   useEffect(() => {
     if (!poolData) return;
     setValue("name", poolData.name);
-
     setValue("slug", poolData?.slug);
     setValue("website", poolData?.website);
     setValue("twitter", poolData?.twitter);
@@ -93,6 +92,8 @@ const PoolForm = (props: PoolFormTypes) => {
     setValue("token_data_api", poolData?.token_data_api);
     setValue("total_supply", poolData?.total_supply);
     setValue("token_release", JSON.stringify(poolData.token_release || ""));
+    setValue("accepted_currency", poolData?.accepted_currency);
+    setValue("require_kyc", poolData?.require_kyc);
 
     setValue("start_join_time", poolData?.start_join_time);
     setValue("end_join_time", poolData?.end_join_time);
@@ -104,29 +105,25 @@ const PoolForm = (props: PoolFormTypes) => {
     setValue("allocation_public", poolData?.allocation_public);
 
     setValue("pri_address", poolData?.pri_address);
-    setValue("pri_require_kyc", poolData?.pri_require_kyc);
     setValue("pri_token_allocated", poolData?.pri_token_allocated);
-    setValue("pri_accepted_currency", poolData?.pri_accepted_currency);
     setValue("pri_conversion_rate", poolData?.pri_conversion_rate);
     setValue("pri_receiver_address", poolData?.pri_receiver_address);
     setValue("pri_start_buy_time", poolData?.pri_start_buy_time);
     setValue("pri_end_buy_time", poolData?.pri_end_buy_time);
     setValue("pri_start_fcfs_time", poolData?.pri_start_fcfs_time);
     setValue("pri_end_refund_time", poolData?.pri_end_refund_time);
-    setValue("pri_min_investment", poolData?.pri_min_investment);
+    setValue("pri_min_amount", poolData?.pri_min_amount);
     setValue("pri_fcfs_amount", poolData?.pri_fcfs_amount);
 
     setValue("pub_address", poolData?.pub_address);
-    setValue("pub_require_kyc", poolData?.pub_require_kyc);
     setValue("pub_token_allocated", poolData?.pub_token_allocated);
-    setValue("pub_accepted_currency", poolData?.pub_accepted_currency);
     setValue("pub_conversion_rate", poolData?.pub_conversion_rate);
     setValue("pub_receiver_address", poolData?.pub_receiver_address);
     setValue("pub_start_buy_time", poolData?.pub_start_buy_time);
     setValue("pub_end_buy_time", poolData?.pub_end_buy_time);
     setValue("pub_start_fcfs_time", poolData?.pub_start_fcfs_time);
     setValue("pub_end_refund_time", poolData?.pub_end_refund_time);
-    setValue("pub_min_investment", poolData?.pub_min_investment);
+    setValue("pub_min_amount", poolData?.pub_min_amount);
     setValue("pub_fcfs_amount", poolData?.pub_fcfs_amount);
 
     setValue("tokenominc_development", poolData?.tokenominc_development);
@@ -164,6 +161,8 @@ const PoolForm = (props: PoolFormTypes) => {
 
       start_join_time: data.start_join_time,
       end_join_time: data.end_join_time,
+      accepted_currency: data.accepted_currency,
+      require_kyc: data.require_kyc === "true",
 
       token: {
         token_name: data.token_name,
@@ -197,29 +196,27 @@ const PoolForm = (props: PoolFormTypes) => {
         {
           is_private: true,
           address: data.pri_address,
-          require_kyc: data.pri_require_kyc === "true",
           token_allocated: data.pri_token_allocated,
-          accepted_currency: data.pri_accepted_currency,
           conversion_rate: data.pri_conversion_rate,
           receiver_address: data.pri_receiver_address,
           start_buy_time: data.pri_start_buy_time,
           end_buy_time: data.pri_end_buy_time,
           start_fcfs_time: data.pri_start_fcfs_time,
           end_refund_time: data.pri_end_refund_time,
+          min_amount: data.pri_min_amount,
           fcfs_amount: data.pri_fcfs_amount,
         },
         {
           is_private: false,
           address: data.pub_address,
-          require_kyc: false,
           token_allocated: data.pub_token_allocated,
-          accepted_currency: data.pub_accepted_currency,
           conversion_rate: data.pub_conversion_rate,
           receiver_address: data.pub_receiver_address,
           start_buy_time: data.pub_start_buy_time,
           end_buy_time: data.pub_end_buy_time,
           start_fcfs_time: data.pub_start_fcfs_time,
           end_refund_time: data.pub_end_refund_time,
+          min_amount: data.pub_min_amount,
           fcfs_amount: data.pub_fcfs_amount,
         },
       ],

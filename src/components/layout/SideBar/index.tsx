@@ -1,12 +1,12 @@
 import clsx from "clsx";
-import { SessionContextTypes, URLS } from "../../../constants";
 import { useState } from "react";
-import { useLocation, useNavigate, useOutletContext } from "react-router";
+import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
+import { URLS } from "../../../constants";
 
-import iconUser from "../../../assests/icon-user.svg";
-import iconPool from "../../../assests/icon-pool.svg";
 import iconContent from "../../../assests/icon-content.svg";
+import iconPool from "../../../assests/icon-pool.svg";
+import iconUser from "../../../assests/icon-user.svg";
 
 type NavItemTypes = {
   title: string;
@@ -35,26 +35,6 @@ const nav: Array<NavItemTypes> = [
 const SideBar = () => {
   const [navLeft] = useState(nav);
   const location = useLocation();
-  const session: SessionContextTypes = useOutletContext();
-  const navigate = useNavigate();
-  // const [loginUser, setLoginUser] = useState<any>({});
-
-  // useEffect(() => {
-  //   const user = localStorage.getItem("user") || "{}";
-  //   setLoginUser(JSON.parse(user));
-  // }, []);
-
-  const logoutUser = () => {
-    // eslint-disable-next-line no-restricted-globals
-    if (!confirm("Do you want logout?")) {
-      return false;
-    }
-
-    // logout
-    session?.logout();
-    navigate(URLS.LOGIN);
-  };
-
   return (
     <div
       className={clsx(
@@ -62,6 +42,14 @@ const SideBar = () => {
       )}
     >
       <ul className="w-full list-none p-0">
+        <a href={URLS.HOME}>
+          <img
+            className="mr-[10px] mb-10 h-12 w-12 cursor-pointer rounded-full object-cover"
+            src="/images/default-user-avatar.svg"
+            alt=""
+          />
+        </a>
+
         {navLeft.map((item, index) => {
           return (
             <li key={index} className={clsx("mb-10 w-full")}>

@@ -9,7 +9,7 @@ const PrivateMinInvestment = (props: PoolFieldProps) => {
       <NumberField
         control={control}
         errors={errors}
-        name="pri_min_investment"
+        name="pri_min_amount"
         register={register}
         setValue={setValue}
         placeholder="Please enter a number"

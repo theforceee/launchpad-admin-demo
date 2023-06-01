@@ -1,8 +1,8 @@
-import SelectField from "../../../../components/base/SelectField";
-import { acceptedCurrencies } from "../../../../constants";
-import { PoolFieldProps } from "../../../../constants/poolDetail";
+import SelectField from "../../../components/base/SelectField";
+import { acceptedCurrencies } from "../../../constants";
+import { PoolFieldProps } from "../../../constants/poolDetail";
 
-const Public = (props: PoolFieldProps) => {
+const AcceptCurrency = (props: PoolFieldProps) => {
   const { control, errors, register } = props;
   return (
     <div className="flex w-[320px]">
@@ -10,7 +10,7 @@ const Public = (props: PoolFieldProps) => {
       <SelectField
         control={control}
         errors={errors}
-        name="pub_accepted_currency"
+        name="accepted_currency"
         register={register}
         selectOptions={acceptedCurrencies}
       />
@@ -18,4 +18,4 @@ const Public = (props: PoolFieldProps) => {
   );
 };
 
-export default Public;
+export default AcceptCurrency;

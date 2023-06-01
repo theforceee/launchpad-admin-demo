@@ -2,6 +2,8 @@ import { Button } from "@mui/material";
 import { useAccount, useConnect, useEnsName } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { DefaultLayout } from "../../components/layout";
+import { SessionContextTypes, URLS } from "../../constants";
+import { useNavigate, useOutletContext } from "react-router";
 
 const Dashboard = () => {
   const { address, isConnected } = useAccount();
@@ -9,6 +11,26 @@ const Dashboard = () => {
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   });
+  const session: SessionContextTypes = useOutletContext();
+  const navigate = useNavigate();
+
+  const logoutUser = () => {
+    // eslint-disable-next-line no-restricted-globals
+    if (!confirm("Do you want logout?")) {
+      return false;
+    }
+
+    // logout
+    session?.logout();
+    navigate(URLS.LOGIN);
+  };
+
+  // const [loginUser, setLoginUser] = useState<any>({});
+
+  // useEffect(() => {
+  //   const user = localStorage.getItem("user") || "{}";
+  //   setLoginUser(JSON.parse(user));
+  // }, []);
 
   return (
     <DefaultLayout>
@@ -16,6 +38,10 @@ const Dashboard = () => {
         {isConnected ? (
           <div className="flex flex-col">
             <div>Connected to {ensName ?? address}</div>
+
+            <Button variant="contained" color="error" onClick={logoutUser}>
+              Disconnect
+            </Button>
           </div>
         ) : (
           <Button

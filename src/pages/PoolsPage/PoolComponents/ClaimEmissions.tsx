@@ -83,7 +83,6 @@ const ClaimEmissions = (props: PoolFieldProps) => {
         Claim Emissions
       </div>
       {claimEmissions.map((emission: EmissionTypes, index: number) => {
-        console.log("emission", index, emission);
         return (
           <div className="mb-2 flex items-center pl-10 text-16/24" key={index}>
             <input

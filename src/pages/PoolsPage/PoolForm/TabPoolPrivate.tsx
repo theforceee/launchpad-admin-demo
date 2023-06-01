@@ -2,10 +2,10 @@ import clsx from "clsx";
 import { PoolTabProps } from ".";
 import EndWhitelistTime from "../PoolComponents/EndWhitelistTime";
 import PoolStatus from "../PoolComponents/PoolStatus";
-import PrivateAcceptCurrency from "../PoolComponents/PrivatePool/PrivateAcceptCurrency";
+import AcceptCurrency from "../PoolComponents/AcceptCurrency";
 import PrivateEndRefundTime from "../PoolComponents/PrivatePool/PrivateEndRefundTime";
 import PrivateEndSaleTime from "../PoolComponents/PrivatePool/PrivateEndSaleTime";
-import PrivateKycRequire from "../PoolComponents/PrivatePool/PrivateKycRequire";
+import KycRequire from "../PoolComponents/KycRequire";
 import PrivateMaxFcfsAmount from "../PoolComponents/PrivatePool/PrivateMaxFcfsAmount";
 import PrivateMinInvestment from "../PoolComponents/PrivatePool/PrivateMinInvestment";
 import PrivatePoolAddress from "../PoolComponents/PrivatePool/PrivatePoolAddress";
@@ -37,7 +37,7 @@ const TabPoolPrivate = (props: PoolTabProps) => {
           register={register}
           setValue={setValue}
         />
-        <PrivateKycRequire
+        <KycRequire
           control={control}
           errors={errors}
           register={register}
@@ -57,7 +57,7 @@ const TabPoolPrivate = (props: PoolTabProps) => {
       </div>
 
       <div className="formRow">
-        <PrivateAcceptCurrency
+        <AcceptCurrency
           control={control}
           errors={errors}
           register={register}

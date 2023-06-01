@@ -1,18 +1,18 @@
-import RadioGroupField from "../../../../components/base/RadioGroupField";
-import { OptionTypes, PoolFieldProps } from "../../../../constants/poolDetail";
+import RadioGroupField from "../../../components/base/RadioGroupField";
+import { OptionTypes, PoolFieldProps } from "../../../constants/poolDetail";
 
 const options: Array<OptionTypes> = [
   {
     label: "Yes",
-    value: "1",
+    value: "true",
   },
   {
     label: "No",
-    value: "2",
+    value: "false",
   },
 ];
 
-const PublicKycRequire = (props: PoolFieldProps) => {
+const KycRequire = (props: PoolFieldProps) => {
   const { control, errors, register } = props;
   return (
     <div className="flex">
@@ -21,7 +21,7 @@ const PublicKycRequire = (props: PoolFieldProps) => {
       <RadioGroupField
         control={control}
         errors={errors}
-        name="pub_require_kyc"
+        name="require_kyc"
         register={register}
         radioOptions={options}
       />
@@ -29,4 +29,4 @@ const PublicKycRequire = (props: PoolFieldProps) => {
   );
 };
 
-export default PublicKycRequire;
+export default KycRequire;

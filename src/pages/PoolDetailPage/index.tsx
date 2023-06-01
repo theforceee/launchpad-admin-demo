@@ -21,6 +21,8 @@ const PoolDetailPage = () => {
 
       const rawData = poolDetailRes.data;
       const { token, pools } = rawData;
+      const privatePool = pools?.find((pool: any) => pool.is_private === true);
+      const publicPool = pools?.find((pool: any) => pool.is_private === false);
       const { token_sale_allocation, tokenomics, tokenReleases } = token;
 
       const formData: RegisterInputs = {
@@ -45,6 +47,8 @@ const PoolDetailPage = () => {
         token_data_api: token?.token_data_api,
         total_supply: token?.total_supply,
         token_release: tokenReleases,
+        accepted_currency: rawData?.accepted_currency,
+        require_kyc: rawData?.require_kyc + "",
 
         start_join_time: rawData.start_join_time,
         end_join_time: rawData.end_join_time,
@@ -52,31 +56,27 @@ const PoolDetailPage = () => {
         allocation_public: token_sale_allocation?.public + "",
         allocation_venture_capital: token_sale_allocation?.venture_capital + "",
 
-        pri_address: pools[0]?.address,
-        pri_require_kyc: pools[0]?.require_kyc + "",
-        pri_token_allocated: pools[0]?.token_allocated,
-        pri_accepted_currency: pools[0]?.accepted_currency,
-        pri_conversion_rate: pools[0]?.conversion_rate,
-        pri_receiver_address: pools[0]?.receiver_address,
-        pri_start_buy_time: pools[0]?.start_buy_time,
-        pri_end_buy_time: pools[0]?.end_buy_time,
-        pri_start_fcfs_time: pools[0]?.start_fcfs_time,
-        pri_end_refund_time: pools[0]?.end_refund_time,
-        pri_min_investment: pools[0]?.min_investment,
-        pri_fcfs_amount: pools[0]?.fcfs_amount,
+        pri_address: privatePool?.address,
+        pri_token_allocated: privatePool?.token_allocated,
+        pri_conversion_rate: privatePool?.conversion_rate,
+        pri_receiver_address: privatePool?.receiver_address,
+        pri_start_buy_time: privatePool?.start_buy_time,
+        pri_end_buy_time: privatePool?.end_buy_time,
+        pri_start_fcfs_time: privatePool?.start_fcfs_time,
+        pri_end_refund_time: privatePool?.end_refund_time,
+        pri_min_amount: privatePool?.min_amount,
+        pri_fcfs_amount: privatePool?.fcfs_amount,
 
-        pub_address: pools[1]?.address,
-        pub_require_kyc: pools[1]?.require_kyc + "",
-        pub_token_allocated: pools[1]?.token_allocated,
-        pub_accepted_currency: pools[1]?.accepted_currency,
-        pub_conversion_rate: pools[1]?.conversion_rate,
-        pub_receiver_address: pools[1]?.receiver_address,
-        pub_start_buy_time: pools[1]?.start_buy_time,
-        pub_end_buy_time: pools[1]?.end_buy_time,
-        pub_start_fcfs_time: pools[1]?.start_fcfs_time,
-        pub_end_refund_time: pools[1]?.end_refund_time,
-        pub_min_investment: pools[1]?.min_investment,
-        pub_fcfs_amount: pools[1]?.fcfs_amount,
+        pub_address: publicPool?.address,
+        pub_token_allocated: publicPool?.token_allocated,
+        pub_conversion_rate: publicPool?.conversion_rate,
+        pub_receiver_address: publicPool?.receiver_address,
+        pub_start_buy_time: publicPool?.start_buy_time,
+        pub_end_buy_time: publicPool?.end_buy_time,
+        pub_start_fcfs_time: publicPool?.start_fcfs_time,
+        pub_end_refund_time: publicPool?.end_refund_time,
+        pub_min_amount: publicPool?.min_amount,
+        pub_fcfs_amount: publicPool?.fcfs_amount,
 
         tokenominc_development: tokenomics?.development,
         tokenominc_marketing: tokenomics?.marketing,
