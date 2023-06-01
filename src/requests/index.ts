@@ -17,7 +17,7 @@ async function request(url: string, method: string, options?: RequestOptions) {
     headers.append("Authorization", `Bearer ${token}`);
   }
 
-  const response = await fetch(url, {
+  const response = await fetch(`/api/v2/admin/${url}`, {
     method,
     headers,
     credentials: "include",
