@@ -6,7 +6,7 @@ export const URLS = {
   POOL_DETAIL: "/pools/:uuid",
   CREATE_POOL: "/pools/add",
   CONTENTS: "/contents",
-  USERS: "/users",
+  USER: "/user",
   LOGIN: "/login",
 };
 

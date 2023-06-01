@@ -5,16 +5,12 @@ import { AppContext } from "./AppContext";
 
 const AppProvider = (props: any) => {
   const { address } = useAccount();
-  const [openSidebar, setOpenSidebar] = useState<boolean>(true);
   const [userLogin, setUserLogin] = useState<{
     address: string;
     token: string | undefined;
   }>();
 
   useEffect(() => {
-    const localState = localStorage.getItem("openSidebar");
-    setOpenSidebar(localState === "false");
-
     const authToken = localStorage.getItem(KEY_CACHE);
     address &&
       authToken &&
@@ -25,9 +21,7 @@ const AppProvider = (props: any) => {
   }, []);
 
   return (
-    <AppContext.Provider
-      value={{ openSidebar, setOpenSidebar, setUserLogin, userLogin }}
-    >
+    <AppContext.Provider value={{ setUserLogin, userLogin }}>
       {props.children}
     </AppContext.Provider>
   );

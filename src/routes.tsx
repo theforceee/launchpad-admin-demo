@@ -64,7 +64,7 @@ const router = createBrowserRouter(
           element={<ProtectedRoute element={<ContentsPage />} />}
         />
         <Route
-          path={URLS.USERS}
+          path={URLS.USER}
           element={<ProtectedRoute element={<UsersPage />} />}
         />
         <Route path={URLS.POOLS} element={<ProtectedRoute />}>
