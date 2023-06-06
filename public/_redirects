@@ -1,2 +1,2 @@
 /api/* https://mty-test.icetea-software.com/api/:splat 200
-/* /index.html 200           
+/* /index.html 200
