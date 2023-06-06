@@ -1,15 +1,16 @@
 import { FieldErrors } from "react-hook-form";
 import { RegisterInputs } from "../constants/poolDetail";
 
-export const renderError = (
+export const renderError: any = (
   errors: FieldErrors<RegisterInputs>,
   prop: keyof RegisterInputs,
 ) => {
+  if (!prop || typeof prop !== "string") return "";
   const error = errors[prop];
   if (!error) return "";
 
   const errorName = prop.split("_").join(" ");
-  const errorType = error.type;
+  const errorType = error?.type;
 
   switch (errorType) {
     case "required":

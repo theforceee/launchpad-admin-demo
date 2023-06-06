@@ -26,6 +26,7 @@ const PoolDetailPage = () => {
       const { token_sale_allocation, tokenomics, tokenReleases } = token;
 
       const formData: RegisterInputs = {
+        signer: rawData.signer,
         status: rawData.status,
 
         name: rawData.name,
@@ -98,9 +99,7 @@ const PoolDetailPage = () => {
   return (
     <DefaultLayout>
       <div className="flex w-full flex-col">
-        <p className="text-center text-28/40 font-semibold">
-          INITIAL DEX OFFERING (IDO)
-        </p>
+        <p className="text-center text-28/40 font-semibold">INITIAL DEX OFFERING (IDO)</p>
 
         <div className="mx-auto w-full max-w-7xl">
           <PoolForm poolData={poolData} isEditing={true} />

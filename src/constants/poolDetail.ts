@@ -72,6 +72,7 @@ export type RegisterInputs = {
   tokenominc_legal: string | undefined;
 
   status: string;
+  signer?: any;
 };
 
 export const defaultEmptyPool: RegisterInputs = {

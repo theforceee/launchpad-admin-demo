@@ -139,9 +139,9 @@ const TabPoolPrivate = (props: PoolTabProps) => {
         <div className="flex w-full flex-1">
           <input
             type="button"
-            disabled
+            disabled={false}
             value="Deploy Pool Smart Contract"
-            onClick={() => deployPool("private")}
+            onClick={() => deployPool?.("private")}
             className="ml-auto h-min w-full max-w-xs cursor-pointer rounded-lg bg-green-500 py-2 font-semibold text-white disabled:cursor-not-allowed"
           />
         </div>

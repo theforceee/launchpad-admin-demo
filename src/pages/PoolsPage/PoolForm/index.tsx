@@ -5,17 +5,14 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { URLS } from "../../../constants";
-import {
-  PoolFieldProps,
-  RegisterInputs,
-  defaultEmptyPool,
-} from "../../../constants/poolDetail";
+import { PoolFieldProps, RegisterInputs, defaultEmptyPool } from "../../../constants/poolDetail";
 import { post, put } from "../../../requests";
 import TabInfo from "./TabInfo";
 import TabMedia from "./TabMedia";
 import TabPool from "./TabPool";
 import TabToken from "./TabToken";
 import TabUserList from "./TabUserList";
+import { deployPool } from "../../../actions/ido-pool";
 
 export interface PoolTabProps extends PoolFieldProps {
   show: boolean;
@@ -66,12 +63,14 @@ const PoolForm = (props: PoolFormTypes) => {
     reset,
     watch,
     formState: { errors },
+    getValues,
   } = useForm<RegisterInputs>({
     mode: "onChange",
     defaultValues: poolData ?? defaultEmptyPool,
     reValidateMode: "onChange",
   });
 
+  // Mapping data from API to Form
   useEffect(() => {
     if (!poolData) return;
     setValue("name", poolData.name);
@@ -97,10 +96,7 @@ const PoolForm = (props: PoolFormTypes) => {
 
     setValue("start_join_time", poolData?.start_join_time);
     setValue("end_join_time", poolData?.end_join_time);
-    setValue(
-      "allocation_venture_capital",
-      poolData?.allocation_venture_capital,
-    );
+    setValue("allocation_venture_capital", poolData?.allocation_venture_capital);
     setValue("allocation_private", poolData?.allocation_private);
     setValue("allocation_public", poolData?.allocation_public);
 
@@ -136,6 +132,8 @@ const PoolForm = (props: PoolFormTypes) => {
     setValue("tokenominc_partnerships", poolData?.tokenominc_partnerships);
     setValue("tokenominc_community", poolData?.tokenominc_community);
     setValue("tokenominc_legal", poolData?.tokenominc_legal);
+
+    setValue("signer", JSON.stringify(poolData.signer || ""));
   }, [poolData]);
 
   const [selectedNav, setSelectedNav] = useState<number>(1);
@@ -144,10 +142,9 @@ const PoolForm = (props: PoolFormTypes) => {
     setSelectedNav(navValue);
   };
 
-  const createUpdatePool = async (data: RegisterInputs) => {
-    console.log("%cformData", "color:blue", data);
-
-    const payload = {
+  const convertFormData = (data: RegisterInputs) => {
+    return {
+      signer: JSON.parse(data.signer || ""),
       name: data.name,
       slug: data.slug,
       is_featured: data.is_featured === "true",
@@ -221,6 +218,11 @@ const PoolForm = (props: PoolFormTypes) => {
         },
       ],
     };
+  };
+  const createUpdatePool = async (data: RegisterInputs) => {
+    console.log("%cformData", "color:blue", data);
+
+    const payload = convertFormData(data);
     console.log("%c createUpdatePool", "color:red", payload);
 
     if (isEditing) {
@@ -249,8 +251,10 @@ const PoolForm = (props: PoolFormTypes) => {
     }
   };
 
-  const deployPool = (poolType: "public" | "private") => {
-    console.log("deploy: ", poolType);
+  const handleDeployPool = async (poolType: "public" | "private") => {
+    toast.info(`Deploying ${poolType} pool`);
+    const resDeploy = await deployPool(convertFormData(getValues()), poolType);
+    console.log("deploy result", resDeploy);
   };
 
   const onSubmit: SubmitHandler<RegisterInputs> = (data: RegisterInputs) => {
@@ -270,11 +274,7 @@ const PoolForm = (props: PoolFormTypes) => {
             )}
             onClick={() => handleChangeNav(item.value)}
           >
-            <span
-              className={
-                selectedNav === item.value ? "border-b-8 border-[#606060]" : ""
-              }
-            >
+            <span className={selectedNav === item.value ? "border-b-8 border-[#606060]" : ""}>
               {item.label}
             </span>
           </div>
@@ -309,7 +309,7 @@ const PoolForm = (props: PoolFormTypes) => {
             register={register}
             setValue={setValue}
             watch={watch}
-            deployPool={deployPool}
+            deployPool={handleDeployPool}
             poolData={poolData}
           />
           <TabMedia
@@ -333,12 +333,7 @@ const PoolForm = (props: PoolFormTypes) => {
         </div>
 
         <div className="mt-10 grid w-full grid-cols-2 gap-5">
-          <Button
-            onClick={() => reset()}
-            variant={"contained"}
-            size="large"
-            color="secondary"
-          >
+          <Button onClick={() => reset()} variant={"contained"} size="large" color="secondary">
             Reset
           </Button>
           <Button

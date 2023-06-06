@@ -18,15 +18,7 @@ import AcceptCurrency from "../PoolComponents/AcceptCurrency";
 import KycRequire from "../PoolComponents/KycRequire";
 
 const TabPoolPublic = (props: PoolTabProps) => {
-  const {
-    show = false,
-    control,
-    errors,
-    register,
-    setValue,
-    watch,
-    deployPool,
-  } = props;
+  const { show = false, control, errors, register, setValue, deployPool } = props;
 
   return (
     <div className={clsx("flex flex-col", show ? "block" : "hidden")}>
@@ -38,12 +30,7 @@ const TabPoolPublic = (props: PoolTabProps) => {
           setValue={setValue}
         />
         <div className="invisible">
-          <KycRequire
-            control={control}
-            errors={errors}
-            register={register}
-            setValue={setValue}
-          />
+          <KycRequire control={control} errors={errors} register={register} setValue={setValue} />
         </div>
       </div>
 
@@ -59,12 +46,7 @@ const TabPoolPublic = (props: PoolTabProps) => {
       </div>
 
       <div className="formRow">
-        <AcceptCurrency
-          control={control}
-          errors={errors}
-          register={register}
-          setValue={setValue}
-        />
+        <AcceptCurrency control={control} errors={errors} register={register} setValue={setValue} />
         <PublicTokenPrice
           control={control}
           errors={errors}
@@ -137,9 +119,9 @@ const TabPoolPublic = (props: PoolTabProps) => {
         <div className="flex w-full flex-1">
           <input
             type="button"
-            disabled
+            disabled={false}
             value="Deploy Pool Smart Contract"
-            onClick={() => deployPool("private")}
+            onClick={() => deployPool?.("private")}
             className="ml-auto h-min w-full max-w-xs cursor-pointer rounded-lg bg-green-500 py-2 font-semibold text-white disabled:cursor-not-allowed"
           />
         </div>

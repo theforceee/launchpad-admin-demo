@@ -23,7 +23,7 @@ const TabPool = (props: PoolTabProps) => {
     register,
     setValue,
     watch,
-    // deployPool,
+    deployPool,
     // poolData,
   } = props;
 
@@ -56,6 +56,7 @@ const TabPool = (props: PoolTabProps) => {
           register={register}
           setValue={setValue}
           watch={watch}
+          deployPool={deployPool}
         />
 
         <TabPoolPublic
@@ -65,6 +66,7 @@ const TabPool = (props: PoolTabProps) => {
           register={register}
           setValue={setValue}
           watch={watch}
+          deployPool={deployPool}
         />
       </div>
     </div>
