@@ -1,11 +1,12 @@
 import clsx from "clsx";
 import { PoolTabProps } from ".";
-import EndWhitelistTime from "../PoolComponents/EndWhitelistTime";
-import PoolStatus from "../PoolComponents/PoolStatus";
 import AcceptCurrency from "../PoolComponents/AcceptCurrency";
+import ButtonDeploy from "../PoolComponents/ButtonDeploy";
+import EndWhitelistTime from "../PoolComponents/EndWhitelistTime";
+import KycRequire from "../PoolComponents/KycRequire";
+import PoolStatus from "../PoolComponents/PoolStatus";
 import PrivateEndRefundTime from "../PoolComponents/PrivatePool/PrivateEndRefundTime";
 import PrivateEndSaleTime from "../PoolComponents/PrivatePool/PrivateEndSaleTime";
-import KycRequire from "../PoolComponents/KycRequire";
 import PrivateMaxFcfsAmount from "../PoolComponents/PrivatePool/PrivateMaxFcfsAmount";
 import PrivateMinInvestment from "../PoolComponents/PrivatePool/PrivateMinInvestment";
 import PrivatePoolAddress from "../PoolComponents/PrivatePool/PrivatePoolAddress";
@@ -18,7 +19,7 @@ import StartWhitelistTime from "../PoolComponents/StartWhitelistTime";
 import TokenAmount from "../PoolComponents/TokenAmount";
 
 const TabPoolPrivate = (props: PoolTabProps) => {
-  const { show = false, control, errors, register, setValue, watch, deployPool } = props;
+  const { show = false, control, errors, register, setValue, watch, deployPool, isEditing } = props;
 
   const isDeployed = watch?.("pri_is_deployed");
 
@@ -121,15 +122,12 @@ const TabPoolPrivate = (props: PoolTabProps) => {
           setValue={setValue}
         />
         <div className="flex w-full flex-1">
-          {!isDeployed && (
-            <input
-              type="button"
-              disabled={false}
-              value="Deploy Pool Smart Contract"
-              onClick={() => deployPool?.("private")}
-              className="ml-auto h-min w-full max-w-xs cursor-pointer rounded-lg bg-green-500 py-2 font-semibold text-white disabled:cursor-not-allowed"
-            />
-          )}
+          <ButtonDeploy
+            deployPool={deployPool}
+            isDeployed={isDeployed}
+            isEditing={isEditing}
+            poolType="private"
+          />
         </div>
       </div>
 

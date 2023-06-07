@@ -1,8 +1,7 @@
 import { ethers } from "ethers";
+import ERC20_ABI from "../abi/Erc20.json";
 import { default as POOL_ABI, default as POOL_PRESALE_ABI } from "../abi/IdoPool.json";
 import { NETWORK_AVAILABLE } from "../constants";
-
-const ERC20_ABI: any = {};
 
 const NETWORK_URL = process.env.REACT_APP_NETWORK_URL || "";
 const BSC_NETWORK_URL = process.env.REACT_APP_BSC_RPC_URL || "";
@@ -34,6 +33,7 @@ export const getContractReadInstance = (
       break;
   }
   const provider = new ethers.providers.JsonRpcProvider(networkUrl);
+  console.log("getContractReadInstance", contractAddress, networkUrl, provider);
   if (!provider) return;
 
   return new ethers.Contract(ABIContract, contractAddress, provider.getSigner());

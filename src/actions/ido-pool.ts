@@ -71,17 +71,6 @@ export const deployPool = async (pool: any, poolType: "public" | "private") => {
   }
 
   try {
-    console.log("data log", {
-      token_address,
-      tokenAmountForSale,
-      duration,
-      openTime,
-      offeredCurrency,
-      offeredCurrencyRate,
-      offeredCurrencyDecimals,
-      receiver_address,
-      signerWallet,
-    });
     const tx = await factorySmartContract.registerPool(
       token_address,
       tokenAmountForSale,
@@ -94,7 +83,7 @@ export const deployPool = async (pool: any, poolType: "public" | "private") => {
       signerWallet,
     );
     const receipt = await tx.wait();
-    console.log("Deploy Response: ", receipt);
+    // console.log("Deploy Response: ", receipt);
     const poolAddress = receipt.events[0].address;
 
     // update after deployed

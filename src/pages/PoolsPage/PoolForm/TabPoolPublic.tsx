@@ -1,6 +1,11 @@
 import clsx from "clsx";
+import { useEffect, useMemo } from "react";
 import { PoolTabProps } from ".";
+import useTokenBalance from "../../../hooks/useTokenBalance";
+import AcceptCurrency from "../PoolComponents/AcceptCurrency";
+import ButtonDeploy from "../PoolComponents/ButtonDeploy";
 import EndWhitelistTime from "../PoolComponents/EndWhitelistTime";
+import KycRequire from "../PoolComponents/KycRequire";
 import PoolStatus from "../PoolComponents/PoolStatus";
 import PublicEndRefundTime from "../PoolComponents/PublicPool/PublicEndRefundTime";
 import PublicEndSaleTime from "../PoolComponents/PublicPool/PublicEndSaleTime";
@@ -14,11 +19,23 @@ import PublicTokenAllocated from "../PoolComponents/PublicPool/PublicTokenAlloca
 import PublicTokenPrice from "../PoolComponents/PublicPool/PublicTokenPrice";
 import StartWhitelistTime from "../PoolComponents/StartWhitelistTime";
 import TokenAmount from "../PoolComponents/TokenAmount";
-import AcceptCurrency from "../PoolComponents/AcceptCurrency";
-import KycRequire from "../PoolComponents/KycRequire";
 
 const TabPoolPublic = (props: PoolTabProps) => {
-  const { show = false, control, errors, register, watch, setValue, deployPool } = props;
+  const { show = false, control, errors, register, watch, setValue, deployPool, isEditing } = props;
+
+  const poolContractAddress = useMemo(() => watch?.("pub_address"), [watch]);
+  const tokenAddress = useMemo(() => watch?.("token_address"), [watch]);
+  const networkAvailable = useMemo(() => watch?.("network"), [watch]);
+
+  const { getTokenBalance, tokenBalance } = useTokenBalance({
+    networkAvailable,
+    poolContractAddress,
+    tokenAddress,
+  });
+
+  useEffect(() => {
+    getTokenBalance();
+  }, [networkAvailable, poolContractAddress, tokenAddress]);
 
   const isDeployed = watch?.("pub_is_deployed");
 
@@ -119,15 +136,12 @@ const TabPoolPublic = (props: PoolTabProps) => {
           setValue={setValue}
         />
         <div className="flex w-full flex-1">
-          {!isDeployed && (
-            <input
-              type="button"
-              disabled={false}
-              value="Deploy Pool Smart Contract"
-              onClick={() => deployPool?.("public")}
-              className="ml-auto h-min w-full max-w-xs cursor-pointer rounded-lg bg-green-500 py-2 font-semibold text-white disabled:cursor-not-allowed"
-            />
-          )}
+          <ButtonDeploy
+            deployPool={deployPool}
+            isDeployed={isDeployed}
+            poolType="public"
+            isEditing={isEditing}
+          />
         </div>
       </div>
 

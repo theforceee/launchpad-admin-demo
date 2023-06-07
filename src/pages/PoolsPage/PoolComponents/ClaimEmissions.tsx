@@ -12,7 +12,7 @@ type EmissionTypes = {
 };
 
 const ClaimEmissions = (props: PoolFieldProps) => {
-  const { control, errors, register, setValue, poolData } = props;
+  const { setValue, poolData } = props;
 
   const [claimEmissions, setClaimEmissions] = useState<EmissionTypes[]>([
     { release_time: undefined, release_percent: "" },
@@ -47,16 +47,11 @@ const ClaimEmissions = (props: PoolFieldProps) => {
 
   const handleChangeDateTime = (event: any, index: number) => {
     const newEmissions = [...claimEmissions];
-    newEmissions[index].release_time = Math.floor(
-      new Date(event).getTime() / 1000,
-    );
+    newEmissions[index].release_time = Math.floor(new Date(event).getTime() / 1000);
     setClaimEmissions(newEmissions);
   };
 
-  const handleChangeNumber = (
-    event: ChangeEvent<HTMLInputElement> | undefined,
-    index: number,
-  ) => {
+  const handleChangeNumber = (event: ChangeEvent<HTMLInputElement> | undefined, index: number) => {
     const inputValue = event?.target.value || "";
     const newValue = inputValue.split(SEPARATOR).join("");
     const newEmissions = [...claimEmissions];
@@ -65,9 +60,7 @@ const ClaimEmissions = (props: PoolFieldProps) => {
   };
 
   const handleRemove = (indexToRemove: number) => {
-    const updatedArray = [...claimEmissions].filter(
-      (_, index) => index !== indexToRemove,
-    );
+    const updatedArray = [...claimEmissions].filter((_, index) => index !== indexToRemove);
     setClaimEmissions(updatedArray);
   };
   const handleAddNew = () => {
@@ -79,9 +72,7 @@ const ClaimEmissions = (props: PoolFieldProps) => {
 
   return (
     <div className="flex w-2/5 flex-col">
-      <div className="mb-5 pr-10 text-right text-16/24 font-bold">
-        Claim Emissions
-      </div>
+      <div className="mb-5 pr-10 text-right text-16/24 font-bold">Claim Emissions</div>
       {claimEmissions.map((emission: EmissionTypes, index: number) => {
         return (
           <div className="mb-2 flex items-center pl-10 text-16/24" key={index}>
@@ -102,11 +93,7 @@ const ClaimEmissions = (props: PoolFieldProps) => {
                 defaultValue: moment("00:00:00", "HH:mm:ss"),
                 format: "HH:mm",
               }}
-              value={
-                emission.release_time
-                  ? moment(emission.release_time * 1000)
-                  : undefined
-              }
+              value={emission.release_time ? moment(emission.release_time * 1000) : undefined}
               onChange={(value) => handleChangeDateTime(value, index)}
               showSecond={false}
               minuteStep={15}
@@ -114,9 +101,7 @@ const ClaimEmissions = (props: PoolFieldProps) => {
             />
 
             <NumericFormat
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                handleChangeNumber(event, index)
-              }
+              onChange={(event: ChangeEvent<HTMLInputElement>) => handleChangeNumber(event, index)}
               value={emission.release_percent}
               thousandSeparator={true}
               className="formInputText ml-2 w-20"
@@ -145,11 +130,7 @@ const ClaimEmissions = (props: PoolFieldProps) => {
           className="formInputText"
         />
 
-        <NumericFormat
-          disabled
-          thousandSeparator={true}
-          className="formInputText ml-2 w-20"
-        />
+        <NumericFormat disabled thousandSeparator={true} className="formInputText ml-2 w-20" />
         <span className="ml-3 font-bold">%</span>
       </div>
     </div>
