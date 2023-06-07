@@ -18,15 +18,9 @@ import StartWhitelistTime from "../PoolComponents/StartWhitelistTime";
 import TokenAmount from "../PoolComponents/TokenAmount";
 
 const TabPoolPrivate = (props: PoolTabProps) => {
-  const {
-    show = false,
-    control,
-    errors,
-    register,
-    setValue,
-    watch,
-    deployPool,
-  } = props;
+  const { show = false, control, errors, register, setValue, watch, deployPool } = props;
+
+  const isDeployed = watch?.("pri_is_deployed");
 
   return (
     <div className={clsx("flex flex-col", show ? "block" : "hidden")}>
@@ -37,12 +31,7 @@ const TabPoolPrivate = (props: PoolTabProps) => {
           register={register}
           setValue={setValue}
         />
-        <KycRequire
-          control={control}
-          errors={errors}
-          register={register}
-          setValue={setValue}
-        />
+        <KycRequire control={control} errors={errors} register={register} setValue={setValue} />
       </div>
 
       <div className="formRow">
@@ -53,16 +42,11 @@ const TabPoolPrivate = (props: PoolTabProps) => {
           setValue={setValue}
         />
 
-        <PoolStatus />
+        {isDeployed && <PoolStatus />}
       </div>
 
       <div className="formRow">
-        <AcceptCurrency
-          control={control}
-          errors={errors}
-          register={register}
-          setValue={setValue}
-        />
+        <AcceptCurrency control={control} errors={errors} register={register} setValue={setValue} />
         <PrivateTokenPrice
           control={control}
           errors={errors}
@@ -137,26 +121,32 @@ const TabPoolPrivate = (props: PoolTabProps) => {
           setValue={setValue}
         />
         <div className="flex w-full flex-1">
-          <input
-            type="button"
-            disabled={false}
-            value="Deploy Pool Smart Contract"
-            onClick={() => deployPool?.("private")}
-            className="ml-auto h-min w-full max-w-xs cursor-pointer rounded-lg bg-green-500 py-2 font-semibold text-white disabled:cursor-not-allowed"
-          />
+          {!isDeployed && (
+            <input
+              type="button"
+              disabled={false}
+              value="Deploy Pool Smart Contract"
+              onClick={() => deployPool?.("private")}
+              className="ml-auto h-min w-full max-w-xs cursor-pointer rounded-lg bg-green-500 py-2 font-semibold text-white disabled:cursor-not-allowed"
+            />
+          )}
         </div>
       </div>
 
-      <div className="formRow">
-        <PrivateRefundAmount
-          control={control}
-          errors={errors}
-          register={register}
-          setValue={setValue}
-        />
-      </div>
+      {isDeployed && (
+        <>
+          <div className="formRow">
+            <PrivateRefundAmount
+              control={control}
+              errors={errors}
+              register={register}
+              setValue={setValue}
+            />
+          </div>
 
-      <TokenAmount />
+          <TokenAmount />
+        </>
+      )}
     </div>
   );
 };

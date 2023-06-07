@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import { useAccount } from "wagmi";
+import { deployPool } from "../../../actions/ido-pool";
 import { URLS } from "../../../constants";
 import { PoolFieldProps, RegisterInputs, defaultEmptyPool } from "../../../constants/poolDetail";
 import { post, put } from "../../../requests";
@@ -12,7 +14,6 @@ import TabMedia from "./TabMedia";
 import TabPool from "./TabPool";
 import TabToken from "./TabToken";
 import TabUserList from "./TabUserList";
-import { deployPool } from "../../../actions/ido-pool";
 
 export interface PoolTabProps extends PoolFieldProps {
   show: boolean;
@@ -54,6 +55,7 @@ const poolNav: Array<PoolNavTypes> = [
 
 const PoolForm = (props: PoolFormTypes) => {
   const { poolData, isEditing } = props;
+  const { address: connectedAccount } = useAccount();
   const navigate = useNavigate();
   const {
     register,
@@ -81,7 +83,6 @@ const PoolForm = (props: PoolFormTypes) => {
     setValue("discord", poolData?.discord);
     setValue("about", poolData?.about);
     setValue("litepaper", poolData?.litepaper);
-    setValue("is_featured", poolData?.is_featured);
 
     setValue("token_name", poolData?.token_name);
     setValue("token_id", poolData?.token_id);
@@ -100,6 +101,7 @@ const PoolForm = (props: PoolFormTypes) => {
     setValue("allocation_private", poolData?.allocation_private);
     setValue("allocation_public", poolData?.allocation_public);
 
+    setValue("pri_is_deployed", poolData?.pri_is_deployed);
     setValue("pri_address", poolData?.pri_address);
     setValue("pri_token_allocated", poolData?.pri_token_allocated);
     setValue("pri_conversion_rate", poolData?.pri_conversion_rate);
@@ -111,6 +113,7 @@ const PoolForm = (props: PoolFormTypes) => {
     setValue("pri_min_amount", poolData?.pri_min_amount);
     setValue("pri_fcfs_amount", poolData?.pri_fcfs_amount);
 
+    setValue("pub_is_deployed", poolData?.pub_is_deployed);
     setValue("pub_address", poolData?.pub_address);
     setValue("pub_token_allocated", poolData?.pub_token_allocated);
     setValue("pub_conversion_rate", poolData?.pub_conversion_rate);
@@ -144,10 +147,9 @@ const PoolForm = (props: PoolFormTypes) => {
 
   const convertFormData = (data: RegisterInputs) => {
     return {
-      signer: JSON.parse(data.signer || ""),
+      signer: JSON.parse(data.signer || "{}"),
       name: data.name,
       slug: data.slug,
-      is_featured: data.is_featured === "true",
       website: data.website,
       twitter: data.twitter,
       telegram: data.telegram,
@@ -186,11 +188,12 @@ const PoolForm = (props: PoolFormTypes) => {
           private: data.allocation_private,
           public: data.allocation_public,
         },
-        token_release: JSON.parse(data.token_release || ""), // time config
+        token_release: JSON.parse(data.token_release || "{}"), // time config
       },
 
       pools: [
         {
+          is_deployed: data.pri_is_deployed,
           is_private: true,
           address: data.pri_address,
           token_allocated: data.pri_token_allocated,
@@ -204,6 +207,7 @@ const PoolForm = (props: PoolFormTypes) => {
           fcfs_amount: data.pri_fcfs_amount,
         },
         {
+          is_deployed: data.pub_is_deployed,
           is_private: false,
           address: data.pub_address,
           token_allocated: data.pub_token_allocated,
@@ -219,6 +223,7 @@ const PoolForm = (props: PoolFormTypes) => {
       ],
     };
   };
+
   const createUpdatePool = async (data: RegisterInputs) => {
     console.log("%cformData", "color:blue", data);
 
@@ -236,6 +241,7 @@ const PoolForm = (props: PoolFormTypes) => {
       }
 
       toast.success("SUCCESS: pool has been updated");
+      window.location.reload();
     } else {
       // Create Pool
       const createRes = await post("/pool", {
@@ -252,9 +258,14 @@ const PoolForm = (props: PoolFormTypes) => {
   };
 
   const handleDeployPool = async (poolType: "public" | "private") => {
+    if (!connectedAccount) {
+      toast.error("ERROR: please connect wallet");
+      return;
+    }
+
     toast.info(`Deploying ${poolType} pool`);
-    const resDeploy = await deployPool(convertFormData(getValues()), poolType);
-    console.log("deploy result", resDeploy);
+    const deployData = convertFormData(getValues());
+    await deployPool(deployData, poolType);
   };
 
   const onSubmit: SubmitHandler<RegisterInputs> = (data: RegisterInputs) => {
@@ -311,6 +322,7 @@ const PoolForm = (props: PoolFormTypes) => {
             watch={watch}
             deployPool={handleDeployPool}
             poolData={poolData}
+            isEditing={isEditing}
           />
           <TabMedia
             show={selectedNav === 4}

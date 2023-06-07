@@ -1,4 +1,5 @@
 import { BigNumber, ethers } from "ethers";
+import { toast } from "react-toastify";
 import poolFactoryABI from "../abi/IdoPoolFactory.json";
 import {
   IDO_POOL_FACTORY_BSC_SMART_CONTRACT,
@@ -8,9 +9,9 @@ import {
   MAPPING_CURRENCY_DECIMALS,
   NETWORK_AVAILABLE,
 } from "../constants";
+import { put } from "../requests";
 import { getContractInstance } from "../services/web3";
 import { getCurrencyToTokenRate } from "../utils/campaign";
-import { toast } from "react-toastify";
 import { getErrorMessage } from "../utils/getErrorMessage";
 
 function fromReadableAmount(amount: number, decimals: number) {
@@ -20,12 +21,16 @@ function fromReadableAmount(amount: number, decimals: number) {
 export const deployPool = async (pool: any, poolType: "public" | "private") => {
   if (!pool) return;
   console.log("deploying", poolType, pool);
-  const { pools, token, signer, accepted_currency } = pool;
+  const { pools, token, signer, accepted_currency, slug } = pool;
   const { network, token_address, token_decimal } = token;
 
   let currentPool;
   if (poolType === "private") currentPool = pools.find((item: any) => !!item.is_private);
   else currentPool = pools.find((item: any) => !item.is_private);
+  if (currentPool?.is_deployed) {
+    toast.error("ERROR: pool has already deployed");
+    return;
+  }
 
   const { conversion_rate, start_buy_time, end_buy_time, token_allocated, receiver_address } =
     currentPool;
@@ -66,8 +71,7 @@ export const deployPool = async (pool: any, poolType: "public" | "private") => {
   }
 
   try {
-    console.log(
-      "data log",
+    console.log("data log", {
       token_address,
       tokenAmountForSale,
       duration,
@@ -77,7 +81,7 @@ export const deployPool = async (pool: any, poolType: "public" | "private") => {
       offeredCurrencyDecimals,
       receiver_address,
       signerWallet,
-    );
+    });
     const tx = await factorySmartContract.registerPool(
       token_address,
       tokenAmountForSale,
@@ -89,11 +93,29 @@ export const deployPool = async (pool: any, poolType: "public" | "private") => {
       receiver_address,
       signerWallet,
     );
-    await tx.wait();
+    const receipt = await tx.wait();
+    console.log("Deploy Response: ", receipt);
+    const poolAddress = receipt.events[0].address;
 
-    console.log("Deploy Response: ", tx);
-    const poolAddress = await factorySmartContract.pool();
-    return poolAddress;
+    // update after deployed
+    const dataUpdate = {
+      is_private: currentPool.is_private,
+      address: poolAddress,
+      registered_by: receipt.from,
+      receiver_address,
+    };
+
+    const updateRes = await put(`/pool/${slug}/deploy`, {
+      body: dataUpdate,
+    });
+    console.log("%c updateRes deploy", "color:red", updateRes);
+    if (!updateRes || updateRes.status !== 200) {
+      toast.error("ERROR: pool failed to be deployed");
+      return;
+    }
+
+    toast.success("SUCCESS: pool has been deployed");
+    window.location.reload();
   } catch (error) {
     console.log("Fail to deploy Pool", error);
     toast.error(getErrorMessage(error, "Fail to deploy Pool"));

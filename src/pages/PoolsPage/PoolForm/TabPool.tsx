@@ -16,16 +16,7 @@ const poolNav = [
 ];
 
 const TabPool = (props: PoolTabProps) => {
-  const {
-    show = false,
-    control,
-    errors,
-    register,
-    setValue,
-    watch,
-    deployPool,
-    // poolData,
-  } = props;
+  const { show = false, control, errors, register, setValue, watch, deployPool, isEditing } = props;
 
   const [activedNav, setActivedNav] = useState<"private" | "public">("private");
 
@@ -57,6 +48,7 @@ const TabPool = (props: PoolTabProps) => {
           setValue={setValue}
           watch={watch}
           deployPool={deployPool}
+          isEditing={isEditing}
         />
 
         <TabPoolPublic
@@ -67,6 +59,7 @@ const TabPool = (props: PoolTabProps) => {
           setValue={setValue}
           watch={watch}
           deployPool={deployPool}
+          isEditing={isEditing}
         />
       </div>
     </div>

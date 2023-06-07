@@ -14,7 +14,6 @@ const PoolLinks = (props: PoolFieldProps) => {
           name="website"
           register={register}
           placeholder="Website"
-          required
         />
         <TextField
           control={control}
@@ -22,7 +21,6 @@ const PoolLinks = (props: PoolFieldProps) => {
           name="twitter"
           register={register}
           placeholder="Twitter"
-          required
         />
         <TextField
           control={control}
@@ -30,7 +28,6 @@ const PoolLinks = (props: PoolFieldProps) => {
           name="telegram"
           register={register}
           placeholder="Telegram"
-          required
         />
         <TextField
           control={control}
@@ -38,7 +35,6 @@ const PoolLinks = (props: PoolFieldProps) => {
           name="discord"
           register={register}
           placeholder="Discord"
-          required
         />
       </div>
     </div>

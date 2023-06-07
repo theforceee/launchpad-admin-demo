@@ -18,7 +18,9 @@ import AcceptCurrency from "../PoolComponents/AcceptCurrency";
 import KycRequire from "../PoolComponents/KycRequire";
 
 const TabPoolPublic = (props: PoolTabProps) => {
-  const { show = false, control, errors, register, setValue, deployPool } = props;
+  const { show = false, control, errors, register, watch, setValue, deployPool } = props;
+
+  const isDeployed = watch?.("pub_is_deployed");
 
   return (
     <div className={clsx("flex flex-col", show ? "block" : "hidden")}>
@@ -42,7 +44,7 @@ const TabPoolPublic = (props: PoolTabProps) => {
           setValue={setValue}
         />
 
-        <PoolStatus />
+        {isDeployed && <PoolStatus />}
       </div>
 
       <div className="formRow">
@@ -117,26 +119,32 @@ const TabPoolPublic = (props: PoolTabProps) => {
           setValue={setValue}
         />
         <div className="flex w-full flex-1">
-          <input
-            type="button"
-            disabled={false}
-            value="Deploy Pool Smart Contract"
-            onClick={() => deployPool?.("private")}
-            className="ml-auto h-min w-full max-w-xs cursor-pointer rounded-lg bg-green-500 py-2 font-semibold text-white disabled:cursor-not-allowed"
-          />
+          {!isDeployed && (
+            <input
+              type="button"
+              disabled={false}
+              value="Deploy Pool Smart Contract"
+              onClick={() => deployPool?.("public")}
+              className="ml-auto h-min w-full max-w-xs cursor-pointer rounded-lg bg-green-500 py-2 font-semibold text-white disabled:cursor-not-allowed"
+            />
+          )}
         </div>
       </div>
 
-      <div className="formRow">
-        <PublicRefundAmount
-          control={control}
-          errors={errors}
-          register={register}
-          setValue={setValue}
-        />
-      </div>
+      {isDeployed && (
+        <>
+          <div className="formRow">
+            <PublicRefundAmount
+              control={control}
+              errors={errors}
+              register={register}
+              setValue={setValue}
+            />
+          </div>
 
-      <TokenAmount />
+          <TokenAmount />
+        </>
+      )}
     </div>
   );
 };

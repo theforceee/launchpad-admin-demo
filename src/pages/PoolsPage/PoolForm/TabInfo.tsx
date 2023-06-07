@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { PoolTabProps } from ".";
-import Featured from "../PoolComponents/Featured";
 import Litepaper from "../PoolComponents/Litepaper";
 import PoolAbout from "../PoolComponents/PoolAbout";
 import PoolLinks from "../PoolComponents/PoolLinks";
@@ -9,16 +8,7 @@ import PoolSlug from "../PoolComponents/PoolSlug";
 import PoolTags from "../PoolComponents/PoolTags";
 
 const TabInfo = (props: PoolTabProps) => {
-  const {
-    show = false,
-    control,
-    errors,
-    register,
-    setValue,
-    watch,
-    poolData,
-    isEditing,
-  } = props;
+  const { show = false, control, errors, register, setValue, watch, poolData, isEditing } = props;
 
   return (
     <div className={clsx(show ? "block" : "hidden")}>
@@ -26,7 +16,6 @@ const TabInfo = (props: PoolTabProps) => {
         <div className="formRow">
           <PoolName control={control} errors={errors} register={register} />
           <PoolSlug control={control} errors={errors} register={register} />
-          <Featured control={control} errors={errors} register={register} />
         </div>
 
         <PoolLinks control={control} errors={errors} register={register} />

@@ -31,7 +31,6 @@ const PoolDetailPage = () => {
 
         name: rawData.name,
         slug: rawData.slug,
-        is_featured: rawData.is_featured + "",
         website: rawData.website,
         twitter: rawData.twitter,
         telegram: rawData.telegram,
@@ -57,6 +56,7 @@ const PoolDetailPage = () => {
         allocation_public: token_sale_allocation?.public + "",
         allocation_venture_capital: token_sale_allocation?.venture_capital + "",
 
+        pri_is_deployed: privatePool?.is_deployed,
         pri_address: privatePool?.address,
         pri_token_allocated: privatePool?.token_allocated,
         pri_conversion_rate: privatePool?.conversion_rate,
@@ -68,6 +68,7 @@ const PoolDetailPage = () => {
         pri_min_amount: privatePool?.min_amount,
         pri_fcfs_amount: privatePool?.fcfs_amount,
 
+        pub_is_deployed: publicPool?.is_deployed,
         pub_address: publicPool?.address,
         pub_token_allocated: publicPool?.token_allocated,
         pub_conversion_rate: publicPool?.conversion_rate,

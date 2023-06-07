@@ -11,6 +11,7 @@ const PublicPoolAddress = (props: PoolFieldProps) => {
         control={control}
         errors={errors}
         name="pub_address"
+        disabled={true}
         register={register}
       />
     </div>

@@ -18,7 +18,6 @@ export type RegisterInputs = {
   discord: string;
   about: string;
   litepaper: string;
-  is_featured: string;
   tags: string;
 
   token_name: string;
@@ -38,6 +37,7 @@ export type RegisterInputs = {
   allocation_private: string;
   allocation_public: string;
 
+  pri_is_deployed?: boolean | undefined;
   pri_address: string | undefined;
   pri_token_allocated: string | undefined;
   pri_conversion_rate: string | undefined;
@@ -49,6 +49,7 @@ export type RegisterInputs = {
   pri_min_amount: string;
   pri_fcfs_amount: string;
 
+  pub_is_deployed?: boolean | undefined;
   pub_address: string | undefined;
   pub_token_allocated: string | undefined;
   pub_conversion_rate: string | undefined;
@@ -84,7 +85,6 @@ export const defaultEmptyPool: RegisterInputs = {
   discord: "",
   about: "",
   litepaper: "",
-  is_featured: "",
   tags: "",
 
   token_name: "",
@@ -153,6 +153,7 @@ export interface PoolFieldProps {
 export type InputFieldProps = {
   label?: string;
   name: keyof RegisterInputs;
+  disabled?: boolean | undefined;
   control: Control<RegisterInputs, any>;
   register: UseFormRegister<RegisterInputs>;
   errors: FieldErrors<RegisterInputs>;

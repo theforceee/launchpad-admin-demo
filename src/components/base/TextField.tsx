@@ -1,9 +1,9 @@
-import { Controller, useController } from "react-hook-form";
+import { useController } from "react-hook-form";
 import { InputFieldProps } from "../../constants/poolDetail";
 import { renderError } from "../../utils/validate";
 
 const TextField = (props: InputFieldProps) => {
-  const { name, control, register, errors, required, placeholder } = props;
+  const { name, control, errors, required, placeholder, disabled } = props;
 
   const { field } = useController({
     name,
@@ -17,6 +17,7 @@ const TextField = (props: InputFieldProps) => {
         {...field}
         type="text"
         name={name}
+        disabled={disabled}
         className="formInputText"
         placeholder={placeholder}
       />
