@@ -26,6 +26,7 @@ const TabPoolPublic = (props: PoolTabProps) => {
   const poolContractAddress = useMemo(() => watch?.("pub_address"), [watch]);
   const tokenAddress = useMemo(() => watch?.("token_address"), [watch]);
   const networkAvailable = useMemo(() => watch?.("network"), [watch]);
+  const tokenAllocated = useMemo(() => watch?.("pub_token_allocated"), [watch]);
 
   const { getTokenBalance, tokenBalance } = useTokenBalance({
     networkAvailable,
@@ -61,7 +62,7 @@ const TabPoolPublic = (props: PoolTabProps) => {
           setValue={setValue}
         />
 
-        {isDeployed && <PoolStatus />}
+        {isDeployed && <PoolStatus tokenAllocated={tokenAllocated} />}
       </div>
 
       <div className="formRow">
@@ -156,7 +157,7 @@ const TabPoolPublic = (props: PoolTabProps) => {
             />
           </div>
 
-          <TokenAmount />
+          <TokenAmount watch={watch} />
         </>
       )}
     </div>

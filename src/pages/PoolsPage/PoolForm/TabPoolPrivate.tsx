@@ -17,11 +17,13 @@ import PrivateTokenAllocated from "../PoolComponents/PrivatePool/PrivateTokenAll
 import PrivateTokenPrice from "../PoolComponents/PrivatePool/PrivateTokenPrice";
 import StartWhitelistTime from "../PoolComponents/StartWhitelistTime";
 import TokenAmount from "../PoolComponents/TokenAmount";
+import { useMemo } from "react";
 
 const TabPoolPrivate = (props: PoolTabProps) => {
   const { show = false, control, errors, register, setValue, watch, deployPool, isEditing } = props;
 
   const isDeployed = watch?.("pri_is_deployed");
+  const tokenAllocated = useMemo(() => watch?.("pri_token_allocated"), [watch]);
 
   return (
     <div className={clsx("flex flex-col", show ? "block" : "hidden")}>
@@ -43,7 +45,7 @@ const TabPoolPrivate = (props: PoolTabProps) => {
           setValue={setValue}
         />
 
-        {isDeployed && <PoolStatus />}
+        {isDeployed && <PoolStatus tokenAllocated={tokenAllocated} />}
       </div>
 
       <div className="formRow">
