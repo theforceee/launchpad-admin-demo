@@ -38,19 +38,6 @@ const tableHeaders: Array<TableHeaderTypes> = [
   },
 ];
 
-let dataTable: Array<any> = [];
-
-for (let i = 0; i < 10; i++) {
-  dataTable = [
-    ...dataTable,
-    {
-      id: i + 1,
-      wallet_address: "0xF1b4b671FBCB9d6A73168197a46D24357DFbe765",
-      points: "1000",
-    },
-  ];
-}
-
 const TabUserList = (props: PoolTabProps) => {
   const { show = false } = props;
   const [selectedUserNav, setSelectedUserNav] = useState<number>(1);
@@ -72,7 +59,7 @@ const TabUserList = (props: PoolTabProps) => {
             <div
               key={item.value}
               className={clsx(
-                "flex items-center justify-center font-semibold py-3 w-[180px] cursor-pointer",
+                "flex w-[180px] cursor-pointer items-center justify-center py-3 font-semibold",
                 selectedUserNav === item.value
                   ? "bg-gray-400 text-black"
                   : "bg-gray-300 text-[#8D8C8C]",
@@ -84,9 +71,9 @@ const TabUserList = (props: PoolTabProps) => {
           ))}
         </div>
 
-        <div className="flex w-full mt-10">
+        <div className="mt-10 flex w-full">
           <TableWithPagination
-            dataTable={dataTable}
+            dataTable={[]}
             pagination={pagination}
             setPagination={setPagination}
             tableHeaders={tableHeaders}

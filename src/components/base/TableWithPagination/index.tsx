@@ -60,27 +60,19 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
 
-  const handleFirstPageButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
+  const handleFirstPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     onPageChange(event, 0);
   };
 
-  const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
+  const handleBackButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     onPageChange(event, page - 1);
   };
 
-  const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
+  const handleNextButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     onPageChange(event, page + 1);
   };
 
-  const handleLastPageButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
+  const handleLastPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
   };
 
@@ -93,27 +85,15 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
       >
         {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
       </IconButton>
-      <IconButton
-        onClick={handleBackButtonClick}
-        disabled={page === 0}
-        aria-label="previous page"
-      >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowRight />
-        ) : (
-          <KeyboardArrowLeft />
-        )}
+      <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
+        {theme.direction === "rtl" ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
       >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowLeft />
-        ) : (
-          <KeyboardArrowRight />
-        )}
+        {theme.direction === "rtl" ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
@@ -127,17 +107,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
 }
 
 const TableWithPagination = (props: TableWithPaginationProps) => {
-  const { dataTable, tableHeaders, pagination, setPagination, TableRecord } =
-    props;
+  const { dataTable, tableHeaders, pagination, setPagination, TableRecord } = props;
 
   const handleSort = (headerValue: number) => {
     console.log("sort", headerValue);
   };
 
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number,
-  ) => {
+  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
     setPagination((currentState) => ({
       ...currentState,
       currentPage: newPage,
@@ -162,10 +138,7 @@ const TableWithPagination = (props: TableWithPaginationProps) => {
             <TableHead>
               <TableRow>
                 {tableHeaders.map((tableHeader: TableHeaderTypes) => (
-                  <StyledTableCell
-                    key={tableHeader.value}
-                    className="pb-6 pr-7"
-                  >
+                  <StyledTableCell key={tableHeader.value} className="pb-6 pr-7">
                     <p className="m-0 flex justify-between">
                       <span>{tableHeader.label}</span>
                       {tableHeader.sortable && (
@@ -182,11 +155,11 @@ const TableWithPagination = (props: TableWithPaginationProps) => {
               </TableRow>
             </TableHead>
             <TableBody className={styles.tableBody}>
-              {dataTable &&
-                dataTable.length > 0 &&
-                dataTable.map((dataRecord: any, index: number) => (
-                  <TableRecord dataRecord={dataRecord} key={index} />
-                ))}
+              {dataTable && dataTable.length > 0
+                ? dataTable.map((dataRecord: any, index: number) => (
+                    <TableRecord dataRecord={dataRecord} key={index} />
+                  ))
+                : "Empty"}
             </TableBody>
           </Table>
         </TableContainer>
