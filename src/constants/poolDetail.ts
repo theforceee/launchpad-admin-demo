@@ -10,6 +10,7 @@ import {
 
 // all pool properties
 export type RegisterInputs = {
+  id: number | undefined;
   name: string;
   slug: string;
   website: string;
@@ -77,6 +78,7 @@ export type RegisterInputs = {
 };
 
 export const defaultEmptyPool: RegisterInputs = {
+  id: undefined,
   name: "",
   slug: "",
   website: "",

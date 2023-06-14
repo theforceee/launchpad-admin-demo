@@ -155,11 +155,13 @@ const TableWithPagination = (props: TableWithPaginationProps) => {
               </TableRow>
             </TableHead>
             <TableBody className={styles.tableBody}>
-              {dataTable && dataTable.length > 0
-                ? dataTable.map((dataRecord: any, index: number) => (
-                    <TableRecord dataRecord={dataRecord} key={index} />
-                  ))
-                : "Empty"}
+              {dataTable && dataTable.length > 0 ? (
+                dataTable.map((dataRecord: any, index: number) => (
+                  <TableRecord dataRecord={dataRecord} key={index} />
+                ))
+              ) : (
+                <div className="text-20/28">Empty</div>
+              )}
             </TableBody>
           </Table>
         </TableContainer>

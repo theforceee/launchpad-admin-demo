@@ -14,14 +14,17 @@ type UserNavTypes = {
   label: string;
   value: number;
 };
+const TAB_WINNER = 2;
+const TAB_WHITELIST = 1;
+
 const userNav: Array<UserNavTypes> = [
   {
     label: "Participants",
-    value: 1,
+    value: TAB_WHITELIST,
   },
   {
     label: "Allocation Winners",
-    value: 2,
+    value: TAB_WINNER,
   },
 ];
 
@@ -41,25 +44,49 @@ const tableHeaders: Array<TableHeaderTypes> = [
 ];
 
 const TabUserList = (props: PoolTabProps) => {
-  const { show = false } = props;
-  const [selectedUserNav, setSelectedUserNav] = useState<number>(1);
-  const [pagination, setPagination] = useState<PagingationTypes>({
+  const { show = false, poolData } = props;
+  const [selectedUserNav, setSelectedUserNav] = useState<number>(TAB_WHITELIST);
+  const [pagingWinners, setPagingWinners] = useState<PagingationTypes>({
+    currentPage: 0,
+    rowsPerPage: 0,
+    total: 0,
+  });
+  const [pagingWhitelist, setPagingWhitelist] = useState<PagingationTypes>({
     currentPage: 0,
     rowsPerPage: 0,
     total: 0,
   });
 
-  useEffect(() => {
-    const getData = async () => {
-      const poolDetailRes = await get(`/pool/`);
-      console.log(poolDetailRes);
+  const [dataWinners, setDataWinners] = useState<any[]>([]);
+  const [dataWhitelist, setDataWhitelist] = useState<any[]>([]);
 
-      if (poolDetailRes.status !== 200) {
-        toast.error("ERROR: Fail to pool detail");
+  useEffect(() => {
+    if (!poolData?.id) return;
+    const getDataWinner = async () => {
+      const winnerRes = await get(`/pool/${poolData.id}/winner`);
+      console.log(winnerRes);
+
+      if (winnerRes.status !== 200) {
+        toast.error("ERROR: Fail to fetch winners");
         return;
       }
+      setDataWinners(winnerRes?.data?.data || []);
     };
-  }, []);
+
+    const getDataWhitelist = async () => {
+      const whitelistRes = await get(`/pool/${poolData.id}/whitelist`);
+      console.log(whitelistRes);
+
+      if (whitelistRes.status !== 200) {
+        toast.error("ERROR: Fail to fetch whitelists");
+        return;
+      }
+      setDataWhitelist(whitelistRes?.data?.data || []);
+    };
+
+    getDataWhitelist();
+    getDataWinner();
+  }, [poolData?.id]);
 
   const handleSelectNav = (nav: number) => {
     setSelectedUserNav(nav);
@@ -85,11 +112,23 @@ const TabUserList = (props: PoolTabProps) => {
           ))}
         </div>
 
-        <div className="mt-10 flex w-full">
+        <div className={clsx("mt-10 w-full", selectedUserNav === TAB_WINNER ? "hidden" : "flex")}>
           <TableWithPagination
-            dataTable={[]}
-            pagination={pagination}
-            setPagination={setPagination}
+            dataTable={dataWhitelist}
+            pagination={pagingWhitelist}
+            setPagination={setPagingWhitelist}
+            tableHeaders={tableHeaders}
+            TableRecord={UserPoolRecord}
+          />
+        </div>
+
+        <div
+          className={clsx("mt-10 w-full", selectedUserNav === TAB_WHITELIST ? "hidden" : "flex")}
+        >
+          <TableWithPagination
+            dataTable={dataWinners}
+            pagination={pagingWinners}
+            setPagination={setPagingWinners}
             tableHeaders={tableHeaders}
             TableRecord={UserPoolRecord}
           />

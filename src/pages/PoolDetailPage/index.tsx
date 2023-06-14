@@ -15,7 +15,7 @@ const PoolDetailPage = () => {
       if (!params) return;
       const poolDetailRes = await get(`/pool/${params.uuid}`);
       if (poolDetailRes.status !== 200) {
-        toast.error("ERROR: Fail to pool detail");
+        toast.error("ERROR: Fail to fetch pool detail");
         return;
       }
 
@@ -26,6 +26,7 @@ const PoolDetailPage = () => {
       const { token_sale_allocation, tokenomics, tokenReleases } = token;
 
       const formData: RegisterInputs = {
+        id: rawData.id,
         signer: rawData.signer,
         status: rawData.status,
 
