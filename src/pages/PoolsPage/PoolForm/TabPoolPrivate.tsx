@@ -1,5 +1,8 @@
 import clsx from "clsx";
+import { useContext, useEffect } from "react";
 import { PoolTabProps } from ".";
+import { AppContext } from "../../../contexts/AppContext";
+import useTokenBalance from "../../../hooks/useTokenBalance";
 import AcceptCurrency from "../PoolComponents/AcceptCurrency";
 import ButtonDeploy from "../PoolComponents/ButtonDeploy";
 import EndWhitelistTime from "../PoolComponents/EndWhitelistTime";
@@ -17,13 +20,18 @@ import PrivateTokenAllocated from "../PoolComponents/PrivatePool/PrivateTokenAll
 import PrivateTokenPrice from "../PoolComponents/PrivatePool/PrivateTokenPrice";
 import StartWhitelistTime from "../PoolComponents/StartWhitelistTime";
 import TokenAmount from "../PoolComponents/TokenAmount";
-import { useMemo } from "react";
 
 const TabPoolPrivate = (props: PoolTabProps) => {
   const { show = false, control, errors, register, setValue, watch, deployPool, isEditing } = props;
+  const { isWrongChain } = useContext(AppContext);
 
   const isDeployed = watch?.("pri_is_deployed");
-  const tokenAllocated = useMemo(() => watch?.("pri_token_allocated"), [watch]);
+  const tokenAllocated = watch?.("pri_token_allocated");
+  const poolContractAddress: any = watch?.("pri_address");
+  const tokenAddress: any = watch?.("token_address");
+  const networkAvailable = watch?.("network");
+
+  const { contractBalance } = useTokenBalance(tokenAddress, poolContractAddress);
 
   return (
     <div className={clsx("flex flex-col", show ? "block" : "hidden")}>
@@ -45,7 +53,9 @@ const TabPoolPrivate = (props: PoolTabProps) => {
           setValue={setValue}
         />
 
-        {isDeployed && <PoolStatus tokenAllocated={tokenAllocated} />}
+        {isDeployed && (
+          <PoolStatus tokenAllocated={tokenAllocated} contractBalance={contractBalance} />
+        )}
       </div>
 
       <div className="formRow">
@@ -144,7 +154,7 @@ const TabPoolPrivate = (props: PoolTabProps) => {
             />
           </div>
 
-          <TokenAmount />
+          <TokenAmount watch={watch} tokenAmount={contractBalance} />
         </>
       )}
     </div>

@@ -1,36 +1,42 @@
-import { useCallback, useState } from "react";
-import { getErc20Contract, getReadOnlyTokenContract } from "../services/web3";
+import { erc20ABI, useContractRead } from "wagmi";
+import IdoPool_ABI from "../abi/IdoPool.json";
+import Erc20_ABI from "../abi/Erc20.json";
+import { ethers } from "ethers";
 
-type TokenBalanceProps = {
-  networkAvailable: string | undefined;
-  poolContractAddress: string | undefined;
-  tokenAddress: string | undefined;
+const useTokenBalance = (
+  tokenAddress: `0x${string}` | undefined,
+  poolContractAddress: `0x${string}` | undefined,
+) => {
+  // const { isWrongChain } = useContext(AppContext);
+
+  // const { data: userBalance, isLoading } = useContractRead({
+  //   address: tokenAddress,
+  //   abi: IdoPool_ABI,
+  //   chainId: 97,
+  //   // enabled: !!tokenAddress && !!poolContractAddress,
+  //   functionName: "totalUnclaimed",
+  //   onError(error) {
+  //     console.log("Error to fetch balance", error);
+  //   },
+  //   args: [],
+  //   onSuccess(data) {
+  //     console.log("userBalance", data);
+  //   },
+  // });
+
+  const { data: contractBalance } = useContractRead({
+    address: tokenAddress,
+    abi: erc20ABI,
+    enabled: !!tokenAddress && !!poolContractAddress,
+    functionName: "balanceOf",
+    chainId: 97,
+    onError(error) {
+      console.log("Error balanceOf", error);
+    },
+    args: poolContractAddress && [poolContractAddress],
+  });
+
+  return { contractBalance: ethers.utils.formatEther(contractBalance || 0) };
 };
 
-const useTokenBalance = (props: TokenBalanceProps) => {
-  const { networkAvailable, poolContractAddress, tokenAddress } = props;
-  const [tokenBalance, setTokenBalance] = useState<string>("");
-
-  const getTokenBalance = useCallback(async () => {
-    console.log("getTokenBalance", networkAvailable, poolContractAddress, tokenAddress);
-    if (!networkAvailable || !poolContractAddress || !tokenAddress) return;
-
-    const ercContract = getReadOnlyTokenContract({
-      networkAvailable,
-      tokenAddress: poolContractAddress,
-    });
-    console.log("getTokenBalance", ercContract);
-    if (!ercContract) return;
-
-    try {
-      const balance = await ercContract.balanceOf(tokenAddress);
-      console.log("Token balance:", balance.toString());
-      setTokenBalance(balance.toString());
-    } catch (error) {
-      console.error("Error getting token balance:", error);
-    }
-  }, [networkAvailable, poolContractAddress, tokenAddress]);
-
-  return { tokenBalance, getTokenBalance };
-};
 export default useTokenBalance;

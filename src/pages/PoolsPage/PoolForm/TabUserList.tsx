@@ -1,12 +1,14 @@
 import clsx from "clsx";
 import { PoolTabProps } from ".";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   PagingationTypes,
   TableHeaderTypes,
 } from "../../../components/base/TableWithPagination/constants";
 import TableWithPagination from "../../../components/base/TableWithPagination";
 import UserPoolRecord from "./UserPoolRecord";
+import { get } from "../../../requests";
+import { toast } from "react-toastify";
 
 type UserNavTypes = {
   label: string;
@@ -46,6 +48,18 @@ const TabUserList = (props: PoolTabProps) => {
     rowsPerPage: 0,
     total: 0,
   });
+
+  useEffect(() => {
+    const getData = async () => {
+      const poolDetailRes = await get(`/pool/`);
+      console.log(poolDetailRes);
+
+      if (poolDetailRes.status !== 200) {
+        toast.error("ERROR: Fail to pool detail");
+        return;
+      }
+    };
+  }, []);
 
   const handleSelectNav = (nav: number) => {
     setSelectedUserNav(nav);

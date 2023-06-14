@@ -1,11 +1,12 @@
-import { configureChains, createClient, mainnet, WagmiConfig } from "wagmi";
+import { configureChains, createClient, goerli, mainnet, WagmiConfig } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 import "./App.css";
 import AppProvider from "./contexts/AppProvider";
 import createRoutes from "./routes";
+import { bsc, bscTestnet } from "@wagmi/chains";
 
 const { provider, webSocketProvider } = configureChains(
-  [mainnet],
+  [mainnet, goerli, bsc, bscTestnet],
   [publicProvider()],
 );
 

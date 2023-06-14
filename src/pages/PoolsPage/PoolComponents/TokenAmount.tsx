@@ -1,3 +1,5 @@
+import { formatCurrency } from "../../../utils";
+
 const TokenAmount = (props: any) => {
   const { tokenAmount, watch } = props;
 
@@ -8,7 +10,7 @@ const TokenAmount = (props: any) => {
       <label className="formInputLabel">Token Amount</label>
 
       <div className="flex items-center text-16/24 font-semibold text-red-500">
-        <span className="">{tokenAmount || "0"}</span>
+        <span className="">{formatCurrency(tokenAmount)}</span>
         <span className="ml-1">{tokenId}</span>
       </div>
     </div>

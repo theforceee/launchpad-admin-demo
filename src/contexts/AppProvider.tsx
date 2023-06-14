@@ -10,6 +10,8 @@ const AppProvider = (props: any) => {
     token: string | undefined;
   }>();
 
+  const [isWrongChain, setIsWrongChain] = useState<boolean>(false);
+
   useEffect(() => {
     const authToken = localStorage.getItem(KEY_CACHE);
     address &&
@@ -21,7 +23,7 @@ const AppProvider = (props: any) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ setUserLogin, userLogin }}>
+    <AppContext.Provider value={{ setUserLogin, userLogin, isWrongChain, setIsWrongChain }}>
       {props.children}
     </AppContext.Provider>
   );

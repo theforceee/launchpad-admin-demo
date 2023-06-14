@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { PoolTabProps } from ".";
 import useTokenBalance from "../../../hooks/useTokenBalance";
 import AcceptCurrency from "../PoolComponents/AcceptCurrency";
@@ -23,22 +23,17 @@ import TokenAmount from "../PoolComponents/TokenAmount";
 const TabPoolPublic = (props: PoolTabProps) => {
   const { show = false, control, errors, register, watch, setValue, deployPool, isEditing } = props;
 
-  const poolContractAddress = useMemo(() => watch?.("pub_address"), [watch]);
-  const tokenAddress = useMemo(() => watch?.("token_address"), [watch]);
-  const networkAvailable = useMemo(() => watch?.("network"), [watch]);
-  const tokenAllocated = useMemo(() => watch?.("pub_token_allocated"), [watch]);
-
-  const { getTokenBalance, tokenBalance } = useTokenBalance({
-    networkAvailable,
-    poolContractAddress,
-    tokenAddress,
-  });
-
-  useEffect(() => {
-    getTokenBalance();
-  }, [networkAvailable, poolContractAddress, tokenAddress]);
-
+  const poolContractAddress: any = watch?.("pub_address");
+  const tokenAddress: any = watch?.("token_address");
+  const networkAvailable = watch?.("network");
+  const tokenAllocated = watch?.("pub_token_allocated");
   const isDeployed = watch?.("pub_is_deployed");
+
+  // const { userBalance, loadingBalance } = useTokenBalance(tokenAddress, poolContractAddress);
+
+  // useEffect(() => {
+  //   console.log("poolBalance", userBalance);
+  // }, [networkAvailable, poolContractAddress, tokenAddress]);
 
   return (
     <div className={clsx("flex flex-col", show ? "block" : "hidden")}>

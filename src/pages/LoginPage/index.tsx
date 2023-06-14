@@ -6,13 +6,7 @@ import { useOutletContext } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { SiweMessage } from "siwe";
-import {
-  useAccount,
-  useConnect,
-  useDisconnect,
-  useEnsName,
-  useSignMessage,
-} from "wagmi";
+import { useAccount, useConnect, useDisconnect, useEnsName, useSignMessage } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { KEY_CACHE, SessionContextTypes, URLS } from "../../constants";
 import { AppContext } from "../../contexts/AppContext";
@@ -33,8 +27,8 @@ const LoginPage = () => {
   const { signMessageAsync, isLoading: loadingSignIn } = useSignMessage({
     onSuccess(data, variables) {
       // Verify signature when sign message succeeds
-      const address = verifyMessage(variables.message, data);
-      recoveredAddress.current = address;
+      // const address = verifyMessage(variables.message, data);
+      // recoveredAddress.current = address;
     },
     onError(error) {
       toast.error("Fail to sign in: " + error.message);
@@ -90,13 +84,8 @@ const LoginPage = () => {
           {isConnected ? (
             <div className="flex flex-col">
               <FormControl disabled variant="standard">
-                <InputLabel htmlFor="component-disabled">
-                  Current Ethereum Address
-                </InputLabel>
-                <Input
-                  id="component-disabled"
-                  defaultValue={ensName ?? address}
-                />
+                <InputLabel htmlFor="component-disabled">Current Ethereum Address</InputLabel>
+                <Input id="component-disabled" defaultValue={ensName ?? address} />
               </FormControl>
             </div>
           ) : (

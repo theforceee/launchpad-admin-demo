@@ -1,20 +1,21 @@
 import { Button } from "@mui/material";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import { useAccount } from "wagmi";
+import { useAccount, useChainId } from "wagmi";
 import { deployPool } from "../../../actions/ido-pool";
 import { URLS } from "../../../constants";
 import { PoolFieldProps, RegisterInputs, defaultEmptyPool } from "../../../constants/poolDetail";
+import { AppContext } from "../../../contexts/AppContext";
 import { post, put } from "../../../requests";
+import { convertFormData } from "../../../utils/campaign";
 import TabInfo from "./TabInfo";
 import TabMedia from "./TabMedia";
 import TabPool from "./TabPool";
 import TabToken from "./TabToken";
 import TabUserList from "./TabUserList";
-import { convertFormData } from "../../../utils/campaign";
 
 export interface PoolTabProps extends PoolFieldProps {
   show: boolean;
@@ -56,6 +57,8 @@ const poolNav: Array<PoolNavTypes> = [
 
 const PoolForm = (props: PoolFormTypes) => {
   const { poolData, isEditing } = props;
+  const currentChainId = useChainId();
+  const { setIsWrongChain } = useContext(AppContext);
   const { address: connectedAccount } = useAccount();
   const navigate = useNavigate();
   const {
@@ -194,6 +197,11 @@ const PoolForm = (props: PoolFormTypes) => {
     // console.log(data, errors);
     createUpdatePool(data);
   };
+
+  const networkAvailable = watch?.("network");
+  useEffect(() => {
+    setIsWrongChain?.(+networkAvailable !== currentChainId);
+  }, [networkAvailable]);
 
   return (
     <div className="flex flex-col">
