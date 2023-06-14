@@ -19,17 +19,17 @@ const ClaimEmissions = (props: PoolFieldProps) => {
   ]);
 
   useEffect(() => {
-    if (!poolData?.token_release) return;
+    if (!poolData?.tokenReleases) return;
 
-    const emissions = (poolData.token_release as any).map((item: any) => ({
+    const emissions = (poolData.tokenReleases as any).map((item: any) => ({
       release_percent: item?.release_percent + "",
       release_time: item?.release_time,
     }));
     setClaimEmissions(emissions);
-  }, [poolData?.token_release]);
+  }, [poolData?.tokenReleases]);
 
   useEffect(() => {
-    setValue && setValue("token_release", JSON.stringify(claimEmissions));
+    setValue && setValue("tokenReleases", JSON.stringify(claimEmissions));
   }, [claimEmissions]);
 
   const displayNumOrder = (index: number) => {

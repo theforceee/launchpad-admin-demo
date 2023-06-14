@@ -12,6 +12,7 @@ const TokenDecimal = (props: PoolFieldProps) => {
         errors={errors}
         name="token_decimal"
         register={register}
+        required
         setValue={setValue}
       />
     </div>

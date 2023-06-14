@@ -28,6 +28,7 @@ export type RegisterInputs = {
   token_decimal: string;
   token_data_api: string;
   total_supply: string;
+  tokenReleases: string | undefined;
   token_release: string | undefined;
   accepted_currency: string | undefined;
   require_kyc: string | undefined;
@@ -97,6 +98,7 @@ export const defaultEmptyPool: RegisterInputs = {
   token_data_api: "",
   total_supply: "",
   token_release: undefined,
+  tokenReleases: undefined,
   accepted_currency: "",
   require_kyc: "",
 

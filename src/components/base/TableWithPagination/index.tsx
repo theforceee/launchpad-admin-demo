@@ -116,7 +116,7 @@ const TableWithPagination = (props: TableWithPaginationProps) => {
   const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
     setPagination((currentState) => ({
       ...currentState,
-      currentPage: newPage,
+      currentPage: newPage + 1,
     }));
   };
 

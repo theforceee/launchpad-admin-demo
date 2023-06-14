@@ -10,7 +10,7 @@ import { URLS } from "../../../constants";
 import { PoolFieldProps, RegisterInputs, defaultEmptyPool } from "../../../constants/poolDetail";
 import { AppContext } from "../../../contexts/AppContext";
 import { post, put } from "../../../requests";
-import { convertFormData } from "../../../utils/campaign";
+import { convertFormDataToApi } from "../../../utils/campaign";
 import TabInfo from "./TabInfo";
 import TabMedia from "./TabMedia";
 import TabPool from "./TabPool";
@@ -66,7 +66,6 @@ const PoolForm = (props: PoolFormTypes) => {
     setValue,
     handleSubmit,
     control,
-    reset,
     watch,
     formState: { errors },
     getValues,
@@ -95,7 +94,8 @@ const PoolForm = (props: PoolFormTypes) => {
     setValue("token_decimal", poolData?.token_decimal);
     setValue("token_data_api", poolData?.token_data_api);
     setValue("total_supply", poolData?.total_supply);
-    setValue("token_release", JSON.stringify(poolData.token_release || ""));
+    setValue("tokenReleases", JSON.stringify(poolData.tokenReleases || ""));
+    setValue("token_release", JSON.stringify(poolData.tokenReleases || ""));
     setValue("accepted_currency", poolData?.accepted_currency);
     setValue("require_kyc", poolData?.require_kyc);
 
@@ -152,7 +152,7 @@ const PoolForm = (props: PoolFormTypes) => {
   const createUpdatePool = async (data: RegisterInputs) => {
     console.log("%cformData", "color:blue", data);
 
-    const payload = convertFormData(data);
+    const payload = convertFormDataToApi(data);
     console.log("%c createUpdatePool", "color:red", payload);
 
     if (isEditing) {
@@ -189,13 +189,21 @@ const PoolForm = (props: PoolFormTypes) => {
     }
 
     toast.info(`Deploying ${poolType} pool`);
-    const deployData = convertFormData(getValues());
+    const deployData = convertFormDataToApi(getValues());
     await deployPool(deployData, poolType);
   };
 
   const onSubmit: SubmitHandler<RegisterInputs> = (data: RegisterInputs) => {
     // console.log(data, errors);
     createUpdatePool(data);
+  };
+
+  const handleClonePool = () => {
+    navigate(URLS.CREATE_POOL, {
+      state: {
+        poolData: convertFormDataToApi(getValues()),
+      },
+    });
   };
 
   const networkAvailable = watch?.("network");
@@ -275,8 +283,14 @@ const PoolForm = (props: PoolFormTypes) => {
         </div>
 
         <div className="mt-10 grid w-full grid-cols-2 gap-5">
-          <Button onClick={() => reset()} variant={"contained"} size="large" color="secondary">
-            Reset
+          <Button
+            disabled={!isEditing}
+            onClick={handleClonePool}
+            variant={"contained"}
+            size="large"
+            color="secondary"
+          >
+            Clone
           </Button>
           <Button
             onClick={() => handleSubmit(onSubmit)}
@@ -285,7 +299,7 @@ const PoolForm = (props: PoolFormTypes) => {
             size="large"
             color="warning"
           >
-            Submit
+            {isEditing ? "Update" : "Create"}
           </Button>
         </div>
       </form>

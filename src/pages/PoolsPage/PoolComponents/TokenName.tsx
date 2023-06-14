@@ -11,7 +11,7 @@ const TokenName = (props: PoolFieldProps) => {
         control={control}
         errors={errors}
         name="token_name"
-        // required
+        required
         register={register}
       />
     </div>

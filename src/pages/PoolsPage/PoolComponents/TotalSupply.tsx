@@ -11,6 +11,7 @@ const TotalSupply = (props: PoolFieldProps) => {
         errors={errors}
         name="total_supply"
         register={register}
+        required
         setValue={setValue}
         placeholder="Please enter a number"
       />
