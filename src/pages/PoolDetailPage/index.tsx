@@ -14,7 +14,7 @@ const PoolDetailPage = () => {
   useEffect(() => {
     const getData = async () => {
       if (!params) return;
-      const poolDetailRes = await get(`/pool/${params.uuid}`);
+      const poolDetailRes = await get(`pool/${params.uuid}`);
       if (poolDetailRes.status !== 200) {
         toast.error("ERROR: Fail to fetch pool detail");
         return;

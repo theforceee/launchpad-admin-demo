@@ -37,7 +37,7 @@ const LoginPage = () => {
 
   const handleSignIn = async () => {
     const chainId = await connector?.getChainId();
-    const nonceRes = await get("/nonce");
+    const nonceRes = await get("nonce");
     const nonce = nonceRes?.data?.nonce;
 
     const message = new SiweMessage({

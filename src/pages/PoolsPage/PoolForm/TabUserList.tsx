@@ -63,7 +63,7 @@ const TabUserList = (props: PoolTabProps) => {
   useEffect(() => {
     if (!poolData?.id) return;
     const getDataWinner = async () => {
-      const winnerRes = await get(`/pool/${poolData.id}/winner`);
+      const winnerRes = await get(`pool/${poolData.id}/winner`);
       console.log(winnerRes);
 
       if (winnerRes.status !== 200) {
@@ -74,7 +74,7 @@ const TabUserList = (props: PoolTabProps) => {
     };
 
     const getDataWhitelist = async () => {
-      const whitelistRes = await get(`/pool/${poolData.id}/whitelist`);
+      const whitelistRes = await get(`pool/${poolData.id}/whitelist`);
       console.log(whitelistRes);
 
       if (whitelistRes.status !== 200) {

@@ -54,7 +54,7 @@ const PoolsPage = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await get(`/pool?page=${pagination.currentPage}`);
+      const res = await get(`pool?page=${pagination.currentPage}`);
       if (res.status !== 200) {
         toast.error("ERROR: Fail to get list pool");
         return;
@@ -69,9 +69,7 @@ const PoolsPage = () => {
     getData();
   }, [pagination.currentPage]);
 
-  const handleSearch = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
+  const handleSearch = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const value = e.target.value;
     setSearchInput(value);
   };
