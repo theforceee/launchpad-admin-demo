@@ -2,6 +2,7 @@ import { KEY_CACHE, URLS } from "../constants";
 
 interface RequestOptions {
   body?: Record<string, unknown>;
+  isCSV?: boolean;
 }
 
 export const BASE_API_URL = process.env.REACT_APP_BASE_API_URL || "";
@@ -27,6 +28,7 @@ async function request(url: string, method: string, options?: RequestOptions) {
   if (!response.ok) {
     // throw new Error(`HTTP ${response.status} - ${response.statusText}`);
     console.log(`HTTP ${response.status} - ${response.statusText}`);
+    return response;
   }
 
   // Unauthorized
@@ -34,6 +36,8 @@ async function request(url: string, method: string, options?: RequestOptions) {
     localStorage.removeItem(KEY_CACHE);
     window.location.href = URLS.LOGIN;
   }
+
+  if (options?.isCSV) return response;
 
   return response.json();
 }

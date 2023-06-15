@@ -36,19 +36,15 @@ const SideBar = () => {
   const [navLeft] = useState(nav);
   const location = useLocation();
   return (
-    <div
-      className={clsx(
-        "relative min-h-screen w-20 bg-[#D9D9D9] py-5 px-[14px] text-[#8D8D8D]",
-      )}
-    >
+    <div className={clsx("relative min-h-screen w-20 bg-[#D9D9D9] py-5 px-[14px] text-[#8D8D8D]")}>
       <ul className="w-full list-none p-0">
-        <a href={URLS.HOME}>
+        {/* <a href={URLS.HOME}>
           <img
             className="mr-[10px] mb-10 h-12 w-12 cursor-pointer rounded-full object-cover"
             src="/images/default-user-avatar.svg"
             alt=""
           />
-        </a>
+        </a> */}
 
         {navLeft.map((item, index) => {
           return (
@@ -57,9 +53,7 @@ const SideBar = () => {
                 to={item.part}
                 className={clsx(
                   "",
-                  location?.pathname === item.part
-                    ? "opacity-100"
-                    : "opacity-20",
+                  location?.pathname === item.part ? "opacity-100" : "opacity-20",
                 )}
               >
                 <img src={item.icon} alt="" />

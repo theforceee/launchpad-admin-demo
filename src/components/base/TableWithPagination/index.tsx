@@ -139,14 +139,14 @@ const TableWithPagination = (props: TableWithPaginationProps) => {
               <TableRow>
                 {tableHeaders.map((tableHeader: TableHeaderTypes) => (
                   <StyledTableCell key={tableHeader.value} className="pb-6 pr-7">
-                    <p className="m-0 flex justify-between">
+                    <p className="m-0 flex items-center justify-between">
                       <span>{tableHeader.label}</span>
                       {tableHeader.sortable && (
                         <img
                           src="/images/icon-sort.svg"
                           alt=""
                           onClick={() => handleSort(tableHeader.value)}
-                          className="ml-1 h-5 w-4 cursor-pointer"
+                          className="ml-1 h-4 w-auto cursor-pointer"
                         />
                       )}
                     </p>

@@ -1,151 +1,106 @@
-import FirstPageIcon from "@mui/icons-material/FirstPage";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import LastPageIcon from "@mui/icons-material/LastPage";
 import SearchIcon from "@mui/icons-material/Search";
+import { InputAdornment, TextField } from "@mui/material";
+import { ChangeEvent, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import TableWithPagination from "../../components/base/TableWithPagination";
 import {
-  Box,
-  IconButton,
-  InputAdornment,
-  TablePagination,
-  TextField,
-  useTheme,
-} from "@mui/material";
-import { ChangeEvent, useState } from "react";
+  PagingationTypes,
+  TableHeaderTypes,
+} from "../../components/base/TableWithPagination/constants";
 import { DefaultLayout } from "../../components/layout";
-import UserTable from "./UserTable";
+import { get } from "../../requests";
+import UserRecord from "./UserRecord";
+import fileDownload from "js-file-download";
+import moment from "moment";
 
-interface TablePaginationActionsProps {
-  count: number;
-  page: number;
-  rowsPerPage: number;
-  onPageChange: (
-    event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number,
-  ) => void;
-}
-
-function TablePaginationActions(props: TablePaginationActionsProps) {
-  const theme = useTheme();
-  const { count, page, rowsPerPage, onPageChange } = props;
-
-  const handleFirstPageButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    onPageChange(event, 0);
-  };
-
-  const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    onPageChange(event, page - 1);
-  };
-
-  const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    onPageChange(event, page + 1);
-  };
-
-  const handleLastPageButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-  };
-
-  return (
-    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-      <IconButton
-        onClick={handleFirstPageButtonClick}
-        disabled={page === 0}
-        aria-label="first page"
-      >
-        {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
-      </IconButton>
-      <IconButton
-        onClick={handleBackButtonClick}
-        disabled={page === 0}
-        aria-label="previous page"
-      >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowRight />
-        ) : (
-          <KeyboardArrowLeft />
-        )}
-      </IconButton>
-      <IconButton
-        onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page"
-      >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowLeft />
-        ) : (
-          <KeyboardArrowRight />
-        )}
-      </IconButton>
-      <IconButton
-        onClick={handleLastPageButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="last page"
-      >
-        {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
-      </IconButton>
-    </Box>
-  );
-}
-
-export type UserTypes = {
-  wallet_address: string;
-  token_staked: string;
-  sheriff_staked: string;
-  pioneer_staked: string;
-  points: string;
-};
-const allUsers: Array<UserTypes> = new Array(10).fill({
-  wallet_address: "0xF1b4b671FBCB9d6A73168197a46D24357DFbe765",
-  token_staked: "1231243.3344",
-  sheriff_staked: "3",
-  pioneer_staked: "2",
-  points: "1000",
-});
+const tableHeaders: Array<TableHeaderTypes> = [
+  // {
+  //   value: -1,
+  //   label: "No",
+  // },
+  {
+    value: 1,
+    label: "Wallet Address",
+  },
+  {
+    value: 2,
+    label: "$BLAZE Staked",
+    sortable: true,
+  },
+  {
+    value: 3,
+    label: "Sheriff NFTs Staked",
+    sortable: true,
+  },
+  {
+    value: 4,
+    label: "Pioneer NFTs Staked",
+    sortable: true,
+  },
+  {
+    value: 5,
+    label: "Leaderboard Points",
+    sortable: true,
+  },
+];
 
 const UsersPage = () => {
-  const [page, setPage] = useState<number>(0);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(5);
   const [searchTerm, setSearchInput] = useState<string>("");
+  const [pagination, setPagination] = useState<PagingationTypes>({
+    currentPage: 1,
+    rowsPerPage: 10,
+    total: 0,
+  });
+  const [users, setUsers] = useState<Array<any>>([]);
 
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number,
-  ) => {
-    setPage(newPage);
-  };
+  useEffect(() => {
+    const getData = async () => {
+      const res = await get(`account/users?page=${pagination.currentPage}`);
+      if (res.status !== 200) {
+        toast.error("ERROR: Fail to get list pool");
+        return;
+      }
+      const resData = res.data;
+      setUsers(resData?.data || []);
+      setPagination((prevState) => ({
+        ...prevState,
+        total: resData?.meta?.total,
+      }));
+    };
+    getData();
+  }, [pagination.currentPage]);
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  const handleSearch = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
+  const handleSearch = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const value = e.target.value;
     setSearchInput(value);
   };
 
+  const handleExportCsv = async () => {
+    try {
+      const res = await get(`account/users/exporty`, { isCSV: true });
+
+      if (!res?.ok) {
+        toast.error("ERROR: export csv failed");
+        return;
+      }
+      fileDownload(await res.blob(), `trailblaze_users_${moment().format("DD_MM_YYYY")}.csv`);
+      toast.success("SUCCESS: file has been exported");
+    } catch (error: any) {
+      toast.error("ERROR: export csv failed");
+      console.log("Fail to export: ", error);
+    }
+  };
+
   return (
     <DefaultLayout>
-      <div className="bg-white px-6 py-5 w-full rounded-xl shadow-lg flex flex-col">
-        <div className="mb-10 flex">
+      <div className="flex w-full flex-col rounded-xl bg-white px-6 py-5 shadow-lg">
+        <div className="mb-10 flex items-center justify-between">
           <TextField
             label="Search"
             variant="outlined"
             size="small"
             placeholder="Name, wallet address"
-            className="w-full"
+            className="w-full max-w-3xl"
             // value={searchTerm}
             onChange={handleSearch}
             InputProps={{
@@ -156,25 +111,22 @@ const UsersPage = () => {
               ),
             }}
           />
+
+          <button
+            onClick={handleExportCsv}
+            className="flex h-[30px]  items-center justify-center rounded-md bg-[#606060] px-5 text-white"
+          >
+            Export to CSV
+          </button>
         </div>
-        <UserTable dataTable={allUsers} />
-        <div className="ml-auto">
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-            colSpan={3}
-            count={allUsers.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            sx={{ borderBottom: 0 }}
-            SelectProps={{
-              inputProps: {
-                "aria-label": "rows per page",
-              },
-              // native: true,
-            }}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-            ActionsComponent={TablePaginationActions}
+
+        <div className="w-full">
+          <TableWithPagination
+            dataTable={users}
+            pagination={pagination}
+            setPagination={setPagination}
+            tableHeaders={tableHeaders}
+            TableRecord={UserRecord}
           />
         </div>
       </div>

@@ -21,6 +21,7 @@
     "dotenv": "^16.0.3",
     "eslint-config-prettier": "^8.6.0",
     "ethers": "5",
+    "js-file-download": "^0.4.12",
     "moment": "^2.29.4",
     "postcss-preset-env": "^8.0.1",
     "prettier": "^2.8.3",
