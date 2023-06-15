@@ -20,7 +20,7 @@ function fromReadableAmount(amount: number, decimals: number) {
 export const deployPool = async (pool: any, poolType: "public" | "private") => {
   if (!pool) return;
   console.log("deploying", poolType, pool);
-  const { pools, token, signer, accepted_currency, slug } = pool;
+  const { pools, token, signer, accepted_currency, id } = pool;
   const { network, token_address, token_decimal } = token;
 
   let currentPool;
@@ -85,7 +85,7 @@ export const deployPool = async (pool: any, poolType: "public" | "private") => {
       receiver_address,
     };
 
-    const updateRes = await put(`/pool/${slug}/deploy`, {
+    const updateRes = await put(`/pool/${id}/deploy`, {
       body: dataUpdate,
     });
     console.log("%c updateRes deploy", "color:red", updateRes);
