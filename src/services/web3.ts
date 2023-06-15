@@ -5,7 +5,6 @@ import { NETWORK_AVAILABLE } from "../constants";
 
 const NETWORK_URL = process.env.REACT_APP_NETWORK_URL || "";
 const BSC_NETWORK_URL = process.env.REACT_APP_BSC_RPC_URL || "";
-const POLYGON_NETWORK_URL = process.env.REACT_APP_POLYGON_RPC_URL || "";
 
 export const isMetaMaskInstalled = () => {
   const { ethereum } = window;
@@ -23,17 +22,12 @@ export const getContractReadInstance = (
       networkUrl = BSC_NETWORK_URL;
       break;
 
-    case NETWORK_AVAILABLE.POLYGON:
-      networkUrl = POLYGON_NETWORK_URL;
-      break;
-
     case NETWORK_AVAILABLE.ETH:
     default:
       networkUrl = NETWORK_URL;
       break;
   }
   const provider = new ethers.providers.JsonRpcProvider(networkUrl);
-  console.log("getContractReadInstance", contractAddress, networkUrl, provider);
   if (!provider) return;
 
   return new ethers.Contract(ABIContract, contractAddress, provider.getSigner());
@@ -86,9 +80,6 @@ export const getErc20Contract = ({ networkAvailable, erc20TokenAddress }: any) =
   let web3Instance = null;
   switch (networkAvailable) {
     case NETWORK_AVAILABLE.BSC:
-      web3Instance = getContractInstance(ERC20_ABI, erc20TokenAddress, false);
-      break;
-    case NETWORK_AVAILABLE.POLYGON:
       web3Instance = getContractInstance(ERC20_ABI, erc20TokenAddress, false);
       break;
     default:

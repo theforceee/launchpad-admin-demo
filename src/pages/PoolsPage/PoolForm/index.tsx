@@ -78,6 +78,7 @@ const PoolForm = (props: PoolFormTypes) => {
   // Mapping data from API to Form
   useEffect(() => {
     if (!poolData) return;
+    setValue("id", poolData.id);
     setValue("name", poolData.name);
     setValue("slug", poolData?.slug);
     setValue("website", poolData?.website);
@@ -157,7 +158,7 @@ const PoolForm = (props: PoolFormTypes) => {
 
     if (isEditing) {
       // Update Pool
-      const updateRes = await put(`/pool/${data.slug}`, {
+      const updateRes = await put(`/pool/${data.id}`, {
         body: payload,
       });
       if (updateRes.status !== 200) {

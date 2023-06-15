@@ -20,6 +20,7 @@ export function getCurrencyToTokenRate(
 
 export const convertFormDataToApi = (data: RegisterInputs) => {
   return {
+    id: data.id,
     signer: JSON.parse(data.signer || "{}"),
     name: data.name,
     slug: data.slug,

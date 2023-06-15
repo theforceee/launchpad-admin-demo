@@ -13,6 +13,7 @@ const Litepaper = (props: PoolFieldProps) => {
         control={control}
         errors={errors}
         name="litepaper"
+        required
         register={register}
         setValue={setValue}
         defaultValue={poolData?.litepaper}

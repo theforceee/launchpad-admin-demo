@@ -12,6 +12,7 @@ const PoolAbout = (props: PoolFieldProps) => {
         control={control}
         errors={errors}
         name="about"
+        required
         defaultValue={poolData?.about}
         register={register}
         setValue={setValue}

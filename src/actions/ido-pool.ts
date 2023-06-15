@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import poolFactoryABI from "../abi/IdoPoolFactory.json";
 import {
   IDO_POOL_FACTORY_BSC_SMART_CONTRACT,
-  IDO_POOL_FACTORY_POLYGON_SMART_CONTRACT,
   IDO_POOL_FACTORY_SMART_CONTRACT,
   MAPPING_CURRENCY_ADDRESS,
   MAPPING_CURRENCY_DECIMALS,
@@ -52,14 +51,6 @@ export const deployPool = async (pool: any, poolType: "public" | "private") => {
       factorySmartContract = getContractInstance(
         poolFactoryABI,
         IDO_POOL_FACTORY_BSC_SMART_CONTRACT,
-        false,
-      );
-      break;
-
-    case NETWORK_AVAILABLE.POLYGON:
-      factorySmartContract = getContractInstance(
-        poolFactoryABI,
-        IDO_POOL_FACTORY_POLYGON_SMART_CONTRACT,
         false,
       );
       break;
