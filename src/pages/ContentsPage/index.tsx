@@ -8,10 +8,10 @@ const ContentsPage = () => {
 
   return (
     <DefaultLayout>
-      <div className="flex flex-col w-full">
+      <div className="flex w-full flex-col">
         <p className="">HOMEPAGE BANNERS</p>
-        <div className="grid grid-cols-3 gap-4 w-full">
-          <button className="flex w-full h-24 bg-gray-400 items-center justify-center cursor-pointer">
+        <div className="grid w-full grid-cols-3 gap-4">
+          <button className="flex h-24 w-full cursor-pointer items-center justify-center bg-gray-400">
             <div className="flex items-center justify-center">
               <PlusIcon />
               <span className="">Upload</span>

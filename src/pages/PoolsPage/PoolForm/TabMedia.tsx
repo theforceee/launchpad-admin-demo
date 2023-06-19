@@ -10,7 +10,7 @@ const TabMedia = (props: PoolTabProps) => {
         {new Array(8).fill(1).map((item, index: number) => (
           <button
             key={index}
-            className="flex w-full h-40 bg-gray-300 items-center justify-center cursor-pointer"
+            className="flex h-40 w-full cursor-pointer items-center justify-center bg-gray-300"
           >
             <div className="flex items-center justify-center">
               <span className="font-semibold">

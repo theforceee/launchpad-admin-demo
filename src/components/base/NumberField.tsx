@@ -7,10 +7,10 @@ import { renderError } from "../../utils/validate";
 export const SEPARATOR = ",";
 
 const NumberField = (props: InputFieldProps) => {
-  const { name, control, errors, required, placeholder, setValue,maxLength,max } = props;
+  const { name, control, errors, required, placeholder, setValue, maxLength, max } = props;
   const { field } = useController({
     name,
-    rules: { required,maxLength,max },
+    rules: { required, maxLength, max },
     control,
   });
 
@@ -27,9 +27,7 @@ const NumberField = (props: InputFieldProps) => {
     <div className="flex w-full flex-col">
       <NumericFormat
         {...field}
-        onChange={(event: ChangeEvent<HTMLInputElement>) =>
-          handleChangeNumber(event, name)
-        }
+        onChange={(event: ChangeEvent<HTMLInputElement>) => handleChangeNumber(event, name)}
         thousandSeparator={true}
         className="formInputText"
         placeholder={placeholder}

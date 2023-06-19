@@ -56,8 +56,7 @@ const PoolTags = (props: PoolFieldProps) => {
 
   const handleSelectTag = (tagValue: any) => {
     let newTags = [...selectedTags];
-    if (newTags.includes(tagValue))
-      newTags = newTags.filter((item: string) => item !== tagValue);
+    if (newTags.includes(tagValue)) newTags = newTags.filter((item: string) => item !== tagValue);
     else newTags.push(tagValue);
     setSelectedTags(newTags);
   };

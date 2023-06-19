@@ -7,12 +7,7 @@ const TokenContract = (props: PoolFieldProps) => {
     <div className="flex flex-1">
       <label className="formInputLabelShort">Token Contract</label>
 
-      <TextField
-        control={control}
-        errors={errors}
-        name="token_address"
-        register={register}
-      />
+      <TextField control={control} errors={errors} name="token_address" register={register} />
     </div>
   );
 };

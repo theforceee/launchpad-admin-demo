@@ -173,8 +173,8 @@ export type InputFieldProps = {
     | Record<string, Validate<string | undefined, RegisterInputs>>
     | undefined;
   disabledDate?: RangePickerProps["disabledDate"] | undefined;
-  maxLength?: ValidationRule<number>
-  max?: ValidationRule<string | number> | undefined
+  maxLength?: ValidationRule<number>;
+  max?: ValidationRule<string | number> | undefined;
 };
 
 export type OptionTypes = {

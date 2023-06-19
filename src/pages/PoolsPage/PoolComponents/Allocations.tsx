@@ -6,9 +6,7 @@ const Allocations = (props: PoolFieldProps) => {
 
   return (
     <div className="flex w-1/5 flex-col">
-      <div className="mb-5 pr-10 text-right text-16/24 font-bold">
-        Allocations
-      </div>
+      <div className="mb-5 pr-10 text-right text-16/24 font-bold">Allocations</div>
       <div className="flex items-center pl-20 text-16/24">
         <span className="w-full font-bold text-gray-500">VC</span>
 

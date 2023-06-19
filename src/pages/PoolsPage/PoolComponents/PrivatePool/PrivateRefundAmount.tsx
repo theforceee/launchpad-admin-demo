@@ -17,9 +17,7 @@ const PrivateRefundAmount = (props: PoolFieldProps) => {
       <label className="formInputLabel">Refund Amount</label>
       <div className="!ml-0 grid flex-1 grid-cols-2 ">
         <div className="flex flex-col">
-          <span className="text-16/24 font-bold text-gray-500">
-            0 USDT Refunds Requested
-          </span>
+          <span className="text-16/24 font-bold text-gray-500">0 USDT Refunds Requested</span>
           <input
             type="button"
             value="Deposit Refund"
@@ -28,9 +26,7 @@ const PrivateRefundAmount = (props: PoolFieldProps) => {
           />
         </div>
         <div className="flex flex-col">
-          <span className="text-16/24 font-bold text-gray-500">
-            0 USDT Refund Contract Balance
-          </span>
+          <span className="text-16/24 font-bold text-gray-500">0 USDT Refund Contract Balance</span>
           <input
             type="button"
             value="Withdraw Refund"

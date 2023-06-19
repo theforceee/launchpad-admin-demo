@@ -44,12 +44,7 @@ const Dashboard = () => {
             </Button>
           </div>
         ) : (
-          <Button
-            size="large"
-            variant="contained"
-            className="h-fit"
-            onClick={() => connect()}
-          >
+          <Button size="large" variant="contained" className="h-fit" onClick={() => connect()}>
             Connect Wallet
           </Button>
         )}

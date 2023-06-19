@@ -20,37 +20,18 @@ const TabToken = (props: PoolTabProps) => {
         <div className="formRow">
           <TokenName control={control} errors={errors} register={register} />
           <TokenID control={control} errors={errors} register={register} />
-          <TokenContract
-            control={control}
-            errors={errors}
-            register={register}
-          />
+          <TokenContract control={control} errors={errors} register={register} />
         </div>
         <div className="formRow">
           <TokenNetwork control={control} errors={errors} register={register} />
-          <TokenDecimal
-            control={control}
-            errors={errors}
-            register={register}
-            setValue={setValue}
-          />
+          <TokenDecimal control={control} errors={errors} register={register} setValue={setValue} />
           <TokenApi control={control} errors={errors} register={register} />
         </div>
 
-        <TotalSupply
-          control={control}
-          errors={errors}
-          register={register}
-          setValue={setValue}
-        />
+        <TotalSupply control={control} errors={errors} register={register} setValue={setValue} />
 
         <div className="flex">
-          <Tokennomics
-            setValue={setValue}
-            control={control}
-            errors={errors}
-            register={register}
-          />
+          <Tokennomics setValue={setValue} control={control} errors={errors} register={register} />
           <ClaimEmissions
             setValue={setValue}
             control={control}
@@ -58,12 +39,7 @@ const TabToken = (props: PoolTabProps) => {
             register={register}
             poolData={poolData}
           />
-          <Allocations
-            setValue={setValue}
-            control={control}
-            errors={errors}
-            register={register}
-          />
+          <Allocations setValue={setValue} control={control} errors={errors} register={register} />
         </div>
       </div>
     </div>

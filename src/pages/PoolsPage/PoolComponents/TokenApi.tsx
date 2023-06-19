@@ -7,12 +7,7 @@ const TokenApi = (props: PoolFieldProps) => {
     <div className="flex flex-1">
       <label className="formInputLabelShort">Coin Data API</label>
 
-      <TextField
-        control={control}
-        errors={errors}
-        name="token_data_api"
-        register={register}
-      />
+      <TextField control={control} errors={errors} name="token_data_api" register={register} />
     </div>
   );
 };

@@ -1,8 +1,5 @@
 import React, { useRef } from "react";
-import {
-  StyledTableCell,
-  StyledTableRow,
-} from "../../../components/base/TableWithPagination";
+import { StyledTableCell, StyledTableRow } from "../../../components/base/TableWithPagination";
 
 type UserRecordProps = {
   dataRecord?: any;

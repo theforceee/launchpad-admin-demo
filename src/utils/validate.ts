@@ -27,8 +27,8 @@ export const renderError: any = (
       return "Address receive is invalid.";
     case "invalidToken":
       return error.message;
-      case "max":
-        return error.message;
+    case "max":
+      return error.message;
     default:
       return "";
   }

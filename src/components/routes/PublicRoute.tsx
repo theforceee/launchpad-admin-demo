@@ -4,9 +4,5 @@ import { SessionContextTypes, URLS } from "../../constants";
 
 export const PublicRoute = ({ element }: any) => {
   const session: SessionContextTypes = useOutletContext();
-  return session?.data ? (
-    <Navigate to={URLS.HOME} replace />
-  ) : (
-    element || <Outlet />
-  );
+  return session?.data ? <Navigate to={URLS.HOME} replace /> : element || <Outlet />;
 };

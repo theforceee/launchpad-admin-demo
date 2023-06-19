@@ -13,7 +13,7 @@ const TokenDecimal = (props: PoolFieldProps) => {
         register={register}
         required
         setValue={setValue}
-        max={{value:100,message:"This field cannot be more than 2 characters"}}
+        max={{ value: 100, message: "This field cannot be more than 2 characters" }}
       />
     </div>
   );

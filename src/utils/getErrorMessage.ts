@@ -8,10 +8,7 @@ function capitalizeFirstLetter(str: string) {
 const isUserRejectTransaction = (errorMessage: any) =>
   errorMessage.includes("user rejected transaction");
 
-export const getErrorMessage = (
-  err: any,
-  defaultMessage = DEFAULT_ERROR_MESSAGE,
-) => {
+export const getErrorMessage = (err: any, defaultMessage = DEFAULT_ERROR_MESSAGE) => {
   if (isUserRejectTransaction(err.message)) {
     return "MetaMask Tx Signature: User denied transaction signature";
   }

@@ -4,9 +4,5 @@ import { SessionContextTypes, URLS } from "../../constants";
 
 export const ProtectedRoute = ({ element }: any) => {
   const session: SessionContextTypes = useOutletContext();
-  return session?.data ? (
-    element || <Outlet />
-  ) : (
-    <Navigate to={URLS.LOGIN} replace />
-  );
+  return session?.data ? element || <Outlet /> : <Navigate to={URLS.LOGIN} replace />;
 };

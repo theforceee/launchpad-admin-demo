@@ -64,9 +64,7 @@ const Tokennomics = (props: PoolFieldProps) => {
   const { control, errors, register, setValue } = props;
   return (
     <div className="flex w-2/5 flex-col">
-      <div className="mb-5 pr-10 text-right text-16/24 font-bold text-white">
-        Empty
-      </div>
+      <div className="mb-5 pr-10 text-right text-16/24 font-bold text-white">Empty</div>
       {tokenomics.map((item: TokenomicTypes, index: number) => (
         <div className="flex items-center pl-20 text-16/24" key={index}>
           <span className="w-full font-bold text-gray-500">{item.label}</span>

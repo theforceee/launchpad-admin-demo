@@ -6,15 +6,10 @@ import { InputFieldProps, RegisterInputs } from "../../constants/poolDetail";
 import { renderError } from "../../utils/validate";
 
 const DateTimePicker = React.memo((props: InputFieldProps) => {
-  const { name, control, errors, required, setValue, validate, disabledDate } =
-    props;
+  const { name, control, errors, required, setValue, validate, disabledDate } = props;
 
   const handleChangeDateTime = (event: any, name: keyof RegisterInputs) => {
-    setValue &&
-      setValue(
-        name,
-        Math.floor(moment(event).toDate().getTime() / 1000).toString(),
-      );
+    setValue && setValue(name, Math.floor(moment(event).toDate().getTime() / 1000).toString());
   };
 
   return (
