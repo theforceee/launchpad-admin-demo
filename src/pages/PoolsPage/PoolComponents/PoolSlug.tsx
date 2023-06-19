@@ -11,7 +11,7 @@ const PoolSlug = (props: PoolFieldProps) => {
         control={control}
         errors={errors}
         name="slug"
-        maxLength={{ value: 30, message: "This field cannot be more than 30 characters" }}
+        maxLength={30}
         required
         register={register}
       />

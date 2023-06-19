@@ -14,7 +14,7 @@ const PoolLinks = (props: PoolFieldProps) => {
           name="website"
           register={register}
           placeholder="Website"
-          maxLength={{ value: 16, message: " This field cannot be more than 50 characters" }}
+          maxLength={16}
         />
         <TextField
           control={control}
@@ -22,7 +22,7 @@ const PoolLinks = (props: PoolFieldProps) => {
           name="twitter"
           register={register}
           placeholder="Twitter"
-          maxLength={{ value: 16, message: " This field cannot be more than 16 characters" }}
+          maxLength={16}
         />
         <TextField
           control={control}
@@ -30,7 +30,7 @@ const PoolLinks = (props: PoolFieldProps) => {
           name="telegram"
           register={register}
           placeholder="Telegram"
-          maxLength={{ value: 16, message: " This field cannot be more than 16 characters" }}
+          maxLength={16}
         />
         <TextField
           control={control}
@@ -38,7 +38,7 @@ const PoolLinks = (props: PoolFieldProps) => {
           name="discord"
           register={register}
           placeholder="Discord"
-          maxLength={{ value: 16, message: " This field cannot be more than 16 characters" }}
+          maxLength={16}
         />
       </div>
     </div>
