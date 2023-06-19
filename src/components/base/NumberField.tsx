@@ -7,10 +7,11 @@ import { renderError } from "../../utils/validate";
 export const SEPARATOR = ",";
 
 const NumberField = (props: InputFieldProps) => {
-  const { name, control, errors, required, placeholder, setValue, maxLength, max } = props;
+  const { name, control, errors, required, placeholder, setValue, maxLength } = props;
+  const maxLengthValidate = {value: Number(maxLength), message: `This field cannot be more than ${maxLength} characters`};
   const { field } = useController({
     name,
-    rules: { required, maxLength, max },
+    rules: { required, maxLength:maxLengthValidate },
     control,
   });
 
