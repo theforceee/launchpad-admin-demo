@@ -3,11 +3,11 @@ import { InputFieldProps } from "../../constants/poolDetail";
 import { renderError } from "../../utils/validate";
 
 const TextField = (props: InputFieldProps) => {
-  const { name, control, errors, required, placeholder, disabled } = props;
+  const { name, control, errors, required, placeholder, disabled,maxLength } = props;
 
   const { field } = useController({
     name,
-    rules: { required },
+    rules: { required,maxLength },
     control,
   });
 

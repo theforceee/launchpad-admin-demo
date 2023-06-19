@@ -8,6 +8,7 @@ const TokenName = (props: PoolFieldProps) => {
       <label className="formInputLabel">Token Name</label>
 
       <TextField
+         maxLength={{value:50,message:" This field cannot be more than 50 characters"}}
         control={control}
         errors={errors}
         name="token_name"

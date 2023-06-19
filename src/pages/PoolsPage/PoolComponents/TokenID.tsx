@@ -13,6 +13,7 @@ const TokenID = (props: PoolFieldProps) => {
         name="token_id"
         required
         register={register}
+        maxLength={{value:30,message:" This field cannot be more than 30 characters"}}
       />
     </div>
   );

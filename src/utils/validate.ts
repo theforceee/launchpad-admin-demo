@@ -13,6 +13,8 @@ export const renderError: any = (
   const errorType = error?.type;
 
   switch (errorType) {
+    case "maxLength":
+      return error.message;
     case "required":
       return "This field is required";
     case "greaterOrEqualToday":
@@ -25,6 +27,8 @@ export const renderError: any = (
       return "Address receive is invalid.";
     case "invalidToken":
       return error.message;
+      case "max":
+        return error.message;
     default:
       return "";
   }

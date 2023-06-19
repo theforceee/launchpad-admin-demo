@@ -7,10 +7,10 @@ import { renderError } from "../../utils/validate";
 export const SEPARATOR = ",";
 
 const NumberField = (props: InputFieldProps) => {
-  const { name, control, errors, required, placeholder, setValue } = props;
+  const { name, control, errors, required, placeholder, setValue,maxLength,max } = props;
   const { field } = useController({
     name,
-    rules: { required },
+    rules: { required,maxLength,max },
     control,
   });
 

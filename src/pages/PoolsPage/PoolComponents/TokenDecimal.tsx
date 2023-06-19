@@ -6,7 +6,6 @@ const TokenDecimal = (props: PoolFieldProps) => {
   return (
     <div className="flex">
       <label className="formInputLabelShort">Token Decimal</label>
-
       <NumberField
         control={control}
         errors={errors}
@@ -14,6 +13,7 @@ const TokenDecimal = (props: PoolFieldProps) => {
         register={register}
         required
         setValue={setValue}
+        max={{value:100,message:"This field cannot be more than 2 characters"}}
       />
     </div>
   );

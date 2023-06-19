@@ -6,6 +6,7 @@ import {
   UseFormSetValue,
   UseFormWatch,
   Validate,
+  ValidationRule,
 } from "react-hook-form";
 
 // all pool properties
@@ -172,6 +173,8 @@ export type InputFieldProps = {
     | Record<string, Validate<string | undefined, RegisterInputs>>
     | undefined;
   disabledDate?: RangePickerProps["disabledDate"] | undefined;
+  maxLength?: ValidationRule<number>
+  max?: ValidationRule<string | number> | undefined
 };
 
 export type OptionTypes = {
