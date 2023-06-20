@@ -15,12 +15,11 @@ const PoolRecord: React.FC<PoolRecordProps> = (props: PoolRecordProps) => {
 
   const getPoolStatusColor = (status: string) => {
     switch (status) {
-      case "Active":
-        return "bg-green-400";
-      case "Queued":
+      case "QUEUED":
         return "bg-orange-400";
-      case "Ended":
+      case "ENDED":
         return "bg-red-500";
+      case "LIVE":
       default:
         return "bg-green-400";
     }
