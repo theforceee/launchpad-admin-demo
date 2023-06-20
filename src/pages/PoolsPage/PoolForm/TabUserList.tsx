@@ -64,7 +64,7 @@ const TabUserList = (props: PoolTabProps) => {
     if (!poolData?.id) return;
     const getDataWinner = async () => {
       const winnerRes = await get(`pool/${poolData.id}/winner`);
-      console.log(winnerRes);
+      // console.log(winnerRes);
 
       if (winnerRes.status !== 200) {
         toast.error("ERROR: Fail to fetch winners");
@@ -75,7 +75,7 @@ const TabUserList = (props: PoolTabProps) => {
 
     const getDataWhitelist = async () => {
       const whitelistRes = await get(`pool/${poolData.id}/whitelist`);
-      console.log(whitelistRes);
+      // console.log(whitelistRes);
 
       if (whitelistRes.status !== 200) {
         toast.error("ERROR: Fail to fetch whitelists");

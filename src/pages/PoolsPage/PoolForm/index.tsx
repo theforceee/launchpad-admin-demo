@@ -4,9 +4,9 @@ import { useContext, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import { useAccount, useChainId } from "wagmi";
+import { useAccount, useChainId, useNetwork, useSwitchNetwork } from "wagmi";
 import { deployPool } from "../../../actions/ido-pool";
-import { URLS } from "../../../constants";
+import { ChainId, MAPPING_NETWORK_ID_BY_NAME, URLS } from "../../../constants";
 import { PoolFieldProps, RegisterInputs, defaultEmptyPool } from "../../../constants/poolDetail";
 import { AppContext } from "../../../contexts/AppContext";
 import { post, put } from "../../../requests";
@@ -57,9 +57,10 @@ const poolNav: Array<PoolNavTypes> = [
 
 const PoolForm = (props: PoolFormTypes) => {
   const { poolData, isEditing } = props;
-  const currentChainId = useChainId();
-  const { setIsWrongChain } = useContext(AppContext);
+  const { setIsWrongChain, isWrongChain } = useContext(AppContext);
   const { address: connectedAccount } = useAccount();
+  const initChainId = useChainId();
+  const { chains } = useNetwork();
   const navigate = useNavigate();
   const {
     register,
@@ -74,6 +75,22 @@ const PoolForm = (props: PoolFormTypes) => {
     defaultValues: poolData ?? defaultEmptyPool,
     reValidateMode: "onChange",
   });
+  const [currentChainId, setCurrentChainId] = useState<number>(initChainId);
+
+  useEffect(() => {
+    if (!window.ethereum) return;
+
+    window.ethereum.on("chainChanged", (chainId: any) => {
+      setCurrentChainId(Number(chainId));
+    });
+  }, []);
+
+  const networkAvailable = watch?.("network");
+  useEffect(() => {
+    const poolNetworkId: ChainId = MAPPING_NETWORK_ID_BY_NAME[networkAvailable];
+    console.log("chaining", +poolNetworkId, currentChainId, initChainId, chains);
+    setIsWrongChain?.(+poolNetworkId !== currentChainId);
+  }, [networkAvailable, currentChainId, initChainId, chains]);
 
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
 
@@ -193,6 +210,10 @@ const PoolForm = (props: PoolFormTypes) => {
       toast.error("ERROR: please connect wallet");
       return;
     }
+    if (isWrongChain) {
+      toast.error("ERROR: wrong chain");
+      return;
+    }
 
     toast.info(`Deploying ${poolType} pool`);
     setIsUpdating(true);
@@ -213,11 +234,6 @@ const PoolForm = (props: PoolFormTypes) => {
       },
     });
   };
-
-  const networkAvailable = watch?.("network");
-  useEffect(() => {
-    setIsWrongChain?.(+networkAvailable !== currentChainId);
-  }, [networkAvailable]);
 
   return (
     <div className="flex flex-col">

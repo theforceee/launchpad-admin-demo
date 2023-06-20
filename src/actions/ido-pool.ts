@@ -34,7 +34,7 @@ export const deployPool = async (pool: any, poolType: "public" | "private") => {
   const { conversion_rate, start_buy_time, end_buy_time, token_allocated, receiver_address } =
     currentPool;
   const signerWallet = signer?.wallet_address;
-  const offeredCurrency = MAPPING_CURRENCY_ADDRESS[network][accepted_currency];
+  const offeredCurrency = (MAPPING_CURRENCY_ADDRESS as any)[network][accepted_currency];
   const openTime = start_buy_time;
   const duration = end_buy_time - start_buy_time;
   const tokenAmountForSale = fromReadableAmount(token_allocated / conversion_rate, token_decimal);

@@ -61,7 +61,13 @@ const TabPoolPublic = (props: PoolTabProps) => {
       </div>
 
       <div className="formRow">
-        <AcceptCurrency control={control} errors={errors} register={register} setValue={setValue} />
+        <AcceptCurrency
+          control={control}
+          errors={errors}
+          watch={watch}
+          register={register}
+          setValue={setValue}
+        />
         <PublicTokenPrice
           control={control}
           errors={errors}

@@ -1,18 +1,15 @@
 import SelectField from "../../../components/base/SelectField";
+import { NETWORK_AVAILABLE } from "../../../constants";
 import { OptionTypes, PoolFieldProps } from "../../../constants/poolDetail";
 
 const options: Array<OptionTypes> = [
   {
-    label: "Ether",
-    value: "ETHEREUM",
+    label: "Ethereum",
+    value: NETWORK_AVAILABLE.ETH,
   },
   {
     label: "BSC",
-    value: "BSC",
-  },
-  {
-    label: "Polygon",
-    value: "POLYGON",
+    value: NETWORK_AVAILABLE.BSC,
   },
 ];
 

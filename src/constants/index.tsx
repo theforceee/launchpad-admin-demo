@@ -5,6 +5,9 @@ export const IDO_POOL_FACTORY_SMART_CONTRACT =
 export const IDO_POOL_FACTORY_BSC_SMART_CONTRACT =
   process.env.REACT_APP_SMART_CONTRACT_BSC_PRESALE_FACTORY_ADDRESS || "";
 
+export const ETH_NETWORK_ID = process.env.REACT_APP_NETWORK_ID || "";
+export const BSC_NETWORK_ID = process.env.REACT_APP_BSC_NETWORK_ID || "";
+
 export const USDT_ADDRESS = process.env.REACT_APP_SMART_CONTRACT_USDT_ADDRESS || "";
 export const USDC_ADDRESS = process.env.REACT_APP_SMART_CONTRACT_USDC_ADDRESS || "";
 
@@ -31,61 +34,101 @@ export type SessionContextTypes = {
   logout: () => Promise<void>;
 };
 
-export const ACCEPT_CURRENCY = {
-  BUSD: "BUSD",
-  USDT: "USDT",
-  USDC: "USDC",
-};
+export enum ACCEPT_CURRENCY {
+  BUSD = "BUSD",
+  USDT = "USDT",
+  USDC = "USDC",
+}
+export type Currencies = Extract<
+  ACCEPT_CURRENCY,
+  ACCEPT_CURRENCY.BUSD | ACCEPT_CURRENCY.USDT | ACCEPT_CURRENCY.USDC
+>;
 
-export const acceptedCurrencies: Array<OptionTypes> = [
-  {
-    label: "NATIVE",
-    value: "NATIVE",
-  },
-  {
-    label: "BUSD",
+export const currencies: { [key in Currencies]: OptionTypes } = {
+  [ACCEPT_CURRENCY.BUSD]: {
+    label: ACCEPT_CURRENCY.BUSD,
     value: ACCEPT_CURRENCY.BUSD,
   },
-  {
-    label: "USDC",
+  [ACCEPT_CURRENCY.USDC]: {
+    label: ACCEPT_CURRENCY.USDC,
     value: ACCEPT_CURRENCY.USDC,
   },
-  {
-    label: "USDT",
+  [ACCEPT_CURRENCY.USDT]: {
+    label: ACCEPT_CURRENCY.USDT,
     value: ACCEPT_CURRENCY.USDT,
   },
-];
-
-export const NETWORK_AVAILABLE = {
-  ETH: "ETH",
-  BSC: "BSC",
 };
 
-export const MAPPING_CURRENCY_ADDRESS: any = {
+export enum ChainId {
+  MAINNET = 1,
+  GOERLI = 5,
+  BSC_TESTNET = 97,
+  BSC_MAINNET = 56,
+}
+export type chainId = Extract<
+  ChainId,
+  ChainId.BSC_MAINNET | ChainId.BSC_TESTNET | ChainId.MAINNET | ChainId.GOERLI
+>;
+
+export enum NETWORK_AVAILABLE {
+  ETH = "ETHEREUM",
+  BSC = "BSC",
+}
+
+export const MAPPING_NETWORK_ID_BY_NAME: any = {
+  [NETWORK_AVAILABLE.BSC]: BSC_NETWORK_ID,
+  [NETWORK_AVAILABLE.ETH]: ETH_NETWORK_ID,
+};
+
+export interface NetworkInfo {
+  name: string;
+  id: chainId;
+  currencies: Array<OptionTypes>;
+  [k: string]: any;
+}
+export const SUPPORTED_NETWORKS: { [key in ChainId]: NetworkInfo } = {
+  [ChainId.GOERLI]: {
+    id: ChainId.GOERLI,
+    name: "Goerli",
+    currencies: [currencies[ACCEPT_CURRENCY.USDT], currencies[ACCEPT_CURRENCY.USDC]],
+  },
+  [ChainId.MAINNET]: {
+    id: ChainId.MAINNET,
+    name: "Ethereum",
+    currencies: [currencies[ACCEPT_CURRENCY.USDT], currencies[ACCEPT_CURRENCY.USDC]],
+  },
+  [ChainId.BSC_TESTNET]: {
+    id: ChainId.BSC_TESTNET,
+    name: "BSC Testnet",
+    currencies: [currencies[ACCEPT_CURRENCY.USDT], currencies[ACCEPT_CURRENCY.BUSD]],
+  },
+  [ChainId.BSC_MAINNET]: {
+    id: ChainId.BSC_MAINNET,
+    name: "BSC Mainnet",
+    currencies: [currencies[ACCEPT_CURRENCY.USDT], currencies[ACCEPT_CURRENCY.BUSD]],
+  },
+};
+
+export const MAPPING_CURRENCY_ADDRESS: {
+  [key in NETWORK_AVAILABLE]: any;
+} = {
   [NETWORK_AVAILABLE.ETH]: {
-    eth: NATIVE_TOKEN_ADDRESS,
-    native: NATIVE_TOKEN_ADDRESS,
     [ACCEPT_CURRENCY.USDT]: USDT_ADDRESS,
     [ACCEPT_CURRENCY.USDC]: USDC_ADDRESS,
   },
   [NETWORK_AVAILABLE.BSC]: {
-    native: NATIVE_TOKEN_ADDRESS,
     [ACCEPT_CURRENCY.USDT]: USDT_BSC_ADDRESS,
-    [ACCEPT_CURRENCY.USDC]: USDC_BSC_ADDRESS,
     [ACCEPT_CURRENCY.BUSD]: BUSD_BSC_ADDRESS,
   },
 };
 export const MAPPING_CURRENCY_DECIMALS: any = {
   [NETWORK_AVAILABLE.ETH]: {
-    eth: 18,
-    native: 18,
     [ACCEPT_CURRENCY.USDT]: 6,
     [ACCEPT_CURRENCY.USDC]: 6,
   },
   [NETWORK_AVAILABLE.BSC]: {
-    native: NATIVE_TOKEN_ADDRESS,
     [ACCEPT_CURRENCY.USDT]: 18,
-    [ACCEPT_CURRENCY.USDC]: 18,
     [ACCEPT_CURRENCY.BUSD]: 18,
+    // [ACCEPT_CURRENCY.USDC]: 18,
   },
 };

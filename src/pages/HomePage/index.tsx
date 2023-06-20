@@ -1,16 +1,13 @@
 import { Button } from "@mui/material";
+import { useNavigate, useOutletContext } from "react-router";
 import { useAccount, useConnect, useEnsName } from "wagmi";
-import { InjectedConnector } from "wagmi/connectors/injected";
 import { DefaultLayout } from "../../components/layout";
 import { SessionContextTypes, URLS } from "../../constants";
-import { useNavigate, useOutletContext } from "react-router";
 
 const Dashboard = () => {
   const { address, isConnected } = useAccount();
   const { data: ensName } = useEnsName({ address });
-  const { connect } = useConnect({
-    connector: new InjectedConnector(),
-  });
+  const { connect } = useConnect();
   const session: SessionContextTypes = useOutletContext();
   const navigate = useNavigate();
 
