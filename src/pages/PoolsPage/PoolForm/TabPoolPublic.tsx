@@ -1,12 +1,11 @@
 import clsx from "clsx";
-import { useEffect } from "react";
 import { PoolTabProps } from ".";
-import useTokenBalance from "../../../hooks/useTokenBalance";
 import AcceptCurrency from "../PoolComponents/AcceptCurrency";
 import ButtonDeploy from "../PoolComponents/ButtonDeploy";
 import EndWhitelistTime from "../PoolComponents/EndWhitelistTime";
 import KycRequire from "../PoolComponents/KycRequire";
 import PoolStatus from "../PoolComponents/PoolStatus";
+import PublicEndFCFSTime from "../PoolComponents/PublicPool/PublicEndFCFSTime";
 import PublicEndRefundTime from "../PoolComponents/PublicPool/PublicEndRefundTime";
 import PublicEndSaleTime from "../PoolComponents/PublicPool/PublicEndSaleTime";
 import PublicMaxFcfsAmount from "../PoolComponents/PublicPool/PublicMaxFcfsAmount";
@@ -14,6 +13,7 @@ import PublicMinInvestment from "../PoolComponents/PublicPool/PublicMinInvestmen
 import PublicPoolAddress from "../PoolComponents/PublicPool/PublicPoolAddress";
 import PublicReceivingAddress from "../PoolComponents/PublicPool/PublicReceivingAddress";
 import PublicRefundAmount from "../PoolComponents/PublicPool/PublicRefundAmount";
+import PublicStartFCFSTime from "../PoolComponents/PublicPool/PublicStartFCFSTime";
 import PublicStartSaleTime from "../PoolComponents/PublicPool/PublicStartSaleTime";
 import PublicTokenAllocated from "../PoolComponents/PublicPool/PublicTokenAllocated";
 import PublicTokenPrice from "../PoolComponents/PublicPool/PublicTokenPrice";
@@ -118,6 +118,23 @@ const TabPoolPublic = (props: PoolTabProps) => {
         />
         <PublicEndSaleTime
           control={control}
+          errors={errors}
+          register={register}
+          setValue={setValue}
+        />
+      </div>
+
+      <div className="formRow">
+        <PublicStartFCFSTime
+          control={control}
+          watch={watch}
+          errors={errors}
+          register={register}
+          setValue={setValue}
+        />
+        <PublicEndFCFSTime
+          control={control}
+          watch={watch}
           errors={errors}
           register={register}
           setValue={setValue}

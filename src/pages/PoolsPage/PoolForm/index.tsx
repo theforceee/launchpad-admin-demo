@@ -75,6 +75,8 @@ const PoolForm = (props: PoolFormTypes) => {
     reValidateMode: "onChange",
   });
 
+  const [isUpdating, setIsUpdating] = useState<boolean>(false);
+
   // Mapping data from API to Form
   useEffect(() => {
     if (!poolData) return;
@@ -155,12 +157,14 @@ const PoolForm = (props: PoolFormTypes) => {
 
     const payload = convertFormDataToApi(data);
     console.log("%c createUpdatePool", "color:red", payload);
-
+    setIsUpdating(true);
     if (isEditing) {
       // Update Pool
       const updateRes = await put(`/pool/${data.id}`, {
         body: payload,
       });
+      setIsUpdating(false);
+
       if (updateRes.status !== 200) {
         toast.error("ERROR: Pool failed to be updated");
         return;
@@ -173,6 +177,7 @@ const PoolForm = (props: PoolFormTypes) => {
       const createRes = await post("/pool", {
         body: payload,
       });
+      setIsUpdating(false);
       if (createRes.status !== 200) {
         toast.error("ERROR: Pool failed to be created");
         return;
@@ -190,8 +195,10 @@ const PoolForm = (props: PoolFormTypes) => {
     }
 
     toast.info(`Deploying ${poolType} pool`);
+    setIsUpdating(true);
     const deployData = convertFormDataToApi(getValues());
     await deployPool(deployData, poolType);
+    setIsUpdating(false);
   };
 
   const onSubmit: SubmitHandler<RegisterInputs> = (data: RegisterInputs) => {
@@ -295,6 +302,7 @@ const PoolForm = (props: PoolFormTypes) => {
           </Button>
           <Button
             onClick={() => handleSubmit(onSubmit)}
+            disabled={isUpdating}
             type="submit"
             variant="contained"
             size="large"

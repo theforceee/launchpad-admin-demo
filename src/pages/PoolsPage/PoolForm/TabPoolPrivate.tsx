@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { PoolTabProps } from ".";
 import { AppContext } from "../../../contexts/AppContext";
 import useTokenBalance from "../../../hooks/useTokenBalance";
@@ -15,11 +15,13 @@ import PrivateMinInvestment from "../PoolComponents/PrivatePool/PrivateMinInvest
 import PrivatePoolAddress from "../PoolComponents/PrivatePool/PrivatePoolAddress";
 import PrivateReceivingAddress from "../PoolComponents/PrivatePool/PrivateReceivingAddress";
 import PrivateRefundAmount from "../PoolComponents/PrivatePool/PrivateRefundAmount";
+import PrivateStartFCFSTime from "../PoolComponents/PrivatePool/PrivateStartFCFSTime";
 import PrivateStartSaleTime from "../PoolComponents/PrivatePool/PrivateStartSaleTime";
 import PrivateTokenAllocated from "../PoolComponents/PrivatePool/PrivateTokenAllocated";
 import PrivateTokenPrice from "../PoolComponents/PrivatePool/PrivateTokenPrice";
 import StartWhitelistTime from "../PoolComponents/StartWhitelistTime";
 import TokenAmount from "../PoolComponents/TokenAmount";
+import PrivateEndFCFSTime from "../PoolComponents/PrivatePool/PrivateEndFCFSTime";
 
 const TabPoolPrivate = (props: PoolTabProps) => {
   const { show = false, control, errors, register, setValue, watch, deployPool, isEditing } = props;
@@ -118,6 +120,23 @@ const TabPoolPrivate = (props: PoolTabProps) => {
           setValue={setValue}
         />
         <PrivateEndSaleTime
+          control={control}
+          watch={watch}
+          errors={errors}
+          register={register}
+          setValue={setValue}
+        />
+      </div>
+
+      <div className="formRow">
+        <PrivateStartFCFSTime
+          control={control}
+          watch={watch}
+          errors={errors}
+          register={register}
+          setValue={setValue}
+        />
+        <PrivateEndFCFSTime
           control={control}
           watch={watch}
           errors={errors}

@@ -25,11 +25,6 @@ const LoginPage = () => {
 
   const { disconnect } = useDisconnect();
   const { signMessageAsync, isLoading: loadingSignIn } = useSignMessage({
-    onSuccess(data, variables) {
-      // Verify signature when sign message succeeds
-      // const address = verifyMessage(variables.message, data);
-      // recoveredAddress.current = address;
-    },
     onError(error) {
       toast.error("Fail to sign in: " + error.message);
     },

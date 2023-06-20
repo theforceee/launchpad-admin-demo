@@ -5,7 +5,7 @@ const PublicReceivingAddress = (props: PoolFieldProps) => {
   const { control, errors, register } = props;
   return (
     <div className="flex max-w-2xl flex-1">
-      <label className="formInputLabelShort">Receiving Wallet Address</label>
+      <label className="formInputLabel">Receiving Wallet Address</label>
 
       <TextField
         control={control}
