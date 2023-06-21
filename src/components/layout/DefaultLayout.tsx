@@ -1,12 +1,25 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../../contexts/AppContext";
 import SideBar from "./SideBar";
+import { InjectedConnector } from "@wagmi/core";
+import { useAccount, useConnect } from "wagmi";
 
 type LayoutProps = {
   children?: React.ReactElement;
 };
 const DefaultLayout = (props: LayoutProps) => {
   const { isWrongChain } = useContext(AppContext);
+  const { address } = useAccount();
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  });
+
+  useEffect(() => {
+    if (!address) {
+      console.log("connectt");
+      connect();
+    }
+  }, [address]);
 
   return (
     <div className="flex">

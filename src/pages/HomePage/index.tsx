@@ -1,9 +1,9 @@
 import { Button } from "@mui/material";
+import { InjectedConnector } from "@wagmi/core";
 import { useNavigate, useOutletContext } from "react-router";
 import { useAccount, useConnect, useEnsName } from "wagmi";
 import { DefaultLayout } from "../../components/layout";
 import { SessionContextTypes, URLS } from "../../constants";
-import { InjectedConnector } from "@wagmi/core";
 
 const Dashboard = () => {
   const { address, isConnected } = useAccount();
