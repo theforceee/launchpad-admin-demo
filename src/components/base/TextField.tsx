@@ -13,10 +13,10 @@ const TextField = (props: InputFieldProps) => {
     rules: { required, maxLength: maxLengthValidate },
     control,
   });
-
   return (
     <div className="flex w-full flex-col">
       <input
+        maxLength={maxLength}
         {...field}
         type="text"
         name={name}

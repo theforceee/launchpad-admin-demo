@@ -30,6 +30,7 @@ const NumberField = (props: InputFieldProps) => {
   return (
     <div className="flex w-full flex-col">
       <NumericFormat
+        maxLength={2}
         {...field}
         onChange={(event: ChangeEvent<HTMLInputElement>) => handleChangeNumber(event, name)}
         thousandSeparator={true}

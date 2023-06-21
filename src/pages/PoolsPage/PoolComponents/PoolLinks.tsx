@@ -9,6 +9,7 @@ const PoolLinks = (props: PoolFieldProps) => {
 
       <div className="grid w-full grid-cols-2 gap-4">
         <TextField
+          required
           control={control}
           errors={errors}
           name="website"
@@ -16,6 +17,7 @@ const PoolLinks = (props: PoolFieldProps) => {
           placeholder="Website"
         />
         <TextField
+          required
           control={control}
           errors={errors}
           name="twitter"
@@ -23,6 +25,7 @@ const PoolLinks = (props: PoolFieldProps) => {
           placeholder="Twitter"
         />
         <TextField
+          required
           control={control}
           errors={errors}
           name="telegram"
@@ -30,6 +33,7 @@ const PoolLinks = (props: PoolFieldProps) => {
           placeholder="Telegram"
         />
         <TextField
+          required
           control={control}
           errors={errors}
           name="discord"

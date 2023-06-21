@@ -41,7 +41,7 @@ const tags: Array<TagTypes> = [
 const PoolTags = (props: PoolFieldProps) => {
   const { setValue, poolData } = props;
 
-  const [selectedTags, setSelectedTags] = useState<Array<string>>([]);
+  const [selectedTags, setSelectedTags] = useState<Array<string>>(["art"]);
 
   useEffect(() => {
     if (!poolData?.tags) return;
