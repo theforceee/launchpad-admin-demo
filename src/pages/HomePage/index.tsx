@@ -3,11 +3,14 @@ import { useNavigate, useOutletContext } from "react-router";
 import { useAccount, useConnect, useEnsName } from "wagmi";
 import { DefaultLayout } from "../../components/layout";
 import { SessionContextTypes, URLS } from "../../constants";
+import { InjectedConnector } from "@wagmi/core";
 
 const Dashboard = () => {
   const { address, isConnected } = useAccount();
   const { data: ensName } = useEnsName({ address });
-  const { connect } = useConnect();
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  });
   const session: SessionContextTypes = useOutletContext();
   const navigate = useNavigate();
 

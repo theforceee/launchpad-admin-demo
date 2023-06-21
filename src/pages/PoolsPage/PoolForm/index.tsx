@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import { useAccount, useChainId, useNetwork, useSwitchNetwork } from "wagmi";
+import { useAccount, useChainId, useNetwork } from "wagmi";
 import { deployPool } from "../../../actions/ido-pool";
 import { ChainId, MAPPING_NETWORK_ID_BY_NAME, URLS } from "../../../constants";
 import { PoolFieldProps, RegisterInputs, defaultEmptyPool } from "../../../constants/poolDetail";

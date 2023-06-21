@@ -1,27 +1,43 @@
-import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { publicProvider } from "wagmi/providers/public";
-import { MetaMaskConnector } from "wagmi/connectors/metaMask";
-import { bsc, bscTestnet, mainnet, goerli } from "wagmi/chains";
+import { InjectedConnector, configureChains } from "@wagmi/core";
+import { MetaMaskConnector } from "@wagmi/core/connectors/metaMask";
+import { publicProvider } from "@wagmi/core/providers/public";
+import { goerli, mainnet } from "viem/chains";
+import { WagmiConfig, createConfig } from "wagmi";
 import "./App.css";
+import { bsc, bscTestnet } from "@wagmi/core/chains";
 import AppProvider from "./contexts/AppProvider";
 import createRoutes from "./routes";
-import { InjectedConnector } from "wagmi/connectors/injected";
+import { useEffect } from "react";
 
-const { provider, webSocketProvider, chains } = configureChains(
+const { chains, publicClient, webSocketPublicClient } = configureChains(
   [mainnet, goerli, bsc, bscTestnet],
   [publicProvider()],
 );
 
-const client = createClient({
+const config = createConfig({
   autoConnect: true,
-  connectors: [new MetaMaskConnector({ chains }), new InjectedConnector({ chains })],
-  provider,
-  webSocketProvider,
+  connectors: [
+    new MetaMaskConnector({ chains }),
+    new InjectedConnector({
+      chains,
+      options: {
+        name: "Injected",
+        shimDisconnect: true,
+      },
+    }),
+  ],
+  publicClient,
+  webSocketPublicClient,
 });
 
 function App() {
+  useEffect(() => {
+    config.autoConnect();
+    console.log("connectors", config.lastUsedChainId, config.connector);
+  }, []);
+
   return (
-    <WagmiConfig client={client}>
+    <WagmiConfig config={config}>
       <AppProvider>{createRoutes()}</AppProvider>
     </WagmiConfig>
   );
