@@ -1,13 +1,12 @@
 import clsx from "clsx";
-import { useContext } from "react";
 import { PoolTabProps } from ".";
-import { AppContext } from "../../../contexts/AppContext";
 import useTokenBalance from "../../../hooks/useTokenBalance";
 import AcceptCurrency from "../PoolComponents/AcceptCurrency";
 import ButtonDeploy from "../PoolComponents/ButtonDeploy";
 import EndWhitelistTime from "../PoolComponents/EndWhitelistTime";
 import KycRequire from "../PoolComponents/KycRequire";
 import PoolStatus from "../PoolComponents/PoolStatus";
+import PrivateEndFCFSTime from "../PoolComponents/PrivatePool/PrivateEndFCFSTime";
 import PrivateEndRefundTime from "../PoolComponents/PrivatePool/PrivateEndRefundTime";
 import PrivateEndSaleTime from "../PoolComponents/PrivatePool/PrivateEndSaleTime";
 import PrivateMaxFcfsAmount from "../PoolComponents/PrivatePool/PrivateMaxFcfsAmount";
@@ -21,17 +20,14 @@ import PrivateTokenAllocated from "../PoolComponents/PrivatePool/PrivateTokenAll
 import PrivateTokenPrice from "../PoolComponents/PrivatePool/PrivateTokenPrice";
 import StartWhitelistTime from "../PoolComponents/StartWhitelistTime";
 import TokenAmount from "../PoolComponents/TokenAmount";
-import PrivateEndFCFSTime from "../PoolComponents/PrivatePool/PrivateEndFCFSTime";
 
 const TabPoolPrivate = (props: PoolTabProps) => {
   const { show = false, control, errors, register, setValue, watch, deployPool, isEditing } = props;
-  const { isWrongChain } = useContext(AppContext);
 
   const isDeployed = watch?.("pri_is_deployed");
   const tokenAllocated = watch?.("pri_token_allocated");
   const poolContractAddress: any = watch?.("pri_address");
   const tokenAddress: any = watch?.("token_address");
-  const networkAvailable = watch?.("network");
 
   const { contractBalance } = useTokenBalance(tokenAddress, poolContractAddress);
 

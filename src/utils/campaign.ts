@@ -6,12 +6,15 @@ function countDecimals(value: number) {
   return value.toString().split(".")[1].length || 0;
 }
 
+// Price (token to currency): 1 token = x currency
+// Rate (currency to token): 1 currency = 1 / x token
 export function getCurrencyToTokenRate(
   tokenPrice: number,
   tokenDecimals: number,
   currencyDecimals: number,
   rateDecimals = 30,
 ) {
+  // return BigNumber
   return BigNumber.from("1")
     .mul(BigNumber.from(10).pow(tokenDecimals - currencyDecimals + rateDecimals))
     .mul(Math.pow(10, countDecimals(tokenPrice)))

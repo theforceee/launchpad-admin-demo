@@ -5,10 +5,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { useAccount, useChainId, useNetwork } from "wagmi";
-import { deployPool } from "../../../actions/ido-pool";
 import { ChainId, MAPPING_NETWORK_ID_BY_NAME, URLS } from "../../../constants";
 import { PoolFieldProps, RegisterInputs, defaultEmptyPool } from "../../../constants/poolDetail";
 import { AppContext } from "../../../contexts/AppContext";
+import useDeployPool from "../../../hooks/useDeployPool";
 import { post, put } from "../../../requests";
 import { convertFormDataToApi } from "../../../utils/campaign";
 import TabInfo from "./TabInfo";
@@ -85,12 +85,14 @@ const PoolForm = (props: PoolFormTypes) => {
     });
   }, []);
 
-  const networkAvailable = watch?.("network");
+  const networkAvailable: any = watch?.("network");
   useEffect(() => {
     const poolNetworkId: ChainId = MAPPING_NETWORK_ID_BY_NAME[networkAvailable];
     console.log("chaining", +poolNetworkId, currentChainId, initChainId, chains);
     setIsWrongChain?.(+poolNetworkId !== currentChainId);
   }, [networkAvailable, currentChainId, initChainId, chains]);
+
+  const { deployPool, loadingDeploy } = useDeployPool(networkAvailable);
 
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
 

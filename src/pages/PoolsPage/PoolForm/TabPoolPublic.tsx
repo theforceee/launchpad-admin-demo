@@ -19,17 +19,17 @@ import PublicTokenAllocated from "../PoolComponents/PublicPool/PublicTokenAlloca
 import PublicTokenPrice from "../PoolComponents/PublicPool/PublicTokenPrice";
 import StartWhitelistTime from "../PoolComponents/StartWhitelistTime";
 import TokenAmount from "../PoolComponents/TokenAmount";
+import useTokenBalance from "../../../hooks/useTokenBalance";
 
 const TabPoolPublic = (props: PoolTabProps) => {
   const { show = false, control, errors, register, watch, setValue, deployPool, isEditing } = props;
 
   const poolContractAddress: any = watch?.("pub_address");
   const tokenAddress: any = watch?.("token_address");
-  const networkAvailable = watch?.("network");
   const tokenAllocated = watch?.("pub_token_allocated");
   const isDeployed = watch?.("pub_is_deployed");
 
-  // const { userBalance, loadingBalance } = useTokenBalance(tokenAddress, poolContractAddress);
+  const { contractBalance } = useTokenBalance(tokenAddress, poolContractAddress);
 
   // useEffect(() => {
   //   console.log("poolBalance", userBalance);
@@ -57,7 +57,9 @@ const TabPoolPublic = (props: PoolTabProps) => {
           setValue={setValue}
         />
 
-        {isDeployed && <PoolStatus tokenAllocated={tokenAllocated} />}
+        {isDeployed && (
+          <PoolStatus tokenAllocated={tokenAllocated} contractBalance={contractBalance} />
+        )}
       </div>
 
       <div className="formRow">

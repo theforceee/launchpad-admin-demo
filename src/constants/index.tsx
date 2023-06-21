@@ -74,6 +74,10 @@ export enum NETWORK_AVAILABLE {
   ETH = "ETHEREUM",
   BSC = "BSC",
 }
+export type NetworkAvailable = Extract<
+  NETWORK_AVAILABLE,
+  NETWORK_AVAILABLE.BSC | NETWORK_AVAILABLE.ETH
+>;
 
 export const MAPPING_NETWORK_ID_BY_NAME: any = {
   [NETWORK_AVAILABLE.BSC]: BSC_NETWORK_ID,

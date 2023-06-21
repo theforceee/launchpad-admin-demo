@@ -1,6 +1,4 @@
-import { useContext } from "react";
 import { formatCurrency } from "../../../utils";
-import { AppContext } from "../../../contexts/AppContext";
 
 const PoolStatus = (props: any) => {
   const { tokenAllocated, contractBalance } = props;

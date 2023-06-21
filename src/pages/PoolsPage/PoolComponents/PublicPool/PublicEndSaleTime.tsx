@@ -5,7 +5,8 @@ import { PoolFieldProps } from "../../../../constants/poolDetail";
 const PublicEndSaleTime = (props: PoolFieldProps) => {
   const { control, errors, register, setValue, watch } = props;
 
-  const startDate = watch && watch("pub_start_buy_time");
+  const startDate = watch?.("pub_start_buy_time");
+  const isDeployed = watch?.("pub_is_deployed");
 
   return (
     <div className="flex flex-1">
@@ -13,6 +14,7 @@ const PublicEndSaleTime = (props: PoolFieldProps) => {
       <DateTimePicker
         control={control}
         errors={errors}
+        disabled={isDeployed}
         name="pub_end_buy_time"
         register={register}
         setValue={setValue}

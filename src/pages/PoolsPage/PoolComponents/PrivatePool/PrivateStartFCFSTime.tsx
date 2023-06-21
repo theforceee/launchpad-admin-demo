@@ -5,7 +5,8 @@ import { PoolFieldProps } from "../../../../constants/poolDetail";
 const PrivateStartFCFSTime = (props: PoolFieldProps) => {
   const { control, errors, register, setValue, watch } = props;
 
-  const endDate = watch && watch("pri_end_buy_time");
+  const endDate = watch?.("pri_end_buy_time");
+  const isDeployed = watch?.("pri_is_deployed");
 
   // const disabledDate: RangePickerProps["disabledDate"] = useCallback(
   //   (currentDate: moment.Moment) => {
@@ -22,6 +23,7 @@ const PrivateStartFCFSTime = (props: PoolFieldProps) => {
       <DateTimePicker
         control={control}
         errors={errors}
+        disabled={isDeployed}
         name="pri_start_fcfs_time"
         register={register}
         setValue={setValue}
