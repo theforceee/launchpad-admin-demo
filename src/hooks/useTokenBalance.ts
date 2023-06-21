@@ -16,7 +16,11 @@ const useTokenBalance = (
     args: poolContractAddress && [poolContractAddress],
   });
 
-  return { contractBalance: ethers.utils.formatEther(contractBalance || 0) };
+  return {
+    contractBalance: contractBalance
+      ? ethers.utils.formatEther(+BigInt(contractBalance).toString())
+      : 0,
+  };
 };
 
 export default useTokenBalance;
