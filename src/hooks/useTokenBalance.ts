@@ -1,5 +1,6 @@
-import { ethers } from "ethers";
 import { erc20ABI, useContractRead } from "wagmi";
+import ERC20_ABI from "../abi/Erc20.json";
+import { formatEther } from "viem";
 
 const useTokenBalance = (
   tokenAddress: `0x${string}` | undefined,
@@ -7,7 +8,7 @@ const useTokenBalance = (
 ) => {
   const { data: contractBalance } = useContractRead({
     address: tokenAddress,
-    abi: erc20ABI,
+    abi: ERC20_ABI,
     enabled: !!tokenAddress && !!poolContractAddress,
     functionName: "balanceOf",
     onError(error) {
@@ -17,9 +18,7 @@ const useTokenBalance = (
   });
 
   return {
-    contractBalance: contractBalance
-      ? ethers.utils.formatEther(+BigInt(contractBalance).toString())
-      : 0,
+    contractBalance: contractBalance ? formatEther(contractBalance as any) : 0,
   };
 };
 
