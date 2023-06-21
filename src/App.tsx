@@ -33,7 +33,6 @@ const config = createConfig({
 function App() {
   useEffect(() => {
     config.autoConnect();
-    console.log("connectors", config.lastUsedChainId, config.connector);
   }, []);
 
   return (
