@@ -4,7 +4,7 @@ import { Controller } from "react-hook-form";
 import { InputFieldProps } from "../../constants/poolDetail";
 import { renderError } from "../../utils/validate";
 
-const EditorField = React.memo((props: InputFieldProps) => {
+const EditorField = (props: InputFieldProps) => {
   const { name, control, errors, required, defaultValue } = props;
 
   return (
@@ -43,6 +43,6 @@ const EditorField = React.memo((props: InputFieldProps) => {
       <p className="formErrorMessage">{renderError(errors, name)}</p>
     </div>
   );
-});
+};
 
 export default EditorField;

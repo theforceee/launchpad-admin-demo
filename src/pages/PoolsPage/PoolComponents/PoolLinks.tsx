@@ -9,36 +9,36 @@ const PoolLinks = (props: PoolFieldProps) => {
 
       <div className="grid w-full grid-cols-2 gap-4">
         <TextField
+          required
           control={control}
           errors={errors}
           name="website"
           register={register}
           placeholder="Website"
-          maxLength={16}
         />
         <TextField
+          required
           control={control}
           errors={errors}
           name="twitter"
           register={register}
           placeholder="Twitter"
-          maxLength={16}
         />
         <TextField
+          required
           control={control}
           errors={errors}
           name="telegram"
           register={register}
           placeholder="Telegram"
-          maxLength={16}
         />
         <TextField
+          required
           control={control}
           errors={errors}
           name="discord"
           register={register}
           placeholder="Discord"
-          maxLength={16}
         />
       </div>
     </div>
