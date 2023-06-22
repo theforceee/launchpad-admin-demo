@@ -117,9 +117,9 @@ const useDeployPool = (poolNetwork: NetworkAvailable) => {
         token_decimal,
       );
       const offeredCurrencyRate = getCurrencyToTokenRate(
-        conversion_rate,
-        token_decimal,
-        MAPPING_CURRENCY_DECIMALS[network][accepted_currency],
+        +conversion_rate,
+        +token_decimal,
+        +MAPPING_CURRENCY_DECIMALS[network][accepted_currency],
       );
       const offeredCurrencyDecimals = BigNumber.from(30);
 

@@ -14,11 +14,10 @@ export function getCurrencyToTokenRate(
   currencyDecimals: number,
   rateDecimals = 30,
 ) {
-  // return BigNumber
   return BigNumber.from("1")
     .mul(BigNumber.from(10).pow(tokenDecimals - currencyDecimals + rateDecimals))
     .mul(Math.pow(10, countDecimals(tokenPrice)))
-    .div(tokenPrice * Math.pow(10, countDecimals(tokenPrice)));
+    .div(Math.floor(tokenPrice * Math.pow(10, countDecimals(tokenPrice))));
 }
 
 export const convertFormDataToApi = (data: RegisterInputs) => {
