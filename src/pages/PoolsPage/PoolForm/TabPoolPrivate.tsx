@@ -29,7 +29,7 @@ const TabPoolPrivate = (props: PoolTabProps) => {
   const poolContractAddress: any = watch?.("pri_address");
   const tokenAddress: any = watch?.("token_address");
 
-  const { contractBalance } = useTokenBalance(tokenAddress, poolContractAddress);
+  const { contractBalanceData } = useTokenBalance(tokenAddress, poolContractAddress);
 
   return (
     <div className={clsx("flex flex-col", show ? "block" : "hidden")}>
@@ -52,7 +52,7 @@ const TabPoolPrivate = (props: PoolTabProps) => {
         />
 
         {isDeployed && (
-          <PoolStatus tokenAllocated={tokenAllocated} contractBalance={contractBalance} />
+          <PoolStatus tokenAllocated={tokenAllocated} contractBalanceData={contractBalanceData} />
         )}
       </div>
 
@@ -175,7 +175,7 @@ const TabPoolPrivate = (props: PoolTabProps) => {
             />
           </div>
 
-          <TokenAmount watch={watch} tokenAmount={contractBalance} />
+          <TokenAmount contractBalanceData={contractBalanceData} />
         </>
       )}
     </div>

@@ -29,7 +29,7 @@ const TabPoolPublic = (props: PoolTabProps) => {
   const tokenAllocated = watch?.("pub_token_allocated");
   const isDeployed = watch?.("pub_is_deployed");
 
-  const { contractBalance } = useTokenBalance(tokenAddress, poolContractAddress);
+  const { contractBalanceData } = useTokenBalance(tokenAddress, poolContractAddress);
 
   // useEffect(() => {
   //   console.log("poolBalance", userBalance);
@@ -58,7 +58,7 @@ const TabPoolPublic = (props: PoolTabProps) => {
         />
 
         {isDeployed && (
-          <PoolStatus tokenAllocated={tokenAllocated} contractBalance={contractBalance} />
+          <PoolStatus tokenAllocated={tokenAllocated} contractBalanceData={contractBalanceData} />
         )}
       </div>
 
@@ -177,7 +177,7 @@ const TabPoolPublic = (props: PoolTabProps) => {
             />
           </div>
 
-          <TokenAmount watch={watch} />
+          <TokenAmount contractBalanceData={contractBalanceData} />
         </>
       )}
     </div>
