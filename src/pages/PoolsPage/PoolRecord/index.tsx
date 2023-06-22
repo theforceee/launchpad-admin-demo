@@ -34,7 +34,12 @@ const PoolRecord: React.FC<PoolRecordProps> = (props: PoolRecordProps) => {
 
   return (
     <StyledTableRow ref={ref} key={pool.slug} onClick={() => handleSelectPool(pool.id)}>
-      <StyledTableCell align="left">{pool.name}</StyledTableCell>
+      <StyledTableCell align="left">
+        <div className="flex justify-between p-3">
+          <p className="ml-5 font-bold">{pool.name}</p>
+          <div className="bg-purple-500 px-5 text-white">IDO</div>
+        </div>
+      </StyledTableCell>
       <StyledTableCell align="left">{displayDateTime(pool.start_join_time)}</StyledTableCell>
       <StyledTableCell align="left">{displayDateTime(pool.end_join_time)}</StyledTableCell>
       <StyledTableCell align="left">{pool?.token?.network}</StyledTableCell>
