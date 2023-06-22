@@ -40,14 +40,16 @@ const PoolRecord: React.FC<PoolRecordProps> = (props: PoolRecordProps) => {
           <div className="bg-purple-500 px-5 text-white">IDO</div>
         </div>
       </StyledTableCell>
-      <StyledTableCell align="left">{displayDateTime(pool.start_join_time)}</StyledTableCell>
-      <StyledTableCell align="left">{displayDateTime(pool.end_join_time)}</StyledTableCell>
-      <StyledTableCell align="left">{pool?.token?.network}</StyledTableCell>
+      <StyledTableCell align="center">{displayDateTime(pool.start_join_time)}</StyledTableCell>
+      <StyledTableCell align="center">{displayDateTime(pool.end_join_time)}</StyledTableCell>
+      <StyledTableCell align="center">{pool?.token?.network}</StyledTableCell>
 
-      <StyledTableCell align="left">
-        <p className="m-0 flex  items-center">
-          <span className={clsx("h-3 w-3 rounded-full", getPoolStatusColor(pool.status))}></span>
-          <span className="ml-2">{pool.status}</span>
+      <StyledTableCell align="center">
+        <p className="m-0 flex items-center justify-center">
+          <span
+            className={clsx("h-3 w-3 rounded-full text-center", getPoolStatusColor(pool.status))}
+          ></span>
+          <span className="ml-2 text-center">{pool.status}</span>
         </p>
       </StyledTableCell>
     </StyledTableRow>
