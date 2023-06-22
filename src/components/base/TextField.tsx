@@ -21,7 +21,7 @@ const TextField = (props: InputFieldProps) => {
         type="text"
         name={name}
         disabled={disabled}
-        className="formInputText"
+        className="formInputText "
         placeholder={placeholder}
       />
       <p className="formErrorMessage">{renderError(errors, name)}</p>
