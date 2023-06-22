@@ -175,7 +175,7 @@ const TabPoolPrivate = (props: PoolTabProps) => {
             />
           </div>
 
-          <TokenAmount contractBalanceData={contractBalanceData} />
+          <TokenAmount watch={watch} contractBalanceData={contractBalanceData} />
         </>
       )}
     </div>
