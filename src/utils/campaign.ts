@@ -23,6 +23,7 @@ export function getCurrencyToTokenRate(
 export const convertFormDataToApi = (data: RegisterInputs) => {
   return {
     id: data.id,
+    is_live: data.is_live === "true",
     signer: JSON.parse(data.signer || "{}"),
     name: data.name,
     slug: data.slug,
@@ -113,6 +114,7 @@ export const convertApiDataToForm = (rawData: any) => {
     id: rawData.id,
     signer: rawData.signer,
     status: rawData.status,
+    is_live: rawData.is_live,
 
     name: rawData.name || "",
     slug: rawData.slug || "",

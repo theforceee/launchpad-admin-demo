@@ -74,6 +74,7 @@ export type RegisterInputs = {
   tokenominc_community: string | undefined;
   tokenominc_legal: string | undefined;
 
+  is_live: string | undefined;
   status: string;
   signer?: any;
 };
@@ -142,6 +143,7 @@ export const defaultEmptyPool: RegisterInputs = {
   tokenominc_legal: "",
 
   status: "",
+  is_live: "",
 };
 
 export interface PoolFieldProps {

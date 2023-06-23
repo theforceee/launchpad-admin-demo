@@ -1,7 +1,6 @@
 import { FormControl, Input, InputLabel } from "@mui/material";
 import Button from "@mui/material/Button/Button";
-import { verifyMessage } from "ethers/lib/utils";
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import { useOutletContext } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -21,7 +20,6 @@ const LoginPage = () => {
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   });
-  const recoveredAddress = useRef<string>();
 
   const { disconnect } = useDisconnect();
   const { signMessageAsync, isLoading: loadingSignIn } = useSignMessage({

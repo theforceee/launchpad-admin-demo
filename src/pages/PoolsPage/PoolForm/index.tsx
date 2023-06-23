@@ -16,6 +16,7 @@ import TabMedia from "./TabMedia";
 import TabPool from "./TabPool";
 import TabToken from "./TabToken";
 import TabUserList from "./TabUserList";
+import { Switch } from "antd";
 
 export interface PoolTabProps extends PoolFieldProps {
   show: boolean;
@@ -95,6 +96,7 @@ const PoolForm = (props: PoolFormTypes) => {
   const { deployPool, loadingDeploy } = useDeployPool(networkAvailable);
 
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
+  const [aliveValue, setAliveValue] = useState<boolean>(false);
 
   // Mapping data from API to Form
   useEffect(() => {
@@ -163,7 +165,12 @@ const PoolForm = (props: PoolFormTypes) => {
     setValue("tokenominc_legal", poolData?.tokenominc_legal);
 
     setValue("signer", JSON.stringify(poolData.signer || ""));
+    setValue("is_live", poolData?.is_live);
   }, [poolData]);
+
+  useEffect(() => {
+    setAliveValue(!!poolData?.is_live);
+  }, [poolData?.is_live]);
 
   const [selectedNav, setSelectedNav] = useState<number>(1);
 
@@ -237,6 +244,27 @@ const PoolForm = (props: PoolFormTypes) => {
     });
   };
 
+  const changeDisplay = async (value: any) => {
+    const id = watch("id");
+    setIsUpdating(true);
+    const updateRes = await put(`/pool/${id}`, {
+      body: {
+        id: id,
+        is_live: value,
+      },
+    });
+    setIsUpdating(false);
+
+    if (updateRes.status !== 200) {
+      toast.error("ERROR: Pool failed to be updated");
+      return;
+    }
+
+    toast.success("SUCCESS: pool has been updated");
+    setAliveValue((prev) => !prev);
+    return value;
+  };
+
   return (
     <div className="flex flex-col">
       <div className="my-5 flex justify-center">
@@ -308,26 +336,38 @@ const PoolForm = (props: PoolFormTypes) => {
           />
         </div>
 
-        <div className="mt-10 grid w-full grid-cols-2 gap-5">
-          <Button
+        <div className="relative mt-10 flex w-full items-center justify-center gap-5">
+          <input
+            type="button"
             disabled={!isEditing}
+            value="Clone Pool"
+            className="formButton min-w-[150px] bg-[#E7E6E6] px-5 text-black duration-300 hover:tracking-wide"
             onClick={handleClonePool}
-            variant={"contained"}
-            size="large"
-            color="secondary"
-          >
-            Clone
-          </Button>
-          <Button
-            onClick={() => handleSubmit(onSubmit)}
+          />
+          <input
+            type="button"
             disabled={isUpdating}
-            type="submit"
-            variant="contained"
-            size="large"
-            color="warning"
-          >
-            {isEditing ? "Update" : "Create"}
-          </Button>
+            value={isEditing ? "Update Pool" : "Create Pool"}
+            className="formButton min-w-[150px] bg-gray-600 px-5 text-white duration-300 hover:tracking-wide"
+            onClick={() => handleSubmit(onSubmit)}
+          />
+
+          <div className="formButton absolute right-0 flex items-center bg-gray-600 pl-5 pr-3">
+            <span className="text-white">Go Live</span>
+            <Switch
+              className="ml-3 text-black checked:bg-main"
+              disabled={isUpdating}
+              checked={aliveValue}
+              onChange={async (switchValue) => {
+                if (!confirm("Do you want change display ?")) {
+                  return false;
+                }
+                await changeDisplay(switchValue);
+              }}
+              checkedChildren="Display"
+              unCheckedChildren="Hidden"
+            />
+          </div>
         </div>
       </form>
     </div>
