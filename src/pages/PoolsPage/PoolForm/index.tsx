@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Switch } from "antd";
 import clsx from "clsx";
 import { useContext, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -16,7 +16,6 @@ import TabMedia from "./TabMedia";
 import TabPool from "./TabPool";
 import TabToken from "./TabToken";
 import TabUserList from "./TabUserList";
-import { Switch } from "antd";
 
 export interface PoolTabProps extends PoolFieldProps {
   show: boolean;
@@ -314,7 +313,7 @@ const PoolForm = (props: PoolFormTypes) => {
             watch={watch}
             deployPool={handleDeployPool}
             poolData={poolData}
-            isEditing={isEditing}
+            isEditing={isEditing || loadingDeploy}
           />
           <TabMedia
             show={selectedNav === 4}

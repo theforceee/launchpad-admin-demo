@@ -2,13 +2,9 @@ import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from "@m
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
 import React from "react";
-import {
-  TableHeaderTypes,
-  TablePaginationActionsProps,
-  TableWithPaginationProps,
-} from "./constants";
-import styles from "./table.module.scss";
 import PaginationCustom from "../PaginationCustom";
+import { TableHeaderTypes, TableWithPaginationProps } from "./constants";
+import styles from "./table.module.scss";
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -65,7 +61,7 @@ const TableWithPagination = (props: TableWithPaginationProps) => {
                 {tableHeaders.map((tableHeader: TableHeaderTypes) => (
                   <StyledTableCell key={tableHeader.value} className="pb-6 pr-7">
                     <p className="m-0 flex items-center justify-between">
-                      <span>{tableHeader.label}</span>
+                      <span className="pl-5">{tableHeader.label}</span>
                       {tableHeader.sortable && (
                         <img
                           src="/images/icon-sort.svg"
