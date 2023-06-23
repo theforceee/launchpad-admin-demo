@@ -82,7 +82,7 @@ const PoolsPage = () => {
             label="Search"
             variant="outlined"
             size="small"
-            placeholder="Name, wallet address"
+            placeholder="Project Name, Token Name"
             className="w-full max-w-3xl"
             // value={searchTerm}
             onChange={handleSearch}
