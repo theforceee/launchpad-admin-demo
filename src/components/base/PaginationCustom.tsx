@@ -1,6 +1,8 @@
 import Pagination from "@mui/material/Pagination";
 const PaginationCustom = (props: any) => {
   const { pagination, onChange } = props;
+  if (!pagination) return <></>;
+
   const firstItem = pagination.currentPage * pagination.rowsPerPage - pagination.rowsPerPage + 1;
   const lastItem = pagination.currentPage * pagination.rowsPerPage;
   return (

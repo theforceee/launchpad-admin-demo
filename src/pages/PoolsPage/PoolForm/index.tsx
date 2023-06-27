@@ -343,13 +343,14 @@ const PoolForm = (props: PoolFormTypes) => {
             className="formButton min-w-[150px] bg-[#E7E6E6] px-5 text-black duration-300 hover:tracking-wide"
             onClick={handleClonePool}
           />
-          <input
-            type="button"
+          <button
+            type="submit"
             disabled={isUpdating}
-            value={isEditing ? "Update Pool" : "Create Pool"}
             className="formButton min-w-[150px] bg-gray-600 px-5 text-white duration-300 hover:tracking-wide"
             onClick={() => handleSubmit(onSubmit)}
-          />
+          >
+            {isEditing ? "Update Pool" : "Create Pool"}
+          </button>
 
           <div className="formButton absolute right-0 flex items-center bg-gray-600 pl-5 pr-3">
             <span className="text-white">Go Live</span>
