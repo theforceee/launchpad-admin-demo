@@ -7,7 +7,7 @@ import {
 } from "../../../components/base/TableWithPagination/constants";
 import TableWithPagination from "../../../components/base/TableWithPagination";
 import UserPoolRecord from "./UserPoolRecord";
-import { get } from "../../../requests";
+import { get, post } from "../../../requests";
 import { toast } from "react-toastify";
 
 type UserNavTypes = {
@@ -59,6 +59,7 @@ const TabUserList = (props: PoolTabProps) => {
 
   const [dataWinners, setDataWinners] = useState<any[]>([]);
   const [dataWhitelist, setDataWhitelist] = useState<any[]>([]);
+  const [loadingPick, setLoadingPick] = useState<boolean>(false);
 
   useEffect(() => {
     if (!poolData?.id) return;
@@ -92,24 +93,53 @@ const TabUserList = (props: PoolTabProps) => {
     setSelectedUserNav(nav);
   };
 
+  const handlePickWinners = async () => {
+    console.log("picking");
+    setLoadingPick(true);
+    const pickRes = await post(`/pool/${poolData?.id}/pick`, {
+      body: {},
+    });
+    if (pickRes.status !== 200) {
+      toast.error("ERROR: Winners failed to be picked\n" + pickRes.message);
+      return;
+    }
+
+    toast.success("SUCCESS: winners has been picked");
+    setLoadingPick(false);
+  };
+
   return (
     <div className={clsx(show ? "block" : "hidden")}>
       <div className="flex flex-col">
-        <div className="flex">
-          {userNav.map((item: UserNavTypes) => (
-            <div
-              key={item.value}
-              className={clsx(
-                "flex w-[180px] cursor-pointer items-center justify-center py-3 font-semibold",
-                selectedUserNav === item.value
-                  ? "bg-gray-400 text-black"
-                  : "bg-gray-300 text-[#8D8C8C]",
-              )}
-              onClick={() => handleSelectNav(item.value)}
-            >
-              {item.label}
+        <div className="flex justify-between">
+          <div className="flex">
+            {userNav.map((item: UserNavTypes) => (
+              <div
+                key={item.value}
+                className={clsx(
+                  "flex w-[180px] cursor-pointer items-center justify-center py-3 font-semibold",
+                  selectedUserNav === item.value
+                    ? "bg-gray-400 text-black"
+                    : "bg-gray-300 text-[#8D8C8C]",
+                )}
+                onClick={() => handleSelectNav(item.value)}
+              >
+                {item.label}
+              </div>
+            ))}
+          </div>
+
+          {selectedUserNav === TAB_WHITELIST && (
+            <div className="flex">
+              <input
+                type="button"
+                disabled={loadingPick}
+                value="Pick Winner"
+                className="formButton min-w-[150px] bg-gray-600 px-5 text-white duration-300 hover:tracking-wide"
+                onClick={handlePickWinners}
+              />
             </div>
-          ))}
+          )}
         </div>
 
         <div className={clsx("mt-10 w-full", selectedUserNav === TAB_WINNER ? "hidden" : "flex")}>
