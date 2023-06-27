@@ -77,7 +77,7 @@ const UsersPage = () => {
 
   const handleExportCsv = async () => {
     try {
-      const res = await get(`account/users/exporty`, { isCSV: true });
+      const res = await get(`account/users/export`, { isCSV: true });
 
       if (!res?.ok) {
         toast.error("ERROR: export csv failed");
