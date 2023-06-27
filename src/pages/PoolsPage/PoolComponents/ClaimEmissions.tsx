@@ -14,9 +14,7 @@ type EmissionTypes = {
 const ClaimEmissions = (props: PoolFieldProps) => {
   const { setValue, poolData } = props;
 
-  const [claimEmissions, setClaimEmissions] = useState<EmissionTypes[]>([
-    { release_time: undefined, release_percent: "" },
-  ]);
+  const [claimEmissions, setClaimEmissions] = useState<EmissionTypes[]>([]);
 
   useEffect(() => {
     if (!poolData?.tokenReleases) return;
@@ -82,7 +80,7 @@ const ClaimEmissions = (props: PoolFieldProps) => {
               onClick={() => handleRemove(index)}
               className={clsx(
                 "ml-7 flex h-5 w-5 shrink-0 cursor-pointer items-center justify-center rounded-full border-2 border-gray-500 font-bold",
-                index === 0 && "invisible",
+                // index === 0 && "invisible",
               )}
             ></input>
             <span className="mx-3 text-gray-500">{displayNumOrder(index)}</span>
