@@ -79,8 +79,8 @@ const UsersPage = () => {
     try {
       const res = await get(`account/users/export`, { isCSV: true });
 
-      if (!res?.ok) {
-        toast.error("ERROR: export csv failed");
+      if (!res || res.status !== 200) {
+        toast.error(`ERROR: export csv failed\n ${res?.message}`);
         return;
       }
       fileDownload(await res.blob(), `trailblaze_users_${moment().format("DD_MM_YYYY")}.csv`);

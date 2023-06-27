@@ -191,7 +191,7 @@ const PoolForm = (props: PoolFormTypes) => {
       setIsUpdating(false);
 
       if (updateRes.status !== 200) {
-        toast.error("ERROR: Pool failed to be updated");
+        toast.error("ERROR: Pool failed to be updated\n" + updateRes.message);
         return;
       }
 
@@ -204,7 +204,7 @@ const PoolForm = (props: PoolFormTypes) => {
       });
       setIsUpdating(false);
       if (createRes.status !== 200) {
-        toast.error("ERROR: Pool failed to be created");
+        toast.error("ERROR: Pool failed to be created\n" + createRes.message);
         return;
       }
 
@@ -255,7 +255,7 @@ const PoolForm = (props: PoolFormTypes) => {
     setIsUpdating(false);
 
     if (updateRes.status !== 200) {
-      toast.error("ERROR: Pool failed to be updated");
+      toast.error("ERROR: Pool failed to be updated\n" + updateRes.message);
       return;
     }
 

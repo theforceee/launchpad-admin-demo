@@ -14,7 +14,7 @@ const UserDetailPage = () => {
       const userDetailRes = await get(`account/user/${params.uuid}`);
       console.log("userDetailRes", userDetailRes);
       if (userDetailRes.status !== 200) {
-        toast.error("ERROR: Fail to fetch user detail\n" + userDetailRes.statusText);
+        toast.error("ERROR: Fail to fetch user detail\n" + userDetailRes.message);
         return;
       }
     };

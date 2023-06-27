@@ -67,7 +67,7 @@ const TabUserList = (props: PoolTabProps) => {
       // console.log(winnerRes);
 
       if (winnerRes.status !== 200) {
-        toast.error("ERROR: Fail to fetch winners");
+        toast.error("ERROR: Fail to fetch winners\n" + winnerRes.message);
         return;
       }
       setDataWinners(winnerRes?.data?.data || []);
@@ -78,7 +78,7 @@ const TabUserList = (props: PoolTabProps) => {
       // console.log(whitelistRes);
 
       if (whitelistRes.status !== 200) {
-        toast.error("ERROR: Fail to fetch whitelists");
+        toast.error("ERROR: Fail to fetch whitelists\n" + whitelistRes.message);
         return;
       }
       setDataWhitelist(whitelistRes?.data?.data || []);

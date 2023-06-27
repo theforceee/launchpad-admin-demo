@@ -16,7 +16,7 @@ const PoolDetailPage = () => {
       if (!params) return;
       const poolDetailRes = await get(`pool/${params.uuid}`);
       if (poolDetailRes.status !== 200) {
-        toast.error("ERROR: Fail to fetch pool detail");
+        toast.error("ERROR: Fail to fetch pool detail\n" + poolDetailRes.message);
         return;
       }
 

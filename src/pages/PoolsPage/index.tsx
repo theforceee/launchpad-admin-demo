@@ -56,7 +56,7 @@ const PoolsPage = () => {
     const getData = async () => {
       const res = await get(`pool?page=${pagination.currentPage}`);
       if (res.status !== 200) {
-        toast.error("ERROR: Fail to get list pool");
+        toast.error("ERROR: Fail to get list pool\n" + res.message);
         return;
       }
       const resData = res.data;
